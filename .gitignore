@@ -1,5 +1,6 @@
-# SDL2
+# Directories to ignore
 SDL2
+build
 
 # Windows image file caches
 Thumbs.db
