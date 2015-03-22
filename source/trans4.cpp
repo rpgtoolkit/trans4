@@ -9,15 +9,13 @@ using namespace tk4;
 int main(int argc, char* argv[]) {
 	//TODO: Parse settings file here
 
-	/*
-	ScriptEngine* scriptEngine = new ScriptEngine();
-	scriptEngine->initialize(nullptr);
-	scriptEngine->run("main.lua");
-	*/
-
 	try {
 		System* system = new System();
 		system->initialize();
+
+		ScriptEngine* scriptEngine = new ScriptEngine();
+		scriptEngine->initialize(nullptr, system);
+		scriptEngine->run("main.lua");
 
 		Game* game = new Game(system->getInput(), system->getRenderer());
 		game->run();

@@ -3,7 +3,7 @@
 
 using namespace tk4;
 
-ScriptEngine::ScriptEngine() : m_game(nullptr), m_scriptEngine(nullptr) {
+ScriptEngine::ScriptEngine() : m_scriptEngine(nullptr) {
 
 }
 
@@ -13,11 +13,9 @@ ScriptEngine::~ScriptEngine() {
 	}
 }
 
-void ScriptEngine::initialize(Game* game) {
-	m_game = game;
-
+void ScriptEngine::initialize(Game* game, System* system) {
 	m_scriptEngine = new lua::ScriptEngine();
-	m_scriptEngine->initialize(game);
+	m_scriptEngine->initialize(game, system);
 }
 
 void ScriptEngine::run(std::string script) {

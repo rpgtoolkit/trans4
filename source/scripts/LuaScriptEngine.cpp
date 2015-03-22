@@ -1,13 +1,14 @@
 #pragma once
 
 #include "lua.hpp"
+#include "LuaBridge.h"
 
 #include "LuaScriptEngine.h"
+#include "ScriptInterface.h"
 
 #include "game/Game.h"
 
 using namespace lua;
-using namespace luabridge;
 
 ScriptEngine::ScriptEngine() : m_state(nullptr) {
 }
@@ -18,9 +19,12 @@ ScriptEngine::~ScriptEngine() {
 	}
 }
 
-void ScriptEngine::initialize(tk4::Game* game) {
+void ScriptEngine::initialize(tk4::Game* game, tk4::System* system) {
 	m_state = luaL_newstate();
 	luaL_openlibs(m_state);
+
+	tk4::wrapper::setSystemInstance(system);
+	registerFunctions();
 }
 
 void ScriptEngine::run(std::string script) {
@@ -32,5 +36,10 @@ void ScriptEngine::run(std::string script) {
 }
 
 void ScriptEngine::registerFunctions() {
+	using namespace luabridge;
 
+	getGlobalNamespace(m_state)
+		.beginNamespace("tk")
+			.addFunction("isKeyDown", tk4::wrapper::isKeyDown)
+		.endNamespace();
 }

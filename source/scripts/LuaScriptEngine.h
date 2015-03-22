@@ -11,7 +11,7 @@ namespace lua {
 
 		virtual ~ScriptEngine();
 
-		void initialize(tk4::Game* game);
+		void initialize(tk4::Game* game, tk4::System* system);
 
 		void run(std::string script);
 	private:

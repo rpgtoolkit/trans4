@@ -2,16 +2,19 @@
 
 #include <string>
 
-#include "game/Game.h"
+
 
 namespace tk4 {
+	class Game;
+	class System;
+
 	class ScriptEngine {
 	public:
 		ScriptEngine();
 
 		virtual ~ScriptEngine();
 
-		virtual void initialize(Game* game);
+		virtual void initialize(Game* game, System* system);
 
 		virtual void run(std::string script);
 
@@ -19,8 +22,6 @@ namespace tk4 {
 
 		ScriptEngine & operator=(ScriptEngine const&) = delete;
 	protected:
-		Game* m_game;
-
 		ScriptEngine* m_scriptEngine;
 	};
 }
