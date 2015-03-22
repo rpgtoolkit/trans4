@@ -5,9 +5,11 @@ namespace tk4 {
 
 	class Keyboard {
 	public:
-		Keyboard() {}
+		virtual ~Keyboard() {}
 
-		~Keyboard() {}
+		virtual bool isKeyDown(Key key) = 0;
+	protected:
+		Keyboard() {}
 	};
 
 	enum class Key : int {
@@ -82,7 +84,6 @@ namespace tk4 {
 		F22,
 		F23,
 		F24,
-		F25,
 
 		UP,
 		DOWN,
@@ -127,8 +128,6 @@ namespace tk4 {
 		CAPS_LOCK,
 		SCROLL_LOCK,
 		PAUSE,
-		LSUPER,
-		RSUPER,
 		MENU
 	};
 }

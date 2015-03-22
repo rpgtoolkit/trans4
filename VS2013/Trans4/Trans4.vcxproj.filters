@@ -99,6 +99,12 @@
     <ClInclude Include="..\..\source\scripts\LuaScriptEngine.h">
       <Filter>source\scripts</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\scripts\ScriptInterface.h">
+      <Filter>source\scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\sdl\SDLKeyboard.h">
+      <Filter>source\sdl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\common\Exception.cpp">
@@ -130,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp">
       <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\scripts\ScriptInterface.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLKeyboard.cpp">
+      <Filter>source\sdl</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -15,7 +15,11 @@ namespace SDL {
 		void process(tk4::InputHandler* handler);
 
 		bool shouldQuit();
+
+		tk4::Keyboard* getKeyboard();
 	private:
 		bool m_shouldQuit;
+
+		tk4::Keyboard* m_keyboard;
 	};
 }

@@ -56,7 +56,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../external/Lua/include;$(SolutionDir)../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,7 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../external/Lua/include;$(SolutionDir)../include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +106,9 @@
     <ClInclude Include="..\..\include\system\Window.h" />
     <ClInclude Include="..\..\source\game\EmptyState.h" />
     <ClInclude Include="..\..\source\scripts\LuaScriptEngine.h" />
+    <ClInclude Include="..\..\source\scripts\ScriptInterface.h" />
     <ClInclude Include="..\..\source\sdl\SDLInput.h" />
+    <ClInclude Include="..\..\source\sdl\SDLKeyboard.h" />
     <ClInclude Include="..\..\source\sdl\SDLRenderer.h" />
     <ClInclude Include="..\..\source\sdl\SDLWindow.h" />
   </ItemGroup>
@@ -115,7 +117,9 @@
     <ClCompile Include="..\..\source\game\Game.cpp" />
     <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp" />
     <ClCompile Include="..\..\source\scripts\ScriptEngine.cpp" />
+    <ClCompile Include="..\..\source\scripts\ScriptInterface.cpp" />
     <ClCompile Include="..\..\source\sdl\SDLInput.cpp" />
+    <ClCompile Include="..\..\source\sdl\SDLKeyboard.cpp" />
     <ClCompile Include="..\..\source\sdl\SDLRenderer.cpp" />
     <ClCompile Include="..\..\source\sdl\SDLSystem.cpp" />
     <ClCompile Include="..\..\source\sdl\SDLTimer.cpp" />
