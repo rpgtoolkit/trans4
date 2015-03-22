@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trans4", "Trans4\Trans4.vcxproj", "{7F165D20-4947-496B-BD26-00C450221863}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Lua", "Lua\Lua.vcxproj", "{72496693-FEB7-4EFB-B8F7-7442C7D825F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F165D20-4947-496B-BD26-00C450221863}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7F165D20-4947-496B-BD26-00C450221863}.Debug|Win32.Build.0 = Debug|Win32
+		{7F165D20-4947-496B-BD26-00C450221863}.Release|Win32.ActiveCfg = Release|Win32
+		{7F165D20-4947-496B-BD26-00C450221863}.Release|Win32.Build.0 = Release|Win32
+		{72496693-FEB7-4EFB-B8F7-7442C7D825F5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{72496693-FEB7-4EFB-B8F7-7442C7D825F5}.Debug|Win32.Build.0 = Debug|Win32
+		{72496693-FEB7-4EFB-B8F7-7442C7D825F5}.Release|Win32.ActiveCfg = Release|Win32
+		{72496693-FEB7-4EFB-B8F7-7442C7D825F5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

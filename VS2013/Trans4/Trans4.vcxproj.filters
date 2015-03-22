@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="include\common">
+      <UniqueIdentifier>{4113b733-bca1-4a53-814b-1605a8e74f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\game">
+      <UniqueIdentifier>{84d1f305-5a6f-4b05-a9be-558414e1d4a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\graphics">
+      <UniqueIdentifier>{91a44774-45f4-4a55-8a2b-16a0c3113500}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\input">
+      <UniqueIdentifier>{5073f5e1-ea63-4dd4-990e-a290851333ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\scripts">
+      <UniqueIdentifier>{a8ec3246-abef-41b1-a2f6-cc2e2c0d4aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\system">
+      <UniqueIdentifier>{4e461d9b-0400-4ca8-b307-2ecd9d6b097c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="source\common">
+      <UniqueIdentifier>{76b36329-16b9-455f-a69e-72d9bff1067c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\game">
+      <UniqueIdentifier>{df2104ce-8bf8-4145-b134-14248cc830ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scripts">
+      <UniqueIdentifier>{0b0c97c3-5eef-4f2b-9ebb-459b2d711fbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\sdl">
+      <UniqueIdentifier>{c3a0eebf-f888-4f09-908d-24f179633258}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\common\Exception.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\common\Rectangle.h">
+      <Filter>include\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\game\Game.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\game\GameState.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\game\GameStateManager.h">
+      <Filter>include\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\graphics\Renderer.h">
+      <Filter>include\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\input\Input.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\input\InputHandler.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\input\Keyboard.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\game\EmptyState.h">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\sdl\SDLInput.h">
+      <Filter>source\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\sdl\SDLRenderer.h">
+      <Filter>source\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\sdl\SDLWindow.h">
+      <Filter>source\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\system\System.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\system\Timer.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\system\Window.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\scripts\ScriptEngine.h">
+      <Filter>include\scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\scripts\LuaScriptEngine.h">
+      <Filter>source\scripts</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\common\Exception.cpp">
+      <Filter>source\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\game\Game.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\scripts\ScriptEngine.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLInput.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLRenderer.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLSystem.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLTimer.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sdl\SDLWindow.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\trans4.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
