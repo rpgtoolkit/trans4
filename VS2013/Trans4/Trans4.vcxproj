@@ -99,6 +99,7 @@
     <ClInclude Include="..\..\include\graphics\Renderer.h" />
     <ClInclude Include="..\..\include\input\Input.h" />
     <ClInclude Include="..\..\include\input\InputHandler.h" />
+    <ClInclude Include="..\..\include\input\Key.h" />
     <ClInclude Include="..\..\include\input\Keyboard.h" />
     <ClInclude Include="..\..\include\scripts\ScriptEngine.h" />
     <ClInclude Include="..\..\include\system\System.h" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\source\common\Exception.cpp" />
     <ClCompile Include="..\..\source\game\Game.cpp" />
+    <ClCompile Include="..\..\source\input\Key.cpp" />
     <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp" />
     <ClCompile Include="..\..\source\scripts\ScriptEngine.cpp" />
     <ClCompile Include="..\..\source\scripts\ScriptInterface.cpp" />

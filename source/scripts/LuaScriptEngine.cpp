@@ -6,8 +6,6 @@
 #include "LuaScriptEngine.h"
 #include "ScriptInterface.h"
 
-#include "game/Game.h"
-
 using namespace lua;
 
 ScriptEngine::ScriptEngine() : m_state(nullptr) {
@@ -22,8 +20,10 @@ ScriptEngine::~ScriptEngine() {
 void ScriptEngine::initialize(tk4::Game* game, tk4::System* system) {
 	m_state = luaL_newstate();
 	luaL_openlibs(m_state);
-
+	
 	tk4::wrapper::setSystemInstance(system);
+	tk4::wrapper::setGameInstance(game);
+
 	registerFunctions();
 }
 

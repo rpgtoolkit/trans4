@@ -11,8 +11,6 @@ namespace tk4 {
 
 		void setGameInstance(Game* game);
 
-		bool testMe();
-
 		bool isKeyDown(std::string key);
 	}
 }

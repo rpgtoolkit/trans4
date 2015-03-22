@@ -43,6 +43,9 @@
     <Filter Include="source\sdl">
       <UniqueIdentifier>{c3a0eebf-f888-4f09-908d-24f179633258}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\input">
+      <UniqueIdentifier>{39bf244d-b7c1-4b5d-ac3c-abf803e46857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\common\Exception.h">
@@ -105,6 +108,9 @@
     <ClInclude Include="..\..\source\sdl\SDLKeyboard.h">
       <Filter>source\sdl</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\input\Key.h">
+      <Filter>include\input</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\common\Exception.cpp">
@@ -142,6 +148,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\sdl\SDLKeyboard.cpp">
       <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\input\Key.cpp">
+      <Filter>source\input</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

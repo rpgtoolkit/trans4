@@ -48,3 +48,7 @@ Temporary Items
 *.dll
 *.log
 *.opensdf
+*.obj
+*.tlog
+*.idb
+*.pdb

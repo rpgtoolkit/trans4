@@ -1,6 +1,8 @@
 #include <SDL.h>
 
+#include "input/Key.h"
 #include "SDLKeyboard.h"
+
 
 using namespace SDL;
 
