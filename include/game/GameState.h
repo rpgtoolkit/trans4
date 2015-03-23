@@ -37,6 +37,8 @@ namespace tk4 {
 
 		GameState & operator=(GameState const&) = delete;
 	protected:
+		GameState() {}
+
 		GameState(GameStateManager* stateManager) : m_stateManager(stateManager) {}
 
 		GameStateManager* m_stateManager;

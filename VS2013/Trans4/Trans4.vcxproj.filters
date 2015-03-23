@@ -111,6 +111,9 @@
     <ClInclude Include="..\..\include\input\Key.h">
       <Filter>include\input</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\scripts\LuaGameState.h">
+      <Filter>source\scripts</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\common\Exception.cpp">
@@ -151,6 +154,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\input\Key.cpp">
       <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\scripts\LuaGameState.cpp">
+      <Filter>source\scripts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

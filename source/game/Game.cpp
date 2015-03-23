@@ -18,8 +18,6 @@ Game::~Game() {
 }
 
 void Game::run() {
-	pushState(new EmptyState(this));
-
 	const uint32_t MS_PER_UPDATE = 10;
 	uint32_t lag = 0, elapsed;
 

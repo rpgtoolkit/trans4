@@ -1,5 +1,3 @@
-#pragma once
-
 #include "lua.hpp"
 #include "LuaBridge.h"
 
@@ -21,6 +19,7 @@ void ScriptEngine::initialize(tk4::Game* game, tk4::System* system) {
 	m_state = luaL_newstate();
 	luaL_openlibs(m_state);
 	
+	tk4::wrapper::setLuaInstance(m_state);
 	tk4::wrapper::setSystemInstance(system);
 	tk4::wrapper::setGameInstance(game);
 
@@ -41,5 +40,6 @@ void ScriptEngine::registerFunctions() {
 	getGlobalNamespace(m_state)
 		.beginNamespace("tk")
 			.addFunction("isKeyDown", tk4::wrapper::isKeyDown)
+			.addFunction("pushState", tk4::wrapper::pushState)
 		.endNamespace();
 }

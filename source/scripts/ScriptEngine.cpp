@@ -1,4 +1,3 @@
-#include "lua.hpp"
 #include "LuaScriptEngine.h"
 
 using namespace tk4;

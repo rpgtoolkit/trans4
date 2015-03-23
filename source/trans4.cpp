@@ -13,13 +13,15 @@ int main(int argc, char* argv[]) {
 		System* system = new System();
 		system->initialize();
 
-		ScriptEngine* scriptEngine = new ScriptEngine();
-		scriptEngine->initialize(nullptr, system);
-		scriptEngine->run("main.lua");
-
 		Game* game = new Game(system->getInput(), system->getRenderer());
+		ScriptEngine* scriptEngine = new ScriptEngine();
+
+		scriptEngine->initialize(game, system);
+		scriptEngine->run("main.lua");
+		
 		game->run();
 		delete game;
+		delete scriptEngine;
 
 		delete system;
 	} catch (tk4::Exception e) {
