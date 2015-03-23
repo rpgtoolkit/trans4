@@ -52,3 +52,5 @@ Temporary Items
 *.tlog
 *.idb
 *.pdb
+*.bmp
+*.png
