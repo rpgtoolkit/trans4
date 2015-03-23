@@ -1,26 +1,38 @@
-print("Hello world")
-
-t = {}
-t["initialize"] = function()
-	print("t Initialized")
-	tex = tk.loadTexture("cold_weather.bmp")
+MapState = {}
+MapState["initialize"] = function()
+	tileset = tk.loadTexture("tileset.bmp")
+	grass = tk.Rectangle(5*16+5, 0, 16, 16)
+	dirt = tk.Rectangle(6*16+6, 0, 16, 16)
 	
-	r = tk.Rectangle(10, 10, 500, 500)
-	print(r.x)
-	print(r.w)
+	map = { 
+		{1,1,0,0,0,0,0,0,0,0},
+        {0,1,0,0,0,0,0,0,0,0},
+        {0,1,0,0,0,0,0,0,0,0},
+        {1,1,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0},
+        {0,0,0,0,0,0,0,0,0,0}
+    }
 end
 
-t["update"] = function()
-	if tk.isKeyDown("A") then
-		print("A pressed")
-	elseif tk.isKeyDown("ESCAPE") then
-		tk.popState()
-	end
+MapState["update"] = function()
+
 end
 
-t["render"] = function()
-	tk.drawTexture(tex, 10, 10)
-	tk.drawClip(tex, 500, 500, 50, 50, 180, 100)
+MapState["render"] = function()
+	for i = 1, 10 do
+        for j = 1, 10 do
+            local newPos = map[i][j]
+            if newPos == 0 then
+				tk.drawClip(tileset, j*16, i*16, grass.x, grass.y, grass.w, grass.h)
+            elseif newPos == 1 then
+				tk.drawClip(tileset, j*16, i*16, dirt.x, dirt.y, dirt.w, dirt.h)
+			end
+        end
+    end
 end
 
-tk.pushState("t")
+tk.pushState("MapState")
