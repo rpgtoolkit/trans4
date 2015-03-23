@@ -4,7 +4,6 @@
 #include "common/Exception.h"
 #include "game/Game.h"
 #include "system/System.h"
-
 #include "scripts/ScriptEngine.h"
 
 using namespace tk4;

@@ -56,7 +56,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../Trans4/include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,7 +74,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)../include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../Trans4/include;$(SolutionDir)../external/Lua/include;$(SolutionDir)../external/LuaBridge/include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -91,44 +91,44 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\common\Exception.h" />
-    <ClInclude Include="..\..\include\common\Rectangle.h" />
-    <ClInclude Include="..\..\include\game\Game.h" />
-    <ClInclude Include="..\..\include\game\GameState.h" />
-    <ClInclude Include="..\..\include\game\GameStateManager.h" />
-    <ClInclude Include="..\..\include\graphics\Renderer.h" />
-    <ClInclude Include="..\..\include\input\Input.h" />
-    <ClInclude Include="..\..\include\input\InputHandler.h" />
-    <ClInclude Include="..\..\include\input\Key.h" />
-    <ClInclude Include="..\..\include\input\Keyboard.h" />
-    <ClInclude Include="..\..\include\scripts\ScriptEngine.h" />
-    <ClInclude Include="..\..\include\system\System.h" />
-    <ClInclude Include="..\..\include\system\Timer.h" />
-    <ClInclude Include="..\..\include\system\Window.h" />
-    <ClInclude Include="..\..\source\game\EmptyState.h" />
-    <ClInclude Include="..\..\source\scripts\LuaScriptEngine.h" />
-    <ClInclude Include="..\..\source\scripts\LuaGameState.h" />
-    <ClInclude Include="..\..\source\scripts\ScriptInterface.h" />
-    <ClInclude Include="..\..\source\sdl\SDLInput.h" />
-    <ClInclude Include="..\..\source\sdl\SDLKeyboard.h" />
-    <ClInclude Include="..\..\source\sdl\SDLRenderer.h" />
-    <ClInclude Include="..\..\source\sdl\SDLWindow.h" />
+    <ClInclude Include="..\..\Trans4\include\common\Exception.h" />
+    <ClInclude Include="..\..\Trans4\include\common\Rectangle.h" />
+    <ClInclude Include="..\..\Trans4\include\game\Game.h" />
+    <ClInclude Include="..\..\Trans4\include\game\GameState.h" />
+    <ClInclude Include="..\..\Trans4\include\game\GameStateManager.h" />
+    <ClInclude Include="..\..\Trans4\include\graphics\Renderer.h" />
+    <ClInclude Include="..\..\Trans4\include\input\Input.h" />
+    <ClInclude Include="..\..\Trans4\include\input\InputHandler.h" />
+    <ClInclude Include="..\..\Trans4\include\input\Key.h" />
+    <ClInclude Include="..\..\Trans4\include\input\Keyboard.h" />
+    <ClInclude Include="..\..\Trans4\include\scripts\ScriptEngine.h" />
+    <ClInclude Include="..\..\Trans4\include\system\System.h" />
+    <ClInclude Include="..\..\Trans4\include\system\Timer.h" />
+    <ClInclude Include="..\..\Trans4\include\system\Window.h" />
+    <ClInclude Include="..\..\Trans4\source\game\EmptyState.h" />
+    <ClInclude Include="..\..\Trans4\source\scripts\LuaGameState.h" />
+    <ClInclude Include="..\..\Trans4\source\scripts\LuaScriptEngine.h" />
+    <ClInclude Include="..\..\Trans4\source\scripts\ScriptInterface.h" />
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLInput.h" />
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLKeyboard.h" />
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLRenderer.h" />
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\common\Exception.cpp" />
-    <ClCompile Include="..\..\source\game\Game.cpp" />
-    <ClCompile Include="..\..\source\input\Key.cpp" />
-    <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp" />
-    <ClCompile Include="..\..\source\scripts\LuaGameState.cpp" />
-    <ClCompile Include="..\..\source\scripts\ScriptEngine.cpp" />
-    <ClCompile Include="..\..\source\scripts\ScriptInterface.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLInput.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLKeyboard.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLRenderer.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLSystem.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLTimer.cpp" />
-    <ClCompile Include="..\..\source\sdl\SDLWindow.cpp" />
-    <ClCompile Include="..\..\source\trans4.cpp" />
+    <ClCompile Include="..\..\Trans4\source\common\Exception.cpp" />
+    <ClCompile Include="..\..\Trans4\source\game\Game.cpp" />
+    <ClCompile Include="..\..\Trans4\source\input\Key.cpp" />
+    <ClCompile Include="..\..\Trans4\source\scripts\LuaGameState.cpp" />
+    <ClCompile Include="..\..\Trans4\source\scripts\LuaScriptEngine.cpp" />
+    <ClCompile Include="..\..\Trans4\source\scripts\ScriptEngine.cpp" />
+    <ClCompile Include="..\..\Trans4\source\scripts\ScriptInterface.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLInput.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLKeyboard.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLRenderer.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLSystem.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLTimer.cpp" />
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLWindow.cpp" />
+    <ClCompile Include="..\..\Trans4\source\trans4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

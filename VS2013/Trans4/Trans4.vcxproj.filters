@@ -48,115 +48,115 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\include\common\Exception.h">
+    <ClInclude Include="..\..\Trans4\include\common\Exception.h">
       <Filter>include\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\common\Rectangle.h">
+    <ClInclude Include="..\..\Trans4\include\common\Rectangle.h">
       <Filter>include\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\game\Game.h">
+    <ClInclude Include="..\..\Trans4\include\game\Game.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\game\GameState.h">
+    <ClInclude Include="..\..\Trans4\include\game\GameState.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\game\GameStateManager.h">
+    <ClInclude Include="..\..\Trans4\include\game\GameStateManager.h">
       <Filter>include\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\graphics\Renderer.h">
+    <ClInclude Include="..\..\Trans4\include\graphics\Renderer.h">
       <Filter>include\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\input\Input.h">
+    <ClInclude Include="..\..\Trans4\include\input\Input.h">
       <Filter>include\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\input\InputHandler.h">
+    <ClInclude Include="..\..\Trans4\include\input\InputHandler.h">
       <Filter>include\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\input\Keyboard.h">
+    <ClInclude Include="..\..\Trans4\include\input\Key.h">
       <Filter>include\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\game\EmptyState.h">
-      <Filter>source\game</Filter>
+    <ClInclude Include="..\..\Trans4\include\input\Keyboard.h">
+      <Filter>include\input</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\sdl\SDLInput.h">
-      <Filter>source\sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\sdl\SDLRenderer.h">
-      <Filter>source\sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\source\sdl\SDLWindow.h">
-      <Filter>source\sdl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\system\System.h">
-      <Filter>include\system</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\system\Timer.h">
-      <Filter>include\system</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\system\Window.h">
-      <Filter>include\system</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\include\scripts\ScriptEngine.h">
+    <ClInclude Include="..\..\Trans4\include\scripts\ScriptEngine.h">
       <Filter>include\scripts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\scripts\LuaScriptEngine.h">
+    <ClInclude Include="..\..\Trans4\include\system\System.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\include\system\Timer.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\include\system\Window.h">
+      <Filter>include\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\source\game\EmptyState.h">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\source\scripts\LuaGameState.h">
       <Filter>source\scripts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\scripts\ScriptInterface.h">
+    <ClInclude Include="..\..\Trans4\source\scripts\LuaScriptEngine.h">
       <Filter>source\scripts</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\sdl\SDLKeyboard.h">
+    <ClInclude Include="..\..\Trans4\source\scripts\ScriptInterface.h">
+      <Filter>source\scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLInput.h">
       <Filter>source\sdl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\input\Key.h">
-      <Filter>include\input</Filter>
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLKeyboard.h">
+      <Filter>source\sdl</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\scripts\LuaGameState.h">
-      <Filter>source\scripts</Filter>
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLRenderer.h">
+      <Filter>source\sdl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Trans4\source\sdl\SDLWindow.h">
+      <Filter>source\sdl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\source\common\Exception.cpp">
+    <ClCompile Include="..\..\Trans4\source\common\Exception.cpp">
       <Filter>source\common</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\game\Game.cpp">
+    <ClCompile Include="..\..\Trans4\source\game\Game.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\scripts\ScriptEngine.cpp">
-      <Filter>source\scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLInput.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLRenderer.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLSystem.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLTimer.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLWindow.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\trans4.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\scripts\LuaScriptEngine.cpp">
-      <Filter>source\scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\scripts\ScriptInterface.cpp">
-      <Filter>source\scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\sdl\SDLKeyboard.cpp">
-      <Filter>source\sdl</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\input\Key.cpp">
+    <ClCompile Include="..\..\Trans4\source\input\Key.cpp">
       <Filter>source\input</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\scripts\LuaGameState.cpp">
+    <ClCompile Include="..\..\Trans4\source\scripts\LuaGameState.cpp">
       <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\scripts\LuaScriptEngine.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\scripts\ScriptEngine.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\scripts\ScriptInterface.cpp">
+      <Filter>source\scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLInput.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLKeyboard.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLRenderer.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLSystem.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLTimer.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\sdl\SDLWindow.cpp">
+      <Filter>source\sdl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Trans4\source\trans4.cpp">
+      <Filter>source</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
