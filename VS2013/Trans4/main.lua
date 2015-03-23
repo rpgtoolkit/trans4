@@ -3,6 +3,7 @@ print("Hello world")
 t = {}
 t["initialize"] = function()
 	print("t Initialized")
+	tex = tk.loadTexture("cold_weather.bmp")
 end
 
 t["update"] = function()
@@ -14,7 +15,7 @@ t["update"] = function()
 end
 
 t["render"] = function()
-
+	tk.drawTexture(tex, 10, 10)
 end
 
 tk.pushState("t")

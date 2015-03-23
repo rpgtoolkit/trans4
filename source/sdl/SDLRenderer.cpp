@@ -5,7 +5,7 @@
 
 using namespace SDL;
 
-Renderer::Renderer(SDL_Window* sdlWindow) : m_window(sdlWindow) {
+Renderer::Renderer(SDL_Window* sdlWindow) : m_window(sdlWindow), m_textureId(0) {
 	m_renderer = nullptr;
 }
 
@@ -28,11 +28,40 @@ void Renderer::initialize() {
 	}
 }
 
-void Renderer::clearScreen() {
-	SDL_RenderClear(m_renderer);
+tk4::TextureID Renderer::loadTexture(std::string texture_file) {
+	SDL_Surface *surface = SDL_LoadBMP(texture_file.c_str());
+	if (surface == nullptr) {
+		return tk4::INVALID_TEXTURE;
+	}
+
+	SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+	SDL_FreeSurface(surface);
+	if (texture == nullptr) {
+		return tk4::INVALID_TEXTURE;
+	}
+
+	m_textureId++;
+	m_textures[m_textureId] = texture;
+
+	return m_textureId;
 }
 
-void Renderer::draw(int x, int y, int textureId, int clipId) {
+void Renderer::drawTexture(tk4::TextureID textureId, int x, int y) {
+	SDL_Texture *texture = m_textures[textureId];
+	if (texture == nullptr) {
+		return;
+	}
+
+	SDL_Rect destination;
+	destination.x = x;
+	destination.y = y;
+	SDL_QueryTexture(texture, NULL, NULL, &destination.w, &destination.h);
+
+	SDL_RenderCopy(m_renderer, m_textures[textureId], NULL, &destination);
+}
+
+void Renderer::clearScreen() {
+	SDL_RenderClear(m_renderer);
 }
 
 void Renderer::renderScreen() {

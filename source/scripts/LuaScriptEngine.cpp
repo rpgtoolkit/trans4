@@ -43,5 +43,7 @@ void ScriptEngine::registerFunctions() {
 			.addFunction("changeState", tk4::wrapper::changeState)
 			.addFunction("pushState", tk4::wrapper::pushState)
 			.addFunction("popState", tk4::wrapper::popState)
+			.addFunction("loadTexture", tk4::wrapper::loadTexture)
+			.addFunction("drawTexture", tk4::wrapper::drawTexture)
 		.endNamespace();
 }

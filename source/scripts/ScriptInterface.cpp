@@ -5,6 +5,7 @@
 #include "LuaGameState.h"
 
 #include "game/Game.h"
+#include "graphics/Renderer.h"
 #include "system/System.h"
 #include "input/Input.h"
 #include "input/Keyboard.h"
@@ -12,36 +13,46 @@
 
 using namespace tk4;
 
-static lua_State* iLua;
-static System* iSystem;
-static Game* iGame;
+static lua_State* L;
+static System* sys;
+static Renderer* renderer;
+static Game* game;
 
 void wrapper::setLuaInstance(lua_State* lua) {
-	iLua = lua;
+	L = lua;
 }
 
 void wrapper::setSystemInstance(tk4::System* system) {
-	iSystem = system;
+	sys = system;
+	renderer = sys->getRenderer();
 }
 
-void wrapper::setGameInstance(tk4::Game* game) {
-	iGame = game;
+void wrapper::setGameInstance(tk4::Game* g) {
+	game = g;
 }
 
 bool wrapper::isKeyDown(std::string key) {
-	return iSystem->getInput()->getKeyboard()
+	return sys->getInput()->getKeyboard()
 		->isKeyDown(tk4::stringToKey(key));
 }
 
 void wrapper::changeState(std::string state) {
-	iGame->changeState(new lua::GameState(iLua, state));
+	game->changeState(new lua::GameState(L, state));
 }
 
 void wrapper::pushState(std::string state) {
-	iGame->pushState(new lua::GameState(iLua, state));
+	game->pushState(new lua::GameState(L, state));
 }
 
 void wrapper::popState() {
-	iGame->popState();
+	game->popState();
+}
+
+int wrapper::loadTexture(std::string texture_file) {
+	return renderer->loadTexture(texture_file);
+}
+
+void wrapper::drawTexture(int textureId, int x, int y) {
+	renderer->drawTexture(textureId, x, y);
 }
 

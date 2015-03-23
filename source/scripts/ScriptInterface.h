@@ -22,5 +22,9 @@ namespace tk4 {
 		void pushState(std::string state);
 
 		void popState();
+
+		int loadTexture(std::string texture_file);
+
+		void drawTexture(int textureId, int x, int y);
 	}
 }

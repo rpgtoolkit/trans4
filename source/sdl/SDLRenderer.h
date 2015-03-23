@@ -1,5 +1,8 @@
 #pragma once
 
+#include <map>
+
+#include "common/Rectangle.h"
 #include "graphics/Renderer.h"
 
 struct SDL_Renderer;
@@ -16,12 +19,18 @@ namespace SDL {
 
 		void clearScreen();
 
-		void draw(int x, int y, int textureId, int clipId);
+		tk4::TextureID loadTexture(std::string texture_file);
+
+		void drawTexture(tk4::TextureID textureId, int x, int y);
 
 		void renderScreen();
 	private:
 		SDL_Window* m_window;
 
 		SDL_Renderer* m_renderer;
+
+		tk4::TextureID m_textureId;
+
+		std::map<tk4::TextureID, SDL_Texture*> m_textures;
 	};
 }
