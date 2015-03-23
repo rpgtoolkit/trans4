@@ -1,3 +1,6 @@
+#include <string>
+#include <cstdio>
+
 #include "common/Exception.h"
 #include "game/Game.h"
 #include "system/System.h"
@@ -7,6 +10,15 @@
 using namespace tk4;
 
 int main(int argc, char* argv[]) {
+	std::string script;
+	if (argc == 2) {
+		script = argv[1];
+		printf("Using script: %s\n", argv[1]);
+	} else {
+		script = "main.lua";
+		printf("Defaulting to main.lua\n");
+	}
+
 	//TODO: Parse settings file here
 
 	try {
@@ -17,7 +29,7 @@ int main(int argc, char* argv[]) {
 		ScriptEngine* scriptEngine = new ScriptEngine();
 
 		scriptEngine->initialize(game, system);
-		scriptEngine->run("main.lua");
+		scriptEngine->run(script);
 		
 		game->run();
 		delete game;
