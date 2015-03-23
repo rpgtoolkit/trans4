@@ -17,6 +17,10 @@ void Input::initialize() {
 }
 
 void Input::process(tk4::InputHandler* handler) {
+	if (handler == nullptr) {
+		//ignore
+	}
+
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {
 		if (e.type == SDL_QUIT){

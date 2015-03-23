@@ -5,18 +5,32 @@ namespace tk4 {
 
 	class InputHandler {
 	public:
-		InputHandler() {}
-
 		virtual ~InputHandler() {}
 
-		virtual void keyPressed(Key key) {}
+		/**
+		* Called when a keyboard key is pressed.
+		*
+		* @param key The keyboard key that is pressed.
+		*/
+		virtual void keyPressed(Key key) = 0;
 
-		virtual void keyReleased(Key key) {}
+		/**
+		* Called when a keyboard key is released.
+		*
+		* @param key The keyboard key that is released.
+		*/
+		virtual void keyReleased(Key key) = 0;
 
+		/**
+		* No copying allowed.
+		*/
 		InputHandler(InputHandler const&) = delete;
 
+		/**
+		* No copying allowed.
+		*/
 		InputHandler & operator=(InputHandler const&) = delete;
 	protected:
-
+		InputHandler() {}
 	};
 }

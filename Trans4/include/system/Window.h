@@ -8,8 +8,14 @@ namespace tk4 {
 	public:
 		virtual ~Window() {}
 
+		/**
+		* No copying allowed.
+		*/
 		Window(Window const&) = delete;
 
+		/**
+		* No copying allowed.
+		*/
 		Window & operator=(Window const&) = delete;
 	protected:
 		Window() {}

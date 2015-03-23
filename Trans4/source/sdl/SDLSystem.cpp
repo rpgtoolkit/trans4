@@ -56,7 +56,7 @@ namespace tk4 {
 		return m_window;
 	}
 
-	void System::finalize() {
+	System::~System() {
 		if (m_initialized) {
 			if (m_input != nullptr) {
 				delete m_input;

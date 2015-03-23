@@ -8,6 +8,10 @@ namespace tk4 {
 	class Input;
 	class Renderer;
 
+	/**
+	* The game class is responsible for the game loop and managing
+	* the different game states (e.g. Main Menu, Map, Battle, etc).
+	*/
 	class Game : public GameStateManager {
 	public:
 		Game(Input* input, Renderer* renderer);
@@ -28,7 +32,6 @@ namespace tk4 {
 		Game(Game const&) = delete;
 
 		Game & operator=(Game const&) = delete;
-
 	private:
 		void processInput();
 		

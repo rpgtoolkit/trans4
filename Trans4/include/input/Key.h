@@ -5,10 +5,25 @@
 namespace tk4 {
 	enum class Key;
 
+	/**
+	* Converts a string to a key.
+	*
+	* @param str The string to convert
+	* @return The key that corresponds to the string, or UNKNOWN.
+	*/
 	Key stringToKey(std::string str);
 
+	/**
+	* Converts a key to a string.
+	*
+	* @param key The key to convert
+	* @return The string that corresponds to the key.
+	*/
 	std::string keyToString(Key key);
 
+	/**
+	* An enumeration of the various keys that can be found on a keyboard.
+	*/
 	enum class Key : int {
 		UNKNOWN,
 
