@@ -4,6 +4,7 @@
 #include "ScriptInterface.h"
 #include "LuaGameState.h"
 
+#include "common/Rectangle.h"
 #include "game/Game.h"
 #include "graphics/Renderer.h"
 #include "system/System.h"
@@ -48,11 +49,16 @@ void wrapper::popState() {
 	game->popState();
 }
 
-int wrapper::loadTexture(std::string texture_file) {
+unsigned int wrapper::loadTexture(std::string texture_file) {
 	return renderer->loadTexture(texture_file);
 }
 
 void wrapper::drawTexture(int textureId, int x, int y) {
 	renderer->drawTexture(textureId, x, y);
+}
+
+void wrapper::drawClip(int textureId, int x, int y, int tx, int ty, int tw, int th) {
+	tk4::Rectangle rect(tx, ty, tw, th);
+	renderer->drawTexture(textureId, x, y, &rect);
 }
 

@@ -4,6 +4,8 @@
 #include "LuaScriptEngine.h"
 #include "ScriptInterface.h"
 
+#include "common/Rectangle.h"
+
 using namespace lua;
 
 ScriptEngine::ScriptEngine() : m_state(nullptr) {
@@ -45,5 +47,17 @@ void ScriptEngine::registerFunctions() {
 			.addFunction("popState", tk4::wrapper::popState)
 			.addFunction("loadTexture", tk4::wrapper::loadTexture)
 			.addFunction("drawTexture", tk4::wrapper::drawTexture)
+			.addFunction("drawClip", tk4::wrapper::drawClip)
+		.endNamespace();
+
+	getGlobalNamespace(m_state)
+		.beginNamespace("tk")
+			.beginClass <tk4::Rectangle> ("Rectangle")
+				.addConstructor<void (*) (int, int, int, int)> ()
+				.addData("x", &tk4::Rectangle::x)
+				.addData("y", &tk4::Rectangle::y)
+				.addData("w", &tk4::Rectangle::width)
+				.addData("h", &tk4::Rectangle::height)
+			.endClass()
 		.endNamespace();
 }

@@ -21,10 +21,12 @@ namespace SDL {
 
 		tk4::TextureID loadTexture(std::string texture_file);
 
-		void drawTexture(tk4::TextureID textureId, int x, int y);
+		void drawTexture(tk4::TextureID textureId, int x, int y, tk4::Rectangle* clip = nullptr);
 
 		void renderScreen();
 	private:
+		SDL_Rect* getSDLRect(tk4::Rectangle* rect);
+
 		SDL_Window* m_window;
 
 		SDL_Renderer* m_renderer;

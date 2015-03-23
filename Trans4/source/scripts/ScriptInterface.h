@@ -23,8 +23,10 @@ namespace tk4 {
 
 		void popState();
 
-		int loadTexture(std::string texture_file);
+		unsigned int loadTexture(std::string texture_file);
 
 		void drawTexture(int textureId, int x, int y);
+
+		void drawClip(int textureId, int x, int y, int tx, int ty, int tw, int th);
 	}
 }

@@ -1,6 +1,7 @@
 #include <SDL.h>
 
 #include "common/Exception.h"
+#include "common/Rectangle.h"
 #include "SDLRenderer.h"
 
 using namespace SDL;
@@ -46,18 +47,25 @@ tk4::TextureID Renderer::loadTexture(std::string texture_file) {
 	return m_textureId;
 }
 
-void Renderer::drawTexture(tk4::TextureID textureId, int x, int y) {
+void Renderer::drawTexture(tk4::TextureID textureId, int x, int y, tk4::Rectangle* clip) {
 	SDL_Texture *texture = m_textures[textureId];
 	if (texture == nullptr) {
 		return;
 	}
 
-	SDL_Rect destination;
-	destination.x = x;
-	destination.y = y;
-	SDL_QueryTexture(texture, NULL, NULL, &destination.w, &destination.h);
+	SDL_Rect dest;
+	dest.x = x;
+	dest.y = y;
+	if (clip == nullptr) {
+		SDL_QueryTexture(texture, NULL, NULL, &dest.w, &dest.h);
+	} else {
+		dest.w = clip->width;
+		dest.h = clip->height;
+	}
 
-	SDL_RenderCopy(m_renderer, m_textures[textureId], NULL, &destination);
+	SDL_Rect* sdlClip = getSDLRect(clip);
+	SDL_RenderCopy(m_renderer, m_textures[textureId], sdlClip, &dest);
+	delete sdlClip;
 }
 
 void Renderer::clearScreen() {
@@ -66,4 +74,19 @@ void Renderer::clearScreen() {
 
 void Renderer::renderScreen() {
 	SDL_RenderPresent(m_renderer);
+}
+
+SDL_Rect* Renderer::getSDLRect(tk4::Rectangle* rect) {
+	if (rect == nullptr) {
+		return nullptr;
+	}
+
+	SDL_Rect* rectangle = new SDL_Rect();
+
+	rectangle->x = rect->x;
+	rectangle->y = rect->y;
+	rectangle->w = rect->width;
+	rectangle->h = rect->height;
+
+	return rectangle;
 }

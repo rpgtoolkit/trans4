@@ -31,9 +31,9 @@ int main(int argc, char* argv[]) {
 		scriptEngine->run(script);
 		
 		game->run();
+
 		delete game;
 		delete scriptEngine;
-
 		delete system;
 	} catch (tk4::Exception e) {
 		System::showErrorDialog("Trans4 Error", e.what());

@@ -7,7 +7,7 @@ namespace tk4 {
 		int width;
 		int height;
 
-		Rectangle(int xpos, int ypos, int w, int h) 
+		explicit Rectangle(int xpos, int ypos, int w, int h) 
 			: x(xpos), y(ypos), width(w), height(h) {}
 	};
 }

@@ -3,8 +3,10 @@
 #include <string>
 
 namespace tk4 {
-	typedef int TextureID;
+	typedef unsigned int TextureID;
 	const TextureID INVALID_TEXTURE = 0;
+
+	struct Rectangle;
 
 	class Renderer {
 		friend class System;
@@ -14,7 +16,7 @@ namespace tk4 {
 
 		virtual TextureID loadTexture(std::string texture_file) = 0;
 
-		virtual void drawTexture(TextureID textureId, int x, int y) = 0;
+		virtual void drawTexture(TextureID textureId, int x, int y, Rectangle* clip = nullptr) = 0;
 
 		virtual void renderScreen() = 0;
 
