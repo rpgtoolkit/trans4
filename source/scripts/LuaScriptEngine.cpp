@@ -40,6 +40,8 @@ void ScriptEngine::registerFunctions() {
 	getGlobalNamespace(m_state)
 		.beginNamespace("tk")
 			.addFunction("isKeyDown", tk4::wrapper::isKeyDown)
+			.addFunction("changeState", tk4::wrapper::changeState)
 			.addFunction("pushState", tk4::wrapper::pushState)
+			.addFunction("popState", tk4::wrapper::popState)
 		.endNamespace();
 }

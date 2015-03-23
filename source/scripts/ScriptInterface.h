@@ -17,6 +17,10 @@ namespace tk4 {
 
 		bool isKeyDown(std::string key);
 
+		void changeState(std::string state);
+
 		void pushState(std::string state);
+
+		void popState();
 	}
 }

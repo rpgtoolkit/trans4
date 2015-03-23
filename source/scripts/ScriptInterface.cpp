@@ -33,6 +33,15 @@ bool wrapper::isKeyDown(std::string key) {
 		->isKeyDown(tk4::stringToKey(key));
 }
 
+void wrapper::changeState(std::string state) {
+	iGame->changeState(new lua::GameState(iLua, state));
+}
+
 void wrapper::pushState(std::string state) {
 	iGame->pushState(new lua::GameState(iLua, state));
 }
+
+void wrapper::popState() {
+	iGame->popState();
+}
+
