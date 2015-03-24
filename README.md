@@ -23,4 +23,4 @@ of all dependencies through a CMake interface if they are not automatically
 detected, and must use CMake to produce a set of build files suitable for your
 platform, toolchain, and development environment.
 
-**TODO:** Build instructions / guide
+See the [Build Instructions](https://github.com/mariobadr/RPGTK4/wiki/Build) for help building the project for your platform.
