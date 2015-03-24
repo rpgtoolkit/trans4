@@ -16,6 +16,7 @@ find_package(LUABRIDGE REQUIRED)
 set(RPGTOOLKIT_TRANS4_HEADERS
   ${RPGTOOLKIT_HEADERS}/trans4/common/Exception.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/common/Rectangle.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/io/BinaryReader.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/game/Game.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/game/GameState.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/game/GameStateManager.hpp
@@ -64,7 +65,7 @@ include_directories(
   ${LUABRIDGE_INCLUDE_DIRS}
 )
 
-add_executable(${RPGTOOLKIT_TRANS4_TARGET} WIN32
+add_executable(${RPGTOOLKIT_TRANS4_TARGET}
   ${RPGTOOLKIT_TRANS4_HEADERS}
   ${RPGTOOLKIT_TRANS4_SOURCES}
 )
@@ -72,6 +73,7 @@ add_executable(${RPGTOOLKIT_TRANS4_TARGET} WIN32
 target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET}
   ${LUA_LIBRARY}
   ${SDL2_LIBRARY}
+  ${SDL2MAIN_LIBRARY}
 )
 
 if (WIN32)
