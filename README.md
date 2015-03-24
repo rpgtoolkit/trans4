@@ -1,9 +1,26 @@
-# Unofficial Development of RPG Toolkit 4
+# RPG Toolkit 4.x
 
-Unofficial developing of the 4th RPG Toolkit (rpgtoolkit.net).
+Unofficial development of the RPG Toolkit Development System 4.x (rpgtoolkit.net).
+
+# License
+
+Mozilla Public License 2.0
+
+This Source Code Form is subject to the terms of the Mozilla Public License,
+v. 2.0. If a copy of the MPL was not distributed with this file,
+you can obtain one at http://mozilla.org/MPL/2.0/.
 
 # Dependencies
 
-The current version depends on SDL2 (not included) and Lua (included). You will need to download (https://www.libsdl.org/download-2.0.php) and extract SDL2 to the external directory. This will give you extract/SDL2/include and extract/SDL2/lib directories which are necessary to compile.
+- Lua 5.2.4
+- LuaBridge 2.x
+- SDL 2.0.3
 
-A visual studio solution file is available in the VS2013 directory. After extracting SDL2, you should be able to compile all projects in either Release or Debug configurations. You will be able to find the binaries in build/CONFIGURATION/. In order to run the application you will have to copy+paste SDL2.dll into the same directory as the binary. SDL2.dll can be found in the lib folder where you extracted SDL2. Compilation currently defaults to x86.
+# Build
+
+This project uses CMake as a build system. You must specify the location
+of all dependencies through a CMake interface if they are not automatically
+detected, and must use CMake to produce a set of build files suitable for your
+platform, toolchain, and development environment.
+
+**TODO:** Build instructions / guide
