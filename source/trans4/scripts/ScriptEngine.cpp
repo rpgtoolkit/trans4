@@ -19,7 +19,7 @@ namespace rpgtoolkit {
 	}
 
 	void ScriptEngine::initialize(Game* game, System* system) {
-		m_scriptEngine = new ScriptEngine();
+		m_scriptEngine = new LuaScriptEngine();
 		m_scriptEngine->initialize(game, system);
 	}
 
