@@ -8,7 +8,6 @@
 #include "game/GameStateStack.h"
 
 #include "game/Game.hpp"
-#include "game/MainMenuState.h"
 #include "scripts/ScriptEngine.hpp"
 
 using clio::System;

@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "system/System.h"
 #include "input/Input.h"
 #include "SDLKeyboard.h"
 

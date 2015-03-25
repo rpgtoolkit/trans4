@@ -2,7 +2,8 @@
 
 using namespace clio;
 
-Exception::Exception(std::string message) : m_message(message) {
+Exception::Exception(std::string message) throw()
+        : m_message(message) {
 
 }
 

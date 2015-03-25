@@ -50,7 +50,9 @@ namespace clio {
 		* No copying allowed.
 		*/
 		System & operator=(System const&) = delete;
+
 	private:
+
 		std::unique_ptr<Input> m_input;
 
 		std::unique_ptr<Logger> m_logger;
@@ -58,5 +60,6 @@ namespace clio {
 		std::unique_ptr<Renderer2D> m_renderer;
 
 		std::unique_ptr<Window> m_window;
+
 	};
 }
