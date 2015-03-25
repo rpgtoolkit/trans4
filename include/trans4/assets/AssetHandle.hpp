@@ -49,7 +49,7 @@ namespace rpgtoolkit {
         ///
         /// The handle will take ownership of the asset content.
         ///
-        /// @param asset asset content
+        /// \param asset asset content
 
         void
         SetAsset(unique_ptr<Asset> asset) {

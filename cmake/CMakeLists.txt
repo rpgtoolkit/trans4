@@ -21,5 +21,4 @@ set(RPGTOOLKIT_SOURCES ${CMAKE_SOURCE_DIR}/../source)
 
 # Projects
 
-include(projects/clio)
 include(projects/trans4)

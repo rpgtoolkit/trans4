@@ -3,8 +3,8 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <lua.hpp>
-#include <LuaBridge.h>
+#include "lua.hpp"
+#include "LuaBridge.h"
 
 #include "scripts/LuaGameState.hpp"
 

@@ -11,7 +11,7 @@
 #include <lua.hpp>
 #include <LuaBridge.h>
 
-#include "game/GameState.h"
+#include "game/GameState.hpp"
 
 namespace rpgtoolkit {
 

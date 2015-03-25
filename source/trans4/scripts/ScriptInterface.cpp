@@ -9,13 +9,13 @@
 #include "scripts/ScriptInterface.hpp"
 #include "scripts/LuaGameState.hpp"
 #include "game/Game.hpp"
-#include "game/GameState.h"
-#include "game/GameStateStack.h"
-#include "graphics/Renderer2D.h"
-#include "system/System.h"
-#include "input/Input.h"
-#include "input/Keyboard.h"
-#include "input/Key.h"
+#include "game/GameState.hpp"
+#include "game/GameStateStack.hpp"
+#include "graphics/Renderer2D.hpp"
+#include "system/System.hpp"
+#include "input/Input.hpp"
+#include "input/Keyboard.hpp"
+#include "input/Key.hpp"
 
 namespace rpgtoolkit {
 
