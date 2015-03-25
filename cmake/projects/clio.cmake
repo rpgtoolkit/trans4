@@ -13,22 +13,22 @@ find_package(SDL_image REQUIRED)
 # Files
 
 set(RPGTOOLKIT_CLIO_HEADERS
-  ${RPGTOOLKIT_HEADERS}/clio/common/Exception.h
-  ${RPGTOOLKIT_HEADERS}/clio/common/Logger.h
-  ${RPGTOOLKIT_HEADERS}/clio/common/Timer.h
-  ${RPGTOOLKIT_HEADERS}/clio/game/GameState.h
-  ${RPGTOOLKIT_HEADERS}/clio/game/GameStateStack.h
-  ${RPGTOOLKIT_HEADERS}/clio/graphics/Renderer2D.h
-  ${RPGTOOLKIT_HEADERS}/clio/graphics/Texture.h
-  ${RPGTOOLKIT_HEADERS}/clio/input/Input.h
-  ${RPGTOOLKIT_HEADERS}/clio/input/InputContext.h
-  ${RPGTOOLKIT_HEADERS}/clio/input/InputHandler.h
-  ${RPGTOOLKIT_HEADERS}/clio/input/Key.h
-  ${RPGTOOLKIT_HEADERS}/clio/input/Keyboard.h
-  ${RPGTOOLKIT_HEADERS}/clio/system/System.h
-  ${RPGTOOLKIT_HEADERS}/clio/system/SystemSettings.h
-  ${RPGTOOLKIT_HEADERS}/clio/window/Window.h
-  ${RPGTOOLKIT_HEADERS}/clio/window/WindowSettings.h
+  ${RPGTOOLKIT_HEADERS}/clio/common/Exception.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/common/Logger.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/common/Timer.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/game/GameState.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/game/GameStateStack.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/graphics/Renderer2D.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/graphics/Texture.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/input/Input.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/input/InputContext.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/input/InputHandler.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/input/Key.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/input/Keyboard.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/system/System.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/system/SystemSettings.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/window/Window.hpp
+  ${RPGTOOLKIT_HEADERS}/clio/window/WindowSettings.hpp
 )
 
 set(RPGTOOLKIT_CLIO_SOURCES
@@ -45,11 +45,11 @@ set(RPGTOOLKIT_CLIO_SOURCES
   ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLSystem.cpp
   ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLWindow.cpp
   ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLWindowSettings.cpp
-  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDL.h
-  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLInput.h
-  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLKeyboard.h
-  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLRenderer2D.h
-  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLWindow.h
+  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDL.hpp
+  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLInput.hpp
+  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLKeyboard.hpp
+  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLRenderer2D.hpp
+  ${RPGTOOLKIT_SOURCES}/clio/sdl/SDLWindow.hpp
 )
 
 # Build
