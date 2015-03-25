@@ -25,3 +25,9 @@ detected, and must use CMake to produce a set of build files suitable for your
 platform, toolchain, and development environment.
 
 See the [Build Instructions](https://github.com/mariobadr/RPGTK4/wiki/Build) for help building the project for your platform.
+
+# Contributing
+
+See the [Style Guide](https://github.com/mariobadr/RPGTK4/wiki/Style-Guide) for an overview of the coding style adopted by the project and expectations for pull requests and code review.
+
+**TODO:** Formal contribution process
