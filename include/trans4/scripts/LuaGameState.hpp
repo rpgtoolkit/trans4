@@ -11,31 +11,30 @@
 #include <lua.hpp>
 #include <LuaBridge.h>
 
-#include <trans4/game/GameState.hpp>
+#include "game/GameState.h"
 
 namespace rpgtoolkit {
 
-	class LuaGameState : public GameState {
+	class LuaGameState : public clio::GameState {
 	public:
 
 		LuaGameState(lua_State* L, std::string gameState);
 
 		~LuaGameState();
 
-		void initialize();
+		void Initialize();
 
-		void pause();
+		void Pause();
 
-		void resume();
+		void Resume();
 
-		InputHandler* getInputHandler();
+		clio::InputHandler* GetInputHandler();
 
-		void update();
+		void Update();
 
-		void render(Renderer* renderer);
+		void Render();
 
 	private:
-
 		luabridge::LuaRef m_luaState;
 
 	};

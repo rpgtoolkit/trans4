@@ -7,19 +7,20 @@
 #define RPGTOOLKIT_TRANS4_SCRIPTS_SCRIPTINTERFACE_INCLUDED
 
 #include <string>
+#include "system/System.h"
 
 struct lua_State;
 
 namespace rpgtoolkit {
 
 	class Game;
-	class System;
+	class clio::System;
 
 	namespace detail {
 
 		void setLuaInstance(lua_State* lua);
 
-		void setSystemInstance(System* system);
+		void setSystemInstance(clio::System* system);
 
 		void setGameInstance(Game* game);
 

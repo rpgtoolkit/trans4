@@ -6,9 +6,8 @@
 #include <lua.hpp>
 #include <LuaBridge.h>
 
-#include <trans4/scripts/LuaScriptEngine.hpp>
-#include <trans4/scripts/ScriptInterface.hpp>
-#include <trans4/common/Rectangle.hpp>
+#include "scripts/LuaScriptEngine.hpp"
+#include "scripts/ScriptInterface.hpp"
 
 namespace rpgtoolkit {
 
@@ -21,7 +20,7 @@ namespace rpgtoolkit {
 		}
 	}
 
-	void LuaScriptEngine::initialize(Game* game, System* system) {
+	void LuaScriptEngine::initialize(Game* game, clio::System* system) {
 		m_state = luaL_newstate();
 		luaL_openlibs(m_state);
 
@@ -54,18 +53,6 @@ namespace rpgtoolkit {
 				.addFunction("drawTexture", detail::drawTexture)
 				.addFunction("drawClip", detail::drawClip)
 			.endNamespace();
-
-		getGlobalNamespace(m_state)
-			.beginNamespace("tk")
-				.beginClass <Rectangle> ("Rectangle")
-					.addConstructor<void (*) (int, int, int, int)> ()
-					.addData("x", &Rectangle::x)
-					.addData("y", &Rectangle::y)
-					.addData("w", &Rectangle::width)
-					.addData("h", &Rectangle::height)
-				.endClass()
-			.endNamespace();
-
 	}
 
 }

@@ -6,7 +6,7 @@
 #include <lua.hpp>
 #include <LuaBridge.h>
 
-#include <trans4/scripts/LuaGameState.hpp>
+#include "scripts/LuaGameState.hpp"
 
 namespace rpgtoolkit {
 
@@ -17,27 +17,27 @@ namespace rpgtoolkit {
 	LuaGameState::~LuaGameState() {
 	}
 
-	void LuaGameState::initialize() {
+	void LuaGameState::Initialize() {
 		m_luaState["initialize"]();
 	}
 
-	void LuaGameState::pause() {
+	void LuaGameState::Pause() {
 		m_luaState["pause"]();
 	}
 
-	void LuaGameState::resume() {
+	void LuaGameState::Resume() {
 		m_luaState["resume"]();
 	}
 
-	InputHandler* LuaGameState::getInputHandler() {
+	clio::InputHandler* LuaGameState::GetInputHandler() {
 		return nullptr;
 	}
 
-	void LuaGameState::update() {
+	void LuaGameState::Update() {
 		m_luaState["update"]();
 	}
 
-	void LuaGameState::render(Renderer* renderer) {
+	void LuaGameState::Render() {
 		m_luaState["render"]();
 	}
 

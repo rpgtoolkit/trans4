@@ -6,7 +6,8 @@
 #ifndef RPGTOOLKIT_TRANS4_SCRIPTS_LUASCRIPTENGINE_INCLUDED
 #define RPGTOOLKIT_TRANS4_SCRIPTS_LUASCRIPTENGINE_INCLUDED
 
-#include <trans4/scripts/ScriptEngine.hpp>
+#include "scripts/ScriptEngine.hpp"
+#include "system/System.h"
 
 struct lua_State;
 
@@ -19,7 +20,7 @@ namespace rpgtoolkit {
 
 		virtual ~LuaScriptEngine();
 
-		void initialize(Game* game, System* system);
+		void initialize(Game* game, clio::System* system);
 
 		void run(std::string script);
 
