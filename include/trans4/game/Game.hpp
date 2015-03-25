@@ -1,58 +1,66 @@
-/// \copyright
-///
-/// See LICENSE.md in the distribution for the full license text including,
-/// but not limited to, a notice of warranty and distribution rights.
+#pragma once
 
-#ifndef RPGTOOLKIT_TRANS4_GAME_GAME_INCLUDED
-#define RPGTOOLKIT_TRANS4_GAME_GAME_INCLUDED
+#include <string>
 
-#include <vector>
-#include <trans4/game/GameStateManager.hpp>
+namespace clio {
+	class GameStateStack;
+	class Logger;
+	class System;
+}
 
 namespace rpgtoolkit {
 
-	class Input;
-	class Renderer;
-
 	/**
-	* The game class is responsible for the game loop and managing
-	* the different game states (e.g. Main Menu, Map, Battle, etc).
+	* The game class is responsible for the game loop.
 	*/
-	class Game : public GameStateManager {
+	class Game {
 	public:
-		Game(Input* input, Renderer* renderer);
+		const static std::string LOG;
 
+		/**
+		* Constructor.
+		*/
+		Game(clio::System* system);
+
+		/**
+		* Destructor.
+		*/
 		~Game();
 
 		/**
-		* Run the game in the main game loop.
+		* Run the main game loop.
 		*/
-		void run();
+		void Run();
 
-		void changeState(GameState* newState);
+		/**
+		* Quit the game.
+		*/
+		void Quit();
 
-		void pushState(GameState* state);
+		clio::GameStateStack* GetStateStack();
 
-		void popState();
-
+		/**
+		* No copying allowed.
+		*/
 		Game(Game const&) = delete;
 
+		/**
+		* No copying allowed.
+		*/
 		Game & operator=(Game const&) = delete;
 	private:
-		void processInput();
+		clio::Logger* m_log;
 
-		void render();
+		bool m_quit;
 
-		void update();
+		clio::GameStateStack* m_stack;
 
-		Input* m_input;
+		clio::System* m_system;
 
-		bool m_gameOver;
+		void Poll();
 
-		std::vector<GameState*> m_states;
+		void Update();
 
-		Renderer* m_renderer;
+		void Render();
 	};
 }
-
-#endif

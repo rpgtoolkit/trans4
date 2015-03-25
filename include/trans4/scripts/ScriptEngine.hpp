@@ -8,10 +8,13 @@
 
 #include <string>
 
+namespace clio {
+	class System;
+}
+
 namespace rpgtoolkit {
 
 	class Game;
-	class System;
 
 	/**
 	* The ScriptEngine interface defines how scripts can be run.
@@ -31,7 +34,7 @@ namespace rpgtoolkit {
 		* @param game The current game being run.
 		* @param system The current system that has been initialized.
 		*/
-		virtual void initialize(Game* game, System* system);
+		virtual void initialize(Game* game, clio::System* system);
 
 		/**
 		* Run a script.

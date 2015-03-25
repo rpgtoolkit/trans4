@@ -3,105 +3,84 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <trans4/game/EmptyState.hpp>
-#include <trans4/game/Game.hpp>
-#include <trans4/game/GameState.hpp>
-#include <trans4/input/Input.hpp>
-#include <trans4/graphics/Renderer.hpp>
-#include <trans4/system/Timer.hpp>
+#include "common/Logger.h"
+#include "common/Timer.h"
+#include "game/GameState.h"
+#include "game/GameStateStack.h"
+#include "input/Input.h"
+#include "system/System.h"
 
-#include <cstdint>
+#include "game/Game.hpp"
 
-namespace rpgtoolkit {
+using namespace rpgtoolkit;
+using clio::System;
+using clio::GameStateStack;
+using clio::Logger;
+using clio::Timer;
 
-	Game::Game(Input* input, Renderer* renderer)
-		: m_input(input), m_gameOver(false), m_renderer(renderer) {
-	}
+const std::string Game::LOG = "game.log";
 
-	Game::~Game() {
-		for (auto &s : m_states) {
-			delete s;
-		}
-	}
+Game::Game(System* system) : m_log(new Logger(LOG)), m_quit(false), m_stack(new GameStateStack()), m_system(system) {
+}
 
-	void Game::run() {
-		const uint32_t MS_PER_UPDATE = 10;
-		uint32_t lag = 0, elapsed;
+Game::~Game() {
+	delete m_stack;
+	delete m_log;;
+}
 
-		Timer loopTimer;
-		loopTimer.start();
-		while (m_input->shouldQuit() == false && m_gameOver == false) {
-			elapsed = loopTimer.elapsed();
-			lag += elapsed;
-			loopTimer.reset();
+void Game::Run() {
+	LOG(m_log, "Game started.");
 
-			processInput();
+	const double SEC_PER_UPDATE = .001; //1 millisecond
+	double lag = 0, elapsed;
 
-			//Update game logic at a fixed rate, potentially several times
-			//to make up for lag in the game loop
-			while (lag >= MS_PER_UPDATE) {
-				update();
-				lag -= MS_PER_UPDATE;
-			}
+	Timer loopTimer(true);
+	while (m_quit == false) {
+		elapsed = loopTimer.Reset();
+		lag += elapsed;
 
-			render();
-		}
-	}
+		Poll();
 
-	void Game::changeState(GameState* newState) {
-		if (m_states.empty() == false) {
-			GameState* old = m_states.back();
-			m_states.pop_back();
-			delete old;
+		while (lag >= SEC_PER_UPDATE) {
+			Update();
+			lag -= SEC_PER_UPDATE;
 		}
 
-		m_states.push_back(newState);
-		newState->initialize();
+		Render();
 	}
+}
 
-	void Game::pushState(GameState* state) {
-		if (m_states.empty() == false) {
-			m_states.back()->pause();
-		}
+void Game::Quit() {
+	m_quit = true;
+}
 
-		m_states.push_back(state);
-		state->initialize();
+GameStateStack* Game::GetStateStack() {
+	return m_stack;
+}
+
+void Game::Poll() {
+	if (m_stack->isEmpty()) {
+		Quit();
 	}
-
-	void Game::popState() {
-		if (m_states.empty() == false) {
-			GameState* old = m_states.back();
-			m_states.pop_back();
-			delete old;
-		}
-
-		if (m_states.empty() == false) {
-			m_states.back()->resume();
-		} else {
-			m_gameOver = true;
-		}
+	else {
+		m_system->GetInput()->Poll(m_stack->GetCurrentState().GetInputHandler());
 	}
+}
 
-	void Game::processInput() {
-		if (m_states.empty() == false) {
-			m_input->process(m_states.back()->getInputHandler());
-		}
+void Game::Update() {
+	if (m_stack->isEmpty()) {
+		Quit();
 	}
-
-	void Game::update() {
-		if (m_states.empty() == false) {
-			m_states.back()->update();
-		}
+	else {
+		m_stack->GetCurrentState().Update();
 	}
+}
 
-	void Game::render() {
-		m_renderer->clearScreen();
-
-		if (m_states.empty() == false) {
-			m_states.back()->render(m_renderer);
-		}
-
-		m_renderer->renderScreen();
+void Game::Render() {
+	if (m_stack->isEmpty()) {
+		Quit();
 	}
-
+	else {
+		m_stack->GetCurrentState().Render();
+	}
 }

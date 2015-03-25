@@ -3,7 +3,8 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <trans4/scripts/LuaScriptEngine.hpp>
+#include "scripts/ScriptEngine.hpp"
+#include "scripts/LuaScriptEngine.hpp"
 
 namespace rpgtoolkit {
 
@@ -18,7 +19,7 @@ namespace rpgtoolkit {
 		}
 	}
 
-	void ScriptEngine::initialize(Game* game, System* system) {
+	void ScriptEngine::initialize(Game* game, clio::System* system) {
 		m_scriptEngine = new LuaScriptEngine();
 		m_scriptEngine->initialize(game, system);
 	}

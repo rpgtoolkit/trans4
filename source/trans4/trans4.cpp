@@ -3,20 +3,22 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <string>
-#include <cstdio>
+#include "system/System.h"
+#include "system/SystemSettings.h"
+#include "game/GameStateStack.h"
 
-#include <trans4/common/Exception.hpp>
-#include <trans4/game/Game.hpp>
-#include <trans4/system/System.hpp>
-#include <trans4/scripts/ScriptEngine.hpp>
+#include "game/Game.hpp"
+#include "game/MainMenuState.h"
+#include "scripts/ScriptEngine.hpp"
 
-using namespace rpgtoolkit;
+using clio::System;
+using clio::SystemSettings;
+
+using rpgtoolkit::Game;
+using rpgtoolkit::ScriptEngine;
 
 int main(int argc, char* argv[]) {
-
 	std::string script;
-
 	if (argc == 2) {
 		script = argv[1];
 		printf("Using script: %s\n", argv[1]);
@@ -25,31 +27,28 @@ int main(int argc, char* argv[]) {
 		printf("Defaulting to main.lua\n");
 	}
 
-	//TODO: Parse settings file here
+	//Define the initial settings
+	//TODO: Move this to a file and parse it
+	SystemSettings settings;
+	settings.window.x = settings.window.POSITION_CENTERED;
+	settings.window.y = settings.window.POSITION_CENTERED;
+	settings.window.width = 640;
+	settings.window.height = 480;
+	settings.window.init_flags = 0;
 
-	try {
+	System* system = new System();
+	system->Initialize(settings);
 
-		System* system = new System();
-		system->initialize();
+	Game* game = new Game(system);
 
-		Game* game = new Game(system->getInput(), system->getRenderer());
-		ScriptEngine* scriptEngine = new ScriptEngine();
+	ScriptEngine* scriptEngine = new ScriptEngine();
+	scriptEngine->initialize(game, system);
+	scriptEngine->run(script);
 
-		scriptEngine->initialize(game, system);
-		scriptEngine->run(script);
+	game->Run();
 
-		game->run();
-
-		delete game;
-		delete scriptEngine;
-		delete system;
-
-	} catch (Exception e) {
-
-		System::showErrorDialog("Trans4 Error", e.what());
-
-	}
+	delete game;
+	delete system;
 
 	return 0;
-
 }
