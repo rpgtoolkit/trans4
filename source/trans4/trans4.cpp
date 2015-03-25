@@ -3,9 +3,9 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include "system/System.h"
-#include "system/SystemSettings.h"
-#include "game/GameStateStack.h"
+#include "system/System.hpp"
+#include "system/SystemSettings.hpp"
+#include "game/GameStateStack.hpp"
 
 #include "game/Game.hpp"
 #include "scripts/ScriptEngine.hpp"

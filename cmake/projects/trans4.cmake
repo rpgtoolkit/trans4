@@ -102,7 +102,3 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   )
 
 endif ()
-
-# Tests
-
-add_test(TestAssetCache ${RPGTOOLKIT_TRANS4_TARGET})
