@@ -7,7 +7,7 @@
 #define RPGTOOLKIT_TRANS4_SCRIPTS_SCRIPTINTERFACE_INCLUDED
 
 #include <string>
-#include "system/System.h"
+#include "system/System.hpp"
 
 struct lua_State;
 

@@ -8,13 +8,14 @@
 
 namespace rpgtoolkit {
 
-	ScriptEngine::ScriptEngine() : scriptEngine_(new LuaScriptEngine()) {
+	ScriptEngine::ScriptEngine() : scriptEngine_(nullptr) {
 	}
 
 	ScriptEngine::~ScriptEngine() {
 	}
 
 	void ScriptEngine::Initialize(Game * const game, clio::System * const system) {
+		scriptEngine_.reset(new LuaScriptEngine());
 		scriptEngine_->Initialize(game, system);
 	}
 

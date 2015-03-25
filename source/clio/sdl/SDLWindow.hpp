@@ -1,8 +1,8 @@
 #include <memory>
 
-#include "common/Logger.h"
-#include "system/System.h"
-#include "window/Window.h"
+#include "common/Logger.hpp"
+#include "system/System.hpp"
+#include "window/Window.hpp"
 
 struct SDL_Window;
 
@@ -19,23 +19,19 @@ namespace SDL {
 		friend class clio::System;
 	public:
 		~Window();
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Window(Window const&) = delete;
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Window & operator=(Window const&) = delete;
 	protected:
 		Window();
 
 		void Initialize(clio::WindowSettings settings);
 
-		std::unique_ptr<SDL_Window, WindowDeleter> m_screen;
+		std::unique_ptr<SDL_Window, WindowDeleter> screen_;
 	private:
-		std::unique_ptr<clio::Logger> m_logger;
+		std::unique_ptr<clio::Logger> logger_;
 	};
 }

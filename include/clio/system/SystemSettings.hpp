@@ -1,6 +1,6 @@
 #pragma once
 
-#include "window/WindowSettings.h"
+#include "window/WindowSettings.hpp"
 
 namespace clio {
 	struct SystemSettings {

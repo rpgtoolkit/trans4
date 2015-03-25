@@ -4,10 +4,10 @@
 #include <memory>
 #include <cstdint>
 
-#include "common/Logger.h"
-#include "graphics/Renderer2D.h"
-#include "graphics/Texture.h"
-#include "system/System.h"
+#include "common/Logger.hpp"
+#include "graphics/Renderer2D.hpp"
+#include "graphics/Texture.hpp"
+#include "system/System.hpp"
 
 struct SDL_Window;
 struct SDL_Renderer;
@@ -43,15 +43,14 @@ namespace SDL {
 
 		void Initialize();
 	private:
-		std::unique_ptr<clio::Logger> m_log;
+		std::unique_ptr<clio::Logger> log_;
 
-		std::unique_ptr<SDL_Renderer, RendererDeleter> m_renderer;
+		std::unique_ptr<SDL_Renderer, RendererDeleter> renderer_;
 
-		clio::TextureID m_textureId;
+		clio::TextureID texture_id_;
 
-		std::map<std::string, clio::Texture*> m_textures;
-		std::map<clio::Texture*, SDL_Texture*> m_sdlTextures;
+		std::map<std::string, clio::Texture*> textures_;
 
-		SDL_Window* m_window;
+		std::map<clio::Texture*, SDL_Texture*> sdl_textures_;
 	};
 }

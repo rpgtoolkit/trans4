@@ -1,5 +1,5 @@
-#include "SDL.h"
-#include "window/WindowSettings.h"
+#include "SDL.hpp"
+#include "window/WindowSettings.hpp"
 
 uint32_t clio::WindowSettings::FULLSCREEN = SDL_WINDOW_FULLSCREEN;
 uint32_t clio::WindowSettings::FULLSCREEN_DESKTOP = SDL_WINDOW_FULLSCREEN_DESKTOP;

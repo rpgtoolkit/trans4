@@ -5,17 +5,16 @@
 
 namespace clio {
 	typedef uint64_t TextureID;
-	/**
-	* The texture structure allows you to query information about the texture
-	* itself.
-	*/
+	
+	/// The texture structure allows you to query information about the texture
+	/// itself.	
 	struct Texture {
 	public:
-		/** The ID associated with this texture.*/
+		/// \brief The ID associated with this texture.
 		TextureID id;
-		/** The width of the texture in pixels.*/
+		/// \brief The width of the texture in pixels.
 		int32_t width;
-		/** The height of the texture in pixels.*/
+		/// \brief The height of the texture in pixels.
 		int32_t height;
 
 		Texture(TextureID tid, int32_t w, int32_t h) : id(tid), width(w), height(h) {}
@@ -29,9 +28,8 @@ namespace clio {
 		}
 	};
 
-	/**
-	* A TextureClip specifies a clip region for a texture.
-	*/
+	
+	/// A TextureClip specifies a clip region for a texture.
 	struct TextureClip {
 		Texture* texture;
 

@@ -1,52 +1,57 @@
-#include "game/GameState.h"
-#include "game/GameStateStack.h"
+#include "common/Exception.hpp"
+#include "game/GameState.hpp"
+#include "game/GameStateStack.hpp"
 
-using namespace clio;
+namespace clio {
 
-GameStateStack::GameStateStack() {
+	GameStateStack::GameStateStack() {
 
-}
-
-GameStateStack::~GameStateStack() {
-
-}
-
-void GameStateStack::ClearAllStates() {
-	m_states.clear();
-}
-
-void GameStateStack::ChangeState(std::unique_ptr<GameState> newState) {
-	if (m_states.empty() == false) {
-		m_states.pop_back();
 	}
 
-	m_states.push_back(std::move(newState));
-	m_states.back()->Initialize();
-}
+	GameStateStack::~GameStateStack() {
 
-void GameStateStack::PushState(std::unique_ptr<GameState> state) {
-	if (m_states.empty() == false) {
-		m_states.back()->Pause();
 	}
 
-	m_states.push_back(std::move(state));
-	m_states.back()->Initialize();
-}
-
-void GameStateStack::PopState() {
-	if (m_states.empty() == false) {
-		m_states.pop_back();
+	void GameStateStack::ClearAllStates() {
+		states_.clear();
 	}
 
-	if (m_states.empty() == false) {
-		m_states.back()->Resume();
+	void GameStateStack::ChangeState(std::unique_ptr<GameState> newState) {
+		if (states_.empty() == false) {
+			states_.pop_back();
+		}
+
+		states_.push_back(std::move(newState));
+		states_.back()->Initialize();
 	}
-}
 
-GameState& GameStateStack::GetCurrentState() {
-	return (*m_states.back().get());
-}
+	void GameStateStack::PushState(std::unique_ptr<GameState> state) {
+		if (states_.empty() == false) {
+			states_.back()->Pause();
+		}
 
-bool GameStateStack::isEmpty() {
-	return m_states.empty();
+		states_.push_back(std::move(state));
+		states_.back()->Initialize();
+	}
+
+	void GameStateStack::PopState() {
+		if (states_.empty() == false) {
+			states_.pop_back();
+		}
+
+		if (states_.empty() == false) {
+			states_.back()->Resume();
+		}
+	}
+
+	GameState& GameStateStack::GetCurrentState() {
+		if (IsEmpty()) {
+			throw clio::Exception("State Stack is empty. Cannot retrieve current state.");
+		}
+		return (*states_.back().get());
+	}
+
+	bool GameStateStack::IsEmpty() {
+		return states_.empty();
+	}
 }

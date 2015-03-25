@@ -11,7 +11,7 @@
 
 #include "lua.hpp"
 #include "scripts/ScriptEngine.hpp"
-#include "system/System.h"
+#include "system/System.hpp"
 
 struct lua_State;
 
@@ -44,7 +44,7 @@ namespace rpgtoolkit {
 		/// it will run the file, otherwise it will inline
 		/// the script.
 		///
-		/// @param script The script or script file.
+		/// \param script The script or script file.
 		void Run(const std::string& script);
 	private:
 

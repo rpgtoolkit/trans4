@@ -6,24 +6,16 @@ namespace clio {
 	class Window {
 		friend class System;
 	public:
-		/**
-		* Destructor.
-		*/
+		/// Destructor.		
 		virtual ~Window() {}
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Window(Window const&) = delete;
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Window & operator=(Window const&) = delete;
-	protected:
-		/**
-		* Constructor.
-		*/
+	protected:		
+		/// Constructor.		
 		Window() {}
 
 		virtual void Initialize(WindowSettings settings) = 0;

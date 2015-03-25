@@ -1,30 +1,31 @@
-#include "common/Timer.h"
+#include "common/Timer.hpp"
 
-using namespace clio;
+namespace clio {
 
-typedef std::chrono::high_resolution_clock Time;
-typedef std::chrono::duration<double> duration;
+	typedef std::chrono::high_resolution_clock Time;
+	typedef std::chrono::duration<double> duration;
 
-Timer::Timer(bool start) {
-	if (start) {
-		Reset();
+	Timer::Timer(bool start) {
+		if (start) {
+			Reset();
+		}
 	}
-}
 
-Timer::~Timer() {
+	Timer::~Timer() {
 
-}
+	}
 
-double Timer::Reset() {
-	double elapsed = Elapsed();
+	double Timer::Reset() {
+		double elapsed = Elapsed();
 
-	m_start = Time::now();
+		m_start = Time::now();
 
-	return elapsed;
-}
+		return elapsed;
+	}
 
-double Timer::Elapsed() const {
-	duration d = Time::now() - m_start;
+	double Timer::Elapsed() const {
+		duration d = Time::now() - m_start;
 
-	return d.count();
+		return d.count();
+	}
 }

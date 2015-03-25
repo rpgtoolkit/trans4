@@ -1,4 +1,4 @@
-#include "SDL.h"
+#include "SDL.hpp"
 
 static bool sdlInitialized = false;
 

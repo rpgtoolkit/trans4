@@ -4,19 +4,17 @@
 #include <string>
 
 namespace clio {
-	/**
-	* Generic exception class for use with Trans4.
-	*/
+	/// \brief Generic exception class that can be thrown by clio
 	class Exception : public std::exception {
 	public:
-		Exception(std::string message) throw();
+		Exception(const std::string& message) throw();
 
 		virtual ~Exception() throw();
 
 		inline virtual const char *what() const throw()	{
-			return m_message.c_str();
+			return message_.c_str();
 		}
 	private:
-		std::string m_message;
+		std::string message_;
 	};
 }

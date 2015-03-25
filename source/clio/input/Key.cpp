@@ -1,10 +1,10 @@
 #include <map>
 
-#include "input/Key.h"
+#include "input/Key.hpp"
 
-using namespace clio;
+namespace clio {
 
-static std::map<std::string, Key> strToKey = {
+	static std::map<std::string, Key> strToKey = {
 		{ "UNKNOWN", Key::UNKNOWN },
 		{ "A", Key::A },
 		{ "B", Key::B },
@@ -116,16 +116,18 @@ static std::map<std::string, Key> strToKey = {
 		{ "PAUSE", Key::PAUSE },
 		{ "MENU", Key::MENU } };
 
-Key clio::StringToKey(std::string str) {
-	return strToKey[str];
-}
-
-std::string clio::KeyToString(Key key) {
-	for (auto& sk : strToKey) {
-		if (sk.second == key) {
-			return sk.first;
-		}
+	Key clio::StringToKey(const std::string& str) {
+		return strToKey[str];
 	}
 
-	return "UNKNOWN";
+	std::string clio::KeyToString(const Key& key) {
+		for (auto& sk : strToKey) {
+			if (sk.second == key) {
+				return sk.first;
+			}
+		}
+
+		return "UNKNOWN";
+	}
+
 }

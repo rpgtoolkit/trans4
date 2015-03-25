@@ -1,24 +1,25 @@
-#include "common/Exception.h"
-#include "SDL.h"
-#include "SDLWindow.h"
-#include "window/WindowSettings.h"
+#include "common/Exception.hpp"
+#include "SDL.hpp"
+#include "SDLWindow.hpp"
+#include "window/WindowSettings.hpp"
 
-using namespace SDL;
+namespace SDL {
+	Window::Window() : logger_(new clio::Logger(clio::System::LOG)), screen_(nullptr) {
+	}
 
-Window::Window() : m_logger(new clio::Logger(clio::System::LOG)), m_screen(nullptr) {
-}
+	Window::~Window() {
+	}
 
-Window::~Window() {
-}
+	void Window::Initialize(clio::WindowSettings settings) {
+		screen_.reset(SDL_CreateWindow("RPG Toolkit 4", settings.x, settings.y,
+			settings.width, settings.height, settings.init_flags));
 
-void Window::Initialize(clio::WindowSettings settings) {
-	m_screen.reset(SDL_CreateWindow("RPG Toolkit 4", settings.x, settings.y, 
-		settings.width, settings.height, settings.init_flags));
-
-	if (m_screen == nullptr) {
-		LOG(m_logger.get(), "%s", SDL_GetError());
-		throw clio::Exception("Could not create window.");
-	} else {
-		LOG(m_logger.get(), "Window created.");
+		if (screen_ == nullptr) {
+			LOG(logger_.get(), "%s", SDL_GetError());
+			throw clio::Exception("Could not create window.");
+		}
+		else {
+			LOG(logger_.get(), "Window created.");
+		}
 	}
 }

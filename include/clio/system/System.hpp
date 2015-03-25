@@ -13,26 +13,19 @@ namespace clio {
 	class System {
 	public:
 		const static std::string LOG;
-
-		/**
-		* Constructor.
-		*/
+		
+		/// Constructor.
 		System();
-
-		/**
-		* Destructor.
-		*/
+		
+		/// Destructor.
 		~System();
-
-		/**
-		* Initialize the current system. If this has already been called on
-		* another System object, an exception will be thrown.
-		*/
+		
+		/// Initialize the current system. If this has already been called on
+		/// another System object, an exception will be thrown.
 		void Initialize(SystemSettings settings);
 
-		/**
-		* If the system has already been initialized.
-		*/
+		
+		/// If the system has already been initialized.
 		bool isInitialized();
 
 		Window* GetWindow();
@@ -40,26 +33,20 @@ namespace clio {
 		Input* GetInput();
 
 		Renderer2D* GetRenderer();
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.
 		System(System const&) = delete;
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.
 		System & operator=(System const&) = delete;
-
 	private:
+		std::unique_ptr<Input> input_;
 
-		std::unique_ptr<Input> m_input;
+		std::unique_ptr<Logger> logger_;
 
-		std::unique_ptr<Logger> m_logger;
+		std::unique_ptr<Renderer2D> renderer_;
 
-		std::unique_ptr<Renderer2D> m_renderer;
-
-		std::unique_ptr<Window> m_window;
+		std::unique_ptr<Window> window_;
 
 	};
 }

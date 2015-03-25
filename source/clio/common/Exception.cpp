@@ -1,9 +1,9 @@
-#include "common/Exception.h"
+#include "common/Exception.hpp"
 
 using namespace clio;
 
-Exception::Exception(std::string message) throw()
-        : m_message(message) {
+Exception::Exception(const std::string& message) throw()
+	: message_(message) {
 
 }
 

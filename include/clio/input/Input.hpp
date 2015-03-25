@@ -6,35 +6,23 @@ namespace clio {
 
 	class Input {
 		friend class System;
-	public:
-		/**
-		* Destructor.
-		*/
+	public:		
+		/// Destructor.		
 		virtual ~Input() {}
-
-		/**
-		* Poll the operating system for input from the user.
-		*/
+		
+		/// Poll the operating system for input from the user.		
 		virtual void Poll(InputHandler* inputHandler) = 0;
-
-		/**
-		* Get the keyboard.
-		*/
+		
+		/// Get the keyboard.		
 		virtual Keyboard* GetKeyboard() = 0;
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Input(Input const&) = delete;
-
-		/**
-		* No copying allowed.
-		*/
+		
+		/// No copying allowed.		
 		Input & operator=(Input const&) = delete;
-	protected:
-		/**
-		* Constructor.
-		*/
+	protected:		
+		/// \brief Constructor.
 		Input() {}
 	};
 }

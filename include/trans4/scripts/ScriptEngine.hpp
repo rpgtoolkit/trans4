@@ -17,9 +17,8 @@ namespace rpgtoolkit {
 
 	class Game;
 
-	/**
-	* The ScriptEngine interface defines how scripts can be run.
-	*/
+	
+	/// The ScriptEngine interface defines how scripts can be run.
 	class ScriptEngine {
 	public:
 		ScriptEngine();

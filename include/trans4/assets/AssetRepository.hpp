@@ -99,8 +99,8 @@ namespace rpgtoolkit {
 
         /// Loads an asset into the repository.
         ///
-        /// @param uri asset uri (e.g. file://C:/audio.mp3))
-        /// @param reload if true, bypasses cache
+        /// \param uri asset uri (e.g. file://C:/audio.mp3))
+        /// \param reload if true, bypasses cache
 
         AssetHandle *
         Load(string const & uri, bool reload = false) {
@@ -109,8 +109,8 @@ namespace rpgtoolkit {
 
         /// Loads an asset into the repository.
         ///
-        /// @param descriptor asset descriptor (e.g. filename)
-        /// @param reload if true, bypasses cache
+        /// \param descriptor asset descriptor (e.g. filename)
+        /// \param reload if true, bypasses cache
 
         AssetHandle *
         Load(AssetDescriptor const & descriptor, bool reload = false) {

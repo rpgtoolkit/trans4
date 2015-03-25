@@ -4,26 +4,20 @@
 
 namespace clio {
 	enum class Key;
-
-	/**
-	* Converts a string to a key.
-	*
-	* @param str The string to convert
-	* @return The key that corresponds to the string, or UNKNOWN.
-	*/
-	Key StringToKey(std::string str);
-
-	/**
-	* Converts a key to a string.
-	*
-	* @param key The key to convert
-	* @return The string that corresponds to the key.
-	*/
-	std::string KeyToString(Key key);
-
-	/**
-	* An enumeration of the various keys that can be found on a keyboard.
-	*/
+	
+	/// Converts a string to a key.
+	///
+	/// \param str The string to convert
+	/// \return The key that corresponds to the string, or UNKNOWN.	
+	Key StringToKey(const std::string& str);
+	
+	/// Converts a key to a string.
+	///
+	/// \param key The key to convert
+	/// \return The string that corresponds to the key.	
+	std::string KeyToString(const Key& key);
+	
+	/// An enumeration of the various keys that can be found on a keyboard.	
 	enum class Key : int {
 		UNKNOWN,
 

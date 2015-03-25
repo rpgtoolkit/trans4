@@ -1,58 +1,60 @@
-#include "common/Exception.h"
-#include "common/Logger.h"
-#include "SDL.h"
-#include "SDLInput.h"
-#include "SDLRenderer2D.h"
-#include "SDLWindow.h"
-#include "system/System.h"
-#include "system/SystemSettings.h"
+#include "common/Exception.hpp"
+#include "common/Logger.hpp"
+#include "SDL.hpp"
+#include "SDLInput.hpp"
+#include "SDLRenderer2D.hpp"
+#include "SDLWindow.hpp"
+#include "system/System.hpp"
+#include "system/SystemSettings.hpp"
 
 
-using namespace clio;
+namespace clio {
 
-const std::string System::LOG = "system.log";
+	const std::string System::LOG = "system.log";
 
-System::System() : m_input(new SDL::Input()), m_logger(new Logger(LOG)), 
-	m_window(nullptr), m_renderer(nullptr) {
-}
-
-System::~System() {
-}
-
-void System::Initialize(SystemSettings settings) {
-	if (SDL::isInitialized() == true) {
-		LOG(m_logger.get(), "Attempted to initialize two System objects.");
-		throw clio::Exception("Dual system initialization is not allowed.");
+	System::System() : input_(new SDL::Input()), logger_(new Logger(LOG)),
+		window_(new SDL::Window()), renderer_(nullptr) {
 	}
 
-	SDL::Initialize();
-	if (SDL::isInitialized() == false) {
-		LOG(m_logger.get(), "%s", SDL_GetError());
-		throw clio::Exception("Could not initialize SDL.");
-	} else {
-		LOG(m_logger.get(), "SDL Initialized.");
+	System::~System() {
 	}
 
-	SDL::Window* window = new SDL::Window();
-	m_window.reset(window);
-	m_window->Initialize(settings.window);
+	void System::Initialize(SystemSettings settings) {
+		if (SDL::isInitialized() == true) {
+			LOG(logger_.get(), "Attempted to initialize two System objects.");
+			throw clio::Exception("Dual system initialization is not allowed.");
+		}
 
-	m_renderer.reset(new SDL::Renderer2D(window->m_screen.get()));
-	m_renderer->Initialize();
-}
+		SDL::Initialize();
+		if (SDL::isInitialized() == false) {
+			LOG(logger_.get(), "%s", SDL_GetError());
+			throw clio::Exception("Could not initialize SDL.");
+		}
+		else {
+			LOG(logger_.get(), "SDL Initialized.");
+		}
 
-bool System::isInitialized() {
-	return SDL::isInitialized();
-}
+		window_->Initialize(settings.window);
 
-Window* System::GetWindow() {
-	return m_window.get();
-}
+		//Need SDL::Window's SDL_Window to create an SDL::Renderer
+		SDL::Window * tempWindow = dynamic_cast<SDL::Window*>(window_.get());
+		renderer_.reset(new SDL::Renderer2D(tempWindow->screen_.get()));
+		renderer_->Initialize();
+	}
 
-Input* System::GetInput() {
-	return m_input.get();
-}
+	bool System::isInitialized() {
+		return SDL::isInitialized();
+	}
 
-Renderer2D* System::GetRenderer() {
-	return m_renderer.get();
+	Window* System::GetWindow() {
+		return window_.get();
+	}
+
+	Input* System::GetInput() {
+		return input_.get();
+	}
+
+	Renderer2D* System::GetRenderer() {
+		return renderer_.get();
+	}
 }

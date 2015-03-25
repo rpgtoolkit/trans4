@@ -2,8 +2,8 @@
 
 #include <map>
 
-#include "SDL.h"
-#include "input/Keyboard.h"
+#include "SDL.hpp"
+#include "input/Keyboard.hpp"
 
 namespace SDL {
 	class Keyboard : public clio::Keyboard {

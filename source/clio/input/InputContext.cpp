@@ -1,38 +1,39 @@
-#include "input/InputContext.h"
-#include "input/Key.h"
+#include "input/InputContext.hpp"
+#include "input/Key.hpp"
 
-using namespace clio;
+namespace clio {
 
-InputContext::InputContext() {
+	InputContext::InputContext() {
 
-}
-
-InputContext::~InputContext() {
-
-}
-
-void InputContext::KeyPressed(Key key) {
-	auto exists = m_keyCallbacks.find(key);
-	if (exists != m_keyCallbacks.end()) {
-		exists->second(true);
 	}
-}
 
-void InputContext::KeyReleased(Key key) {
-	auto exists = m_keyCallbacks.find(key);
-	if (exists != m_keyCallbacks.end()) {
-		exists->second(false);
+	InputContext::~InputContext() {
+
 	}
-}
 
-void InputContext::RegisterKeyCallback(Key key, KeyCallback callback) {
-	m_keyCallbacks.insert(std::pair<Key, KeyCallback>(key, callback));
-}
+	void InputContext::KeyPressed(Key key) {
+		auto exists = key_callbacks_.find(key);
+		if (exists != key_callbacks_.end()) {
+			exists->second(true);
+		}
+	}
 
-void InputContext::RegisterQuitCallback(QuitCallback callback) {
-	m_quitCallback = callback;
-}
+	void InputContext::KeyReleased(Key key) {
+		auto exists = key_callbacks_.find(key);
+		if (exists != key_callbacks_.end()) {
+			exists->second(false);
+		}
+	}
 
-void InputContext::QuitRequest() {
-	m_quitCallback();
+	void InputContext::RegisterKeyCallback(Key key, KeyCallback callback) {
+		key_callbacks_.insert(std::pair<Key, KeyCallback>(key, callback));
+	}
+
+	void InputContext::RegisterQuitCallback(QuitCallback callback) {
+		quit_callback_ = callback;
+	}
+
+	void InputContext::QuitRequest() {
+		quit_callback_();
+	}
 }
