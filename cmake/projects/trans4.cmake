@@ -11,6 +11,7 @@ find_package(SDL2 REQUIRED)
 find_package(SDL_image REQUIRED)
 find_package(LUA 5.3.0 REQUIRED)
 find_package(LUABRIDGE REQUIRED)
+find_package(CLIO REQUIRED)
 
 # Files
 
@@ -51,6 +52,7 @@ include_directories(
   ${SDL2_IMAGE_INCLUDE_DIR}
   ${LUA_INCLUDE_DIR}
   ${LUABRIDGE_INCLUDE_DIRS}
+  ${CLIO_INCLUDE_DIRS}
 )
 
 add_executable(${RPGTOOLKIT_TRANS4_TARGET}
@@ -58,12 +60,20 @@ add_executable(${RPGTOOLKIT_TRANS4_TARGET}
   ${RPGTOOLKIT_TRANS4_SOURCES}
 )
 
-target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET}
-  ${RPGTOOLKIT_CLIO_TARGET}
+target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET} optimized
   ${LUA_LIBRARY}
   ${SDL2_LIBRARY}
   ${SDL2MAIN_LIBRARY}
   ${SDL2_IMAGE_LIBRARY}
+  ${CLIO_LIBRARY}
+)
+
+target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET} debug
+  ${LUA_LIBRARY}
+  ${SDL2_LIBRARY}
+  ${SDL2MAIN_LIBRARY}
+  ${SDL2_IMAGE_LIBRARY}
+  ${CLIO_LIBRARY}
 )
 
 if (WIN32)
