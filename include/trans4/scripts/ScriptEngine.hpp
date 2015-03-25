@@ -6,6 +6,7 @@
 #ifndef RPGTOOLKIT_TRANS4_SCRIPTS_SCRIPTENGINE_INCLUDED
 #define RPGTOOLKIT_TRANS4_SCRIPTS_SCRIPTENGINE_INCLUDED
 
+#include <memory>
 #include <string>
 
 namespace clio {
@@ -21,41 +22,32 @@ namespace rpgtoolkit {
 	*/
 	class ScriptEngine {
 	public:
-
 		ScriptEngine();
 
 		virtual ~ScriptEngine();
 
-		/**
-		* Initialize the ScriptEngine and provide references to
-		* the System and Game implementations, to be used with
-		* scripts in the future.
-		*
-		* @param game The current game being run.
-		* @param system The current system that has been initialized.
-		*/
-		virtual void initialize(Game* game, clio::System* system);
 
-		/**
-		* Run a script.
-		*
-		* @param script The script or script file.
-		*/
-		virtual void run(std::string script);
+		/// \brief Initialize the ScriptEngine. 
+		/// Provide references to the System and Game implementations, 
+		/// to be used with scripts in the future.
+		///
+		/// \param game
+		/// \param system
+		virtual void Initialize(Game * const game, clio::System * const system);
 
-		/**
-		* No copying allowed.
-		*/
+		/// \brief Run a script.
+		///
+		/// \param script The script to run.
+		virtual void Run(const std::string& script);
+
+		/// \brief No copying allowed.
 		ScriptEngine(ScriptEngine const&) = delete;
 
-		/**
-		* No copying allowed.
-		*/
+		/// \brief No copying allowed.
 		ScriptEngine & operator=(ScriptEngine const&) = delete;
-
 	protected:
-
-		ScriptEngine* m_scriptEngine;
+		/// \brief The ScriptEngine implementation.
+		std::unique_ptr<ScriptEngine> scriptEngine_;
 
 	};
 }

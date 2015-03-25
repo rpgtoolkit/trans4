@@ -20,27 +20,26 @@ using clio::Timer;
 
 const std::string Game::LOG = "game.log";
 
-Game::Game(System* system) : m_log(new Logger(LOG)), m_quit(false), m_stack(new GameStateStack()), m_system(system) {
+Game::Game(System* system) : log_(new Logger(LOG)), quit_(false), stack_(new GameStateStack()), system_(system) {
 }
 
 Game::~Game() {
-	delete m_stack;
-	delete m_log;;
 }
 
 void Game::Run() {
-	LOG(m_log, "Game started.");
+	LOG(log_.get(), "Game started.");
 
 	const double SEC_PER_UPDATE = .001; //1 millisecond
 	double lag = 0, elapsed;
 
 	Timer loopTimer(true);
-	while (m_quit == false) {
+	while (quit_ == false) {
 		elapsed = loopTimer.Reset();
 		lag += elapsed;
 
 		Poll();
 
+		//Update several times to make up for lag.
 		while (lag >= SEC_PER_UPDATE) {
 			Update();
 			lag -= SEC_PER_UPDATE;
@@ -51,36 +50,36 @@ void Game::Run() {
 }
 
 void Game::Quit() {
-	m_quit = true;
+	quit_ = true;
 }
 
-GameStateStack* Game::GetStateStack() {
-	return m_stack;
+GameStateStack * const Game::GetStateStack() {
+	return stack_.get();
 }
 
 void Game::Poll() {
-	if (m_stack->isEmpty()) {
+	if (stack_->isEmpty()) {
 		Quit();
 	}
 	else {
-		m_system->GetInput()->Poll(m_stack->GetCurrentState().GetInputHandler());
+		system_->GetInput()->Poll(stack_->GetCurrentState().GetInputHandler());
 	}
 }
 
 void Game::Update() {
-	if (m_stack->isEmpty()) {
+	if (stack_->isEmpty()) {
 		Quit();
 	}
 	else {
-		m_stack->GetCurrentState().Update();
+		stack_->GetCurrentState().Update();
 	}
 }
 
 void Game::Render() {
-	if (m_stack->isEmpty()) {
+	if (stack_->isEmpty()) {
 		Quit();
 	}
 	else {
-		m_stack->GetCurrentState().Render();
+		stack_->GetCurrentState().Render();
 	}
 }

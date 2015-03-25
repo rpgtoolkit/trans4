@@ -18,26 +18,25 @@ namespace rpgtoolkit {
 
 	namespace detail {
 
-		void setLuaInstance(lua_State* lua);
+		void SetLuaInstance(lua_State * const lua);
 
-		void setSystemInstance(clio::System* system);
+		void SetSystemInstance(clio::System * const system);
 
-		void setGameInstance(Game* game);
+		void SetGameInstance(Game * const game);
 
-		bool isKeyDown(std::string key);
+		bool IsKeyDown(std::string key);
 
-		void changeState(std::string state);
+		void ChangeState(std::string state);
 
-		void pushState(std::string state);
+		void PushState(std::string state);
 
-		void popState();
+		void PopState();
 
-		unsigned int loadTexture(std::string texture_file);
+		unsigned int LoadTexture(std::string texture_file);
 
-		void drawTexture(int textureId, int x, int y);
+		void DrawTexture(int textureId, int x, int y);
 
-		void drawClip(int textureId, int x, int y, int tx, int ty, int tw, int th);
-
+		void DrawClip(int textureId, int x, int y, int tx, int ty, int tw, int th);
 	}
 }
 

@@ -11,34 +11,29 @@
 namespace rpgtoolkit {
 
 	LuaGameState::LuaGameState(lua_State* L, std::string gameState)
-		: m_luaState(luabridge::getGlobal(L, gameState.c_str())) {
+		: luaTable_(luabridge::getGlobal(L, gameState.c_str())) {
 	}
 
 	LuaGameState::~LuaGameState() {
 	}
 
 	void LuaGameState::Initialize() {
-		m_luaState["initialize"]();
+		luaTable_["initialize"]();
 	}
 
 	void LuaGameState::Pause() {
-		m_luaState["pause"]();
+		luaTable_["pause"]();
 	}
 
 	void LuaGameState::Resume() {
-		m_luaState["resume"]();
-	}
-
-	clio::InputHandler* LuaGameState::GetInputHandler() {
-		return nullptr;
+		luaTable_["resume"]();
 	}
 
 	void LuaGameState::Update() {
-		m_luaState["update"]();
+		luaTable_["update"]();
 	}
 
 	void LuaGameState::Render() {
-		m_luaState["render"]();
+		luaTable_["render"]();
 	}
-
 }

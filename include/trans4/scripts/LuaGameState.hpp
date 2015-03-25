@@ -15,9 +15,17 @@
 
 namespace rpgtoolkit {
 
+	/// \brief A GameState implementation that calls on Lua scripts.
+	///
+	/// Lua scripts are expected to implement the functionality of the 
+	/// GameState via a table, indexed by strings labeled "initialize",
+	/// "pause", "resume", "update", and "render".
 	class LuaGameState : public clio::GameState {
 	public:
-
+		/// \brief Constructor
+		///
+		/// \param L The lua state pointer to use
+		/// \param gameState The name of the lua table to index into
 		LuaGameState(lua_State* L, std::string gameState);
 
 		~LuaGameState();
@@ -28,15 +36,12 @@ namespace rpgtoolkit {
 
 		void Resume();
 
-		clio::InputHandler* GetInputHandler();
-
 		void Update();
 
 		void Render();
 
 	private:
-		luabridge::LuaRef m_luaState;
-
+		luabridge::LuaRef luaTable_;
 	};
 }
 

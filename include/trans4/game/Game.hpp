@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include <string>
 
 namespace clio {
@@ -10,57 +11,57 @@ namespace clio {
 
 namespace rpgtoolkit {
 
-	/**
-	* The game class is responsible for the game loop.
-	*/
+	/// \brief The game class is responsible for the game loop. 
+	///
+	/// The object contains a GameStateStack to manage the different
+	/// game states of the game. 
 	class Game {
 	public:
+		/// \brief The string corresponding to a Game log file
 		const static std::string LOG;
 
-		/**
-		* Constructor.
-		*/
+		/// \brief Constructor
+		///
+		/// \param system The system with which to interact.
 		Game(clio::System* system);
 
-		/**
-		* Destructor.
-		*/
+		/// \brief Destructor
 		~Game();
 
-		/**
-		* Run the main game loop.
-		*/
+		/// \brief Run the game loop until Quit() is called
 		void Run();
 
-		/**
-		* Quit the game.
-		*/
+		/// \brief Quit the game.
 		void Quit();
 
-		clio::GameStateStack* GetStateStack();
+		/// \brief Get the game stack.
+		clio::GameStateStack * const GetStateStack();
 
-		/**
-		* No copying allowed.
-		*/
+		/// \brief No copying allowed.
 		Game(Game const&) = delete;
 
-		/**
-		* No copying allowed.
-		*/
+		/// \brief No copying allowed.
 		Game & operator=(Game const&) = delete;
 	private:
-		clio::Logger* m_log;
+		/// \brief Logger for this class.
+		std::unique_ptr<clio::Logger> log_;
 
-		bool m_quit;
+		/// \brief Whether the game loop continues or not.
+		bool quit_;
 
-		clio::GameStateStack* m_stack;
+		/// \brief Manages the game states.
+		std::unique_ptr<clio::GameStateStack> stack_;
 
-		clio::System* m_system;
+		/// \brief The underlying system.
+		clio::System* system_;
 
+		/// \brief Helper function to poll input.
 		void Poll();
 
+		/// \brief Helper function to update state(s).
 		void Update();
 
+		/// \brief Helper function to render to the screen.
 		void Render();
 	};
 }

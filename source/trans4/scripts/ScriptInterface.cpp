@@ -3,7 +3,6 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <map>
 #include <string>
 #include <memory>
 
@@ -25,44 +24,43 @@ namespace rpgtoolkit {
 	static clio::Renderer2D* renderer;
 	static Game* game;
 
-	void detail::setLuaInstance(lua_State* lua) {
+	void detail::SetLuaInstance(lua_State * const lua) {
 		L = lua;
 	}
 
-	void detail::setSystemInstance(clio::System* system) {
+	void detail::SetSystemInstance(clio::System * const system) {
 		sys = system;
 		renderer = sys->GetRenderer();
 	}
 
-	void detail::setGameInstance(Game* g) {
+	void detail::SetGameInstance(Game * const g) {
 		game = g;
 	}
 
-	bool detail::isKeyDown(std::string key) {
-		return sys->GetInput()->GetKeyboard()
-			->isKeyDown(clio::StringToKey(key));
+	bool detail::IsKeyDown(std::string key) {
+		return sys->GetInput()->GetKeyboard()->isKeyDown(clio::StringToKey(key));
 	}
 
-	void detail::changeState(std::string state) {
+	void detail::ChangeState(std::string state) {
 		game->GetStateStack()->ChangeState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
 	}
 
-	void detail::pushState(std::string state) {
+	void detail::PushState(std::string state) {
 		game->GetStateStack()->PushState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
 	}
 
-	void detail::popState() {
+	void detail::PopState() {
 		game->GetStateStack()->PopState();
 	}
 
-	unsigned int detail::loadTexture(std::string texture_file) {
+	unsigned int detail::LoadTexture(std::string texture_file) {
 		return 0;
 	}
 
-	void detail::drawTexture(int textureId, int x, int y) {
+	void detail::DrawTexture(int textureId, int x, int y) {
 	}
 
-	void detail::drawClip(int textureId, int x, int y, int tx, int ty, int tw, int th) {
+	void detail::DrawClip(int textureId, int x, int y, int tx, int ty, int tw, int th) {
 	}
 
 }

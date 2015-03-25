@@ -3,55 +3,50 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <lua.hpp>
-#include <LuaBridge.h>
+#include "lua.hpp"
+#include "LuaBridge.h"
 
 #include "scripts/LuaScriptEngine.hpp"
 #include "scripts/ScriptInterface.hpp"
 
 namespace rpgtoolkit {
 
-	LuaScriptEngine::LuaScriptEngine() : m_state(nullptr) {
+	LuaScriptEngine::LuaScriptEngine() : state_(luaL_newstate()) {
 	}
 
 	LuaScriptEngine::~LuaScriptEngine() {
-		if (m_state != nullptr) {
-			lua_close(m_state);
-		}
 	}
 
-	void LuaScriptEngine::initialize(Game* game, clio::System* system) {
-		m_state = luaL_newstate();
-		luaL_openlibs(m_state);
+	void LuaScriptEngine::Initialize(Game * const game, clio::System * const system) {
+		luaL_openlibs(state_.get());
 
-		detail::setLuaInstance(m_state);
-		detail::setSystemInstance(system);
-		detail::setGameInstance(game);
+		detail::SetLuaInstance(state_.get());
+		detail::SetSystemInstance(system);
+		detail::SetGameInstance(game);
 
-		registerFunctions();
+		RegisterFunctions();
 	}
 
-	void LuaScriptEngine::run(std::string script) {
+	void LuaScriptEngine::Run(const std::string& script) {
 		if (script.substr(script.find_last_of(".") + 1) == "lua") {
-			luaL_dofile(m_state, script.c_str());
+			luaL_dofile(state_.get(), script.c_str());
 		} else {
-			luaL_dostring(m_state, script.c_str());
+			luaL_dostring(state_.get(), script.c_str());
 		}
 	}
 
-	void LuaScriptEngine::registerFunctions() {
-
+	void LuaScriptEngine::RegisterFunctions() {
 		using namespace luabridge;
 
-		getGlobalNamespace(m_state)
+		getGlobalNamespace(state_.get())
 			.beginNamespace("tk")
-				.addFunction("isKeyDown", detail::isKeyDown)
-				.addFunction("changeState", detail::changeState)
-				.addFunction("pushState", detail::pushState)
-				.addFunction("popState", detail::popState)
-				.addFunction("loadTexture", detail::loadTexture)
-				.addFunction("drawTexture", detail::drawTexture)
-				.addFunction("drawClip", detail::drawClip)
+				.addFunction("isKeyDown", detail::IsKeyDown)
+				.addFunction("changeState", detail::ChangeState)
+				.addFunction("pushState", detail::PushState)
+				.addFunction("popState", detail::PopState)
+				.addFunction("loadTexture", detail::LoadTexture)
+				.addFunction("drawTexture", detail::DrawTexture)
+				.addFunction("drawClip", detail::DrawClip)
 			.endNamespace();
 	}
 

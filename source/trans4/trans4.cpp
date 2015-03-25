@@ -41,8 +41,8 @@ int main(int argc, char* argv[]) {
 	Game* game = new Game(system);
 
 	ScriptEngine* scriptEngine = new ScriptEngine();
-	scriptEngine->initialize(game, system);
-	scriptEngine->run(script);
+	scriptEngine->Initialize(game, system);
+	scriptEngine->Run(script);
 
 	game->Run();
 
