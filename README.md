@@ -15,6 +15,7 @@ you can obtain one at http://mozilla.org/MPL/2.0/.
 - Lua 5.2.4
 - LuaBridge 2.x
 - SDL 2.0.3
+- SDL Image Extension
 
 # Build
 
