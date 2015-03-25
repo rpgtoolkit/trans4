@@ -22,9 +22,11 @@ set(RPGTOOLKIT_TRANS4_HEADERS
   ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetRepository.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/Item.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/GameManifest.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/files/FileAssetHandle.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/files/FileAssetHandleResolver.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyItemSerializer.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyGameManifestSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/io/BinaryReader.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/game/Game.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/scripts/LuaGameState.hpp
@@ -49,6 +51,7 @@ include_directories(
   ${RPGTOOLKIT_HEADERS}/trans4
   ${SDL2_INCLUDE_DIR}
   ${SDL2_IMAGE_INCLUDE_DIR}
+  ${SDL2MAIN_LIBRARY}
   ${LUA_INCLUDE_DIR}
   ${LUABRIDGE_INCLUDE_DIRS}
 )
@@ -62,7 +65,6 @@ target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET}
   ${RPGTOOLKIT_CLIO_TARGET}
   ${LUA_LIBRARY}
   ${SDL2_LIBRARY}
-  ${SDL2MAIN_LIBRARY}
   ${SDL2_IMAGE_LIBRARY}
 )
 
@@ -90,3 +92,7 @@ if (CMAKE_COMPILER_IS_GNUCXX)
   )
 
 endif ()
+
+# Tests
+
+add_test(TestAssetCache ${RPGTOOLKIT_TRANS4_TARGET})

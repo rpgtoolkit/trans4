@@ -18,77 +18,147 @@ namespace rpgtoolkit {
     using std::string;
 
     /// Read-only binary stream interface. This stream wrapper reads
-    /// binary data from input streams in a constructor-defined
-    /// byte ordering.
+    /// binary data from input streams; all binary functions assume
+    /// a big endian or network order data stream.
 
     struct BinaryReader {
 
         BinaryReader(std::istream & stream)
-                : stream_(stream) {
-            buffer_.resize(8);
+            : stream_(stream) {
         }
 
-        /// Reads a null-terminated string.
+        inline void
+        static ByteSwap(uint16_t & value) {
+            value = ((value & 0xff) << 8) |
+                ((value & 0xff00) >> 8);
+        }
 
-        inline BinaryReader &
-        operator>>(string & value) {
+        inline void
+        static ByteSwap(uint32_t & value) {
+            value = ((value >> 24)) |
+                ((value << 8) & 0x00ff0000) |
+                ((value >> 8) & 0x0000ff00) |
+                ((value << 24));
+        }
+
+        inline void
+        static ByteSwap(uint64_t & value) {
+            value = ((value << 56) |
+                ((value << 40) & 0xff000000000000ULL) |
+                ((value << 24) & 0xff0000000000ULL) |
+                ((value << 8) & 0xff00000000ULL) |
+                ((value >> 8) & 0xff000000ULL) |
+                ((value >> 24) & 0xff0000ULL) |
+                ((value >> 40) & 0xff00ULL) |
+                ((value >> 56)));
+        }
+
+        string
+        ReadString() {
+            string value;
             std::getline(stream_, value, '\0');
+            return value;
+        }
+
+        uint8_t
+        ReadByte() {
+            char buffer[1];
+            stream_.read(buffer, sizeof(uint8_t));
+            return buffer[0];
+        }
+
+        uint16_t
+        ReadUnsignedShort() {
+            char buffer[2];
+            stream_.read(buffer, 2);
+            return static_cast<uint16_t>(
+                (static_cast<uint16_t>(buffer[0]) << 8) |
+                    (static_cast<uint16_t>(buffer[1]) << 0));
+        }
+
+        uint16_t
+        ReadUnsignedShortSwapped() {
+            char buffer[2];
+            stream_.read(buffer, 2);
+            return static_cast<uint16_t>(
+                (static_cast<uint16_t>(buffer[1]) << 8) |
+                    (static_cast<uint16_t>(buffer[0]) << 0));
+        }
+
+        uint32_t
+        ReadUnsignedInteger() {
+            char buffer[4];
+            stream_.read(buffer, 4);
+            return static_cast<uint32_t>(
+                (static_cast<uint32_t>(buffer[0]) << 24) |
+                    (static_cast<uint32_t>(buffer[1]) << 16) |
+                    (static_cast<uint32_t>(buffer[2]) << 8) |
+                    (static_cast<uint32_t>(buffer[3]) << 0));
+        }
+
+        uint32_t
+        ReadUnsignedIntegerSwapped() {
+            char buffer[4];
+            stream_.read(buffer, 4);
+            return static_cast<uint32_t>(
+                (static_cast<uint32_t>(buffer[3]) << 24) |
+                    (static_cast<uint32_t>(buffer[2]) << 16) |
+                    (static_cast<uint32_t>(buffer[1]) << 8) |
+                    (static_cast<uint32_t>(buffer[0]) << 0));
+        }
+
+        uint64_t
+        ReadUnsignedLong() {
+            char buffer[8];
+            stream_.read(buffer, 8);
+            return static_cast<uint64_t>(
+                (static_cast<uint64_t>(buffer[0]) << 56) |
+                    (static_cast<uint64_t>(buffer[1]) << 48) |
+                    (static_cast<uint64_t>(buffer[2]) << 40) |
+                    (static_cast<uint64_t>(buffer[3]) << 32) |
+                    (static_cast<uint64_t>(buffer[4]) << 24) |
+                    (static_cast<uint64_t>(buffer[5]) << 16) |
+                    (static_cast<uint64_t>(buffer[6]) << 8) |
+                    (static_cast<uint64_t>(buffer[7]) << 0));
+        }
+
+        uint64_t
+        ReadUnsignedLongSwapped() {
+            char buffer[8];
+            stream_.read(buffer, 8);
+            return static_cast<uint64_t>(
+                (static_cast<uint64_t>(buffer[7]) << 56) |
+                    (static_cast<uint64_t>(buffer[6]) << 48) |
+                    (static_cast<uint64_t>(buffer[5]) << 40) |
+                    (static_cast<uint64_t>(buffer[4]) << 32) |
+                    (static_cast<uint64_t>(buffer[3]) << 24) |
+                    (static_cast<uint64_t>(buffer[2]) << 16) |
+                    (static_cast<uint64_t>(buffer[1]) << 8) |
+                    (static_cast<uint64_t>(buffer[0]) << 0));
+        }
+
+        BinaryReader &
+        Skip(size_t count) {
+            stream_.ignore(count);
             return *this;
         }
 
-        /// Reads unsigned byte.
-
-        inline BinaryReader &
-        operator>>(uint8_t & value) {
-            stream_.read(buffer_.data(), sizeof(uint8_t));
-            value = buffer_[0];
+        template<typename T>
+        BinaryReader &
+        Read(T & value) {
+            (*this) >> value;
             return *this;
         }
 
-        /// Reads an unsigned short integer (16-bit)
-
-        inline BinaryReader &
-        operator>>(uint16_t & value) {
-            stream_.read(buffer_.data(), sizeof(uint16_t));
-            value =
-                    (buffer_[1] << 0x08) |
-                    (buffer_[0] << 0x00);
-            return *this;
-        }
-
-        /// Reads an unsigned integer (32-bit)
-
-        inline BinaryReader &
-        operator>>(uint32_t & value) {
-            stream_.read(buffer_.data(), sizeof(uint32_t));
-            value =
-                    (buffer_[3] << 0x18) |
-                    (buffer_[2] << 0x10) |
-                    (buffer_[1] << 0x08) |
-                    (buffer_[0] << 0x00);
-            return *this;
-        }
-
-        /// Reads an unsigned long integer (64-bit)
-
-        inline BinaryReader &
-        operator>>(uint64_t & value) {
-            stream_.read(buffer_.data(), sizeof(uint64_t));
-            value =
-                    (buffer_[7] << 0x38) |
-                    (buffer_[6] << 0x30) |
-                    (buffer_[5] << 0x28) |
-                    (buffer_[4] << 0x20) |
-                    (buffer_[3] << 0x18) |
-                    (buffer_[2] << 0x10) |
-                    (buffer_[1] << 0x08) |
-                    (buffer_[0] << 0x00);
-            return *this;
+        template<typename T>
+        T Read() const {
+            T value;
+            (*this) >> value;
+            return value;
         }
 
     private:
 
-        std::vector<char> buffer_;
         std::istream & stream_;
 
     };

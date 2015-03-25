@@ -1,6 +1,8 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 
+#include "common/Exception.h"
+
 #include "io/BinaryReader.hpp"
 #include "assets/AssetSerializer.hpp"
 #include "assets/Item.hpp"
@@ -8,6 +10,9 @@
 namespace rpgtoolkit {
 
     struct LegacyItemSerializer : public AssetSerializer {
+
+        const int VERSION_MAJOR = 2;
+        const int VERSION_MINOR = 7;
 
         bool
         CanSerialize(AssetDescriptor const & descriptor) override {
@@ -32,16 +37,23 @@ namespace rpgtoolkit {
             auto stream = handle.GetInputStream();
             auto reader = BinaryReader(*stream);
 
-            string header;
-            uint16_t version_major;
-            uint16_t version_minor;
+            auto header = reader.ReadString();
+            auto major = reader.ReadUnsignedShortSwapped();
+            auto minor = reader.ReadUnsignedShortSwapped();
 
-            reader >> header;
-            reader >> version_major;
-            reader >> version_minor;
+            if (header != "RPGTLKIT ITEM") {
+                throw clio::Exception("Unrecognized file format!");
+            }
 
-            reader >> asset->name;
-            reader >> asset->description;
+            if (!major == VERSION_MAJOR && minor == VERSION_MINOR) {
+                throw clio::Exception("Unrecognized file version!");
+            }
+
+            auto name = reader.ReadString();
+            auto description = reader.ReadString();
+
+            asset->SetName(name);
+            asset->SetDescription(description);
 
             handle.SetAsset(std::move(asset));
 

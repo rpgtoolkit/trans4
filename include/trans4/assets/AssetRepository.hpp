@@ -82,6 +82,11 @@ namespace rpgtoolkit {
             assets_.erase(descriptor);
         }
 
+        void
+        Unload(string const & uri) {
+            Unload(AssetDescriptor(0x00, uri));
+        }
+
         /// Loads an asset of the specified type from the
         /// asset repository.
 

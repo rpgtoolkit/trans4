@@ -11,8 +11,31 @@ namespace rpgtoolkit {
 
     struct Item : public Asset {
 
-        string name;
-        string description;
+        string const &
+        GetName() const {
+            return name_;
+        }
+
+        void
+        SetName(string const & value) {
+            name_ = value;
+        }
+
+        string const &
+        GetDescription() const {
+            return description_;
+        }
+
+        void
+        SetDescription(string const & value) {
+            description_ = value;
+        }
+
+    private:
+
+        string name_;
+
+        string description_;
 
     };
 

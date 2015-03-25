@@ -4,6 +4,7 @@
 # but not limited to, a notice of warranty and distribution rights.
 
 cmake_minimum_required(VERSION 2.8.11)
+enable_testing()
 
 set(CMAKE_MODULE_PATH   ${CMAKE_SOURCE_DIR})
 

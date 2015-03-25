@@ -23,6 +23,9 @@ namespace rpgtoolkit {
 
     struct AssetDescriptor {
 
+        AssetDescriptor()
+            : AssetDescriptor(0x00, "") { }
+
         AssetDescriptor(int type, string const & uri)
                 : type_(type), uri_(uri) {
 
