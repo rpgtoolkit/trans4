@@ -19,7 +19,7 @@ namespace rpgtoolkit {
         /// the purpose of data conversion or editing.
 
         virtual void
-        reset() { }
+        Reset() { }
 
     };
 

@@ -6,7 +6,7 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_ASSETSERIALIZER_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_ASSETSERIALIZER_INCLUDED
 
-#include <trans4/assets/AssetHandle.hpp>
+#include "assets/AssetHandle.hpp"
 
 namespace rpgtoolkit {
 
@@ -20,12 +20,12 @@ namespace rpgtoolkit {
         /// Determines if the asset descriptor can be serialized.
 
         virtual bool
-        serializable(AssetDescriptor const & descriptor) = 0;
+        CanSerialize(AssetDescriptor const & descriptor) = 0;
 
         /// Determines if the asset descriptor can be deserialized.
 
         virtual bool
-        deserializable(AssetDescriptor const & descriptor) = 0;
+        CanDeserialize(AssetDescriptor const & descriptor) = 0;
 
         /// Serializes the asset contents of the specified handle.
         ///
@@ -33,13 +33,13 @@ namespace rpgtoolkit {
         /// descriptor attached to the handle.
 
         virtual void
-        serialize(AssetHandle & handle) = 0;
+        Serialize(AssetHandle & handle) = 0;
 
         /// Deserializes the content of the asset descriptor specified by
         /// the asset handle and stores the contents in the handle.
 
         virtual void
-        deserialize(AssetHandle & handle) = 0;
+        Deserialize(AssetHandle & handle) = 0;
 
     };
 

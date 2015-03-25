@@ -9,8 +9,9 @@
 #include <memory>
 #include <iostream>
 
-#include <trans4/assets/AssetDescriptor.hpp>
-#include <trans4/assets/Asset.hpp>
+#include "assets/Asset.hpp"
+#include "assets/AssetDescriptor.hpp"
+#include "assets/AssetHandle.hpp"
 
 namespace rpgtoolkit {
 
@@ -31,7 +32,7 @@ namespace rpgtoolkit {
         /// Returns descriptor associated with the asset handle
 
         AssetDescriptor const &
-        descriptor() const {
+        GetDescriptor() const {
             return descriptor_;
         }
 
@@ -40,7 +41,7 @@ namespace rpgtoolkit {
         /// This method may return null.
 
         Asset *
-        asset() const {
+        GetAsset() const {
             return asset_.get();
         }
 
@@ -51,7 +52,7 @@ namespace rpgtoolkit {
         /// @param asset asset content
 
         void
-        asset(unique_ptr<Asset> asset) {
+        SetAsset(unique_ptr<Asset> asset) {
             asset_ = std::move(asset);
         }
 
@@ -59,13 +60,13 @@ namespace rpgtoolkit {
         /// method represented by the handle (e.g. file, network stream).
 
         virtual bool
-        exists() const = 0;
+        Exists() const = 0;
 
         /// Determines the total size (in bytes) of the asset content
         /// for the serialization method represented by the handle.
 
         virtual uintmax_t
-        size() const = 0;
+        GetSize() const = 0;
 
         /// Returns a writable stream to the asset content.
         ///
@@ -73,7 +74,7 @@ namespace rpgtoolkit {
         /// writable or otherwise accessible through the asset handle.
 
         virtual unique_ptr<ostream>
-        write() = 0;
+        GetOutputStream() = 0;
 
         /// Returns a read-only stream of the asset content.
         ///
@@ -81,7 +82,7 @@ namespace rpgtoolkit {
         /// readable or otherwise accessible through the asset handle.
 
         virtual unique_ptr<istream>
-        read() = 0;
+        GetInputStream() = 0;
 
     protected:
 

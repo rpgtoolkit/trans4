@@ -6,11 +6,12 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_FILEASSETHANDLE_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_FILEASSETHANDLE_INCLUDED
 
+#include <memory>
 #include <string>
 #include <iostream>
 #include <fstream>
 
-#include <trans4/assets/AssetHandle.hpp>
+#include "assets/AssetHandle.hpp"
 
 namespace rpgtoolkit {
 
@@ -23,28 +24,28 @@ namespace rpgtoolkit {
     struct FileAssetHandle : public AssetHandle {
 
         FileAssetHandle(AssetDescriptor const & descriptor)
-                  : AssetHandle(descriptor), path_(descriptor.name()) {
+                  : AssetHandle(descriptor), path_(descriptor.GetName()) {
         }
 
         bool
-        exists() const override {
+        Exists() const override {
             return ifstream(path_);
         }
 
         uintmax_t
-        size() const override {
+        GetSize() const override {
             std::ifstream file(path_, std::ifstream::ate | std::ifstream::binary);
             return file.tellg();
         }
 
         unique_ptr<istream>
-        read() override {
+        GetInputStream() override {
             return unique_ptr<istream>(
                     new std::ifstream(path_, std::ifstream::binary));
         }
 
         unique_ptr<ostream>
-        write() override {
+        GetOutputStream() override {
             return unique_ptr<ostream>(
                     new std::ofstream(path_, std::ifstream::binary));
         }

@@ -1,35 +1,35 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 
-#include <trans4/io/BinaryReader.hpp>
-#include <trans4/assets/AssetSerializer.hpp>
-#include <trans4/assets/Item.hpp>
+#include "io/BinaryReader.hpp"
+#include "assets/AssetSerializer.hpp"
+#include "assets/Item.hpp"
 
 namespace rpgtoolkit {
 
     struct LegacyItemSerializer : public AssetSerializer {
 
         bool
-        serializable(AssetDescriptor const & descriptor) override {
-            return (descriptor.extension() == "itm");
+        CanSerialize(AssetDescriptor const & descriptor) override {
+            return (descriptor.GetExtension() == "itm");
         }
 
         bool
-        deserializable(AssetDescriptor const & descriptor) override {
-            return serializable(descriptor);
+        CanDeserialize(AssetDescriptor const & descriptor) override {
+            return CanSerialize(descriptor);
         }
 
         void
-        serialize(AssetHandle & handle) override {
+        Serialize(AssetHandle & handle) override {
 
         }
 
         virtual void
-        deserialize(AssetHandle & handle) override {
+        Deserialize(AssetHandle & handle) override {
 
             std::unique_ptr<Item> asset(new Item());
 
-            auto stream = handle.read();
+            auto stream = handle.GetInputStream();
             auto reader = BinaryReader(*stream);
 
             string header;
@@ -43,7 +43,7 @@ namespace rpgtoolkit {
             reader >> asset->name;
             reader >> asset->description;
 
-            handle.asset(std::move(asset));
+            handle.SetAsset(std::move(asset));
 
         }
 

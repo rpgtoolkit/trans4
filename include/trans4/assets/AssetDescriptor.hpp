@@ -72,7 +72,7 @@ namespace rpgtoolkit {
 
             }
 
-            // Extract all tags following a query marker (?)
+            // Extract all GetTags following a query marker (?)
 
             // NOTE: Does not currently parse query values; for example,
             /// ?x=y parses to ?x=y instead of a map with x -> y
@@ -85,7 +85,7 @@ namespace rpgtoolkit {
                 size_t pos = 0;
                 size_t lpos = 0;
 
-                // Extract all tags separated by query separator (&)
+                // Extract all GetTags separated by query separator (&)
 
                 while (pos != string::npos) {
                     lpos = pos;
@@ -117,7 +117,7 @@ namespace rpgtoolkit {
         /// for use by the asset framework in filtering runtime assets.
 
         vector<string> &
-        tags() {
+        GetTags() {
             return tags_;
         }
 
@@ -125,28 +125,28 @@ namespace rpgtoolkit {
         /// Returns the asset type of the descriptor.
 
         int
-        type() const {
+        GetType() const {
             return type_;
         }
 
         /// Returns the fully-qualified URI representing the descriptor.
 
         string const &
-        uri() const {
+        GetURI() const {
             return uri_;
         }
 
         /// Returns the file name of the descriptor path.
 
         string const &
-        name() const {
+        GetName() const {
             return name_;
         }
 
         /// Returns the file extension of the descriptor path (name).
 
         string const
-        extension() const {
+        GetExtension() const {
             return extension_;
         }
 
@@ -154,7 +154,7 @@ namespace rpgtoolkit {
         /// with the asset descriptor.
 
         string const &
-        scheme() const {
+        GetScheme() const {
             return scheme_;
         }
 
@@ -180,7 +180,7 @@ namespace rpgtoolkit {
 
         template<typename T>
         static inline void
-        hash_combine(size_t & seed, T const & v) {
+        HashCombine(size_t & seed, T const & v) {
             hash<T> hasher;
             seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed << 2);
         }
@@ -188,10 +188,10 @@ namespace rpgtoolkit {
         size_t
         operator()(AssetDescriptor const & descriptor) const {
             size_t result = 0;
-            hash_combine(result, descriptor.type_);
-            hash_combine(result, descriptor.name_);
+            HashCombine(result, descriptor.type_);
+            HashCombine(result, descriptor.name_);
             for (auto & tag : descriptor.tags_) {
-                hash_combine(result, tag);
+                HashCombine(result, tag);
             }
             return result;
         }

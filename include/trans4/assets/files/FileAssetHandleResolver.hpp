@@ -6,21 +6,21 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_FILEASSETHANDLERESOLVER_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_FILEASSETHANDLERESOLVER_INCLUDED
 
-#include <trans4/assets/AssetHandleResolver.hpp>
-#include <trans4/assets/files/FileAssetHandle.hpp>
+#include "assets/AssetHandleResolver.hpp"
+#include "assets/files/FileAssetHandle.hpp"
 
 namespace rpgtoolkit {
 
     struct FileAssetHandleResolver : public AssetHandleResolver {
 
         bool
-        resolvable(AssetDescriptor const & descriptor) {
-            return (descriptor.scheme() == "file");
+        IsResolvable(AssetDescriptor const & descriptor) {
+            return (descriptor.GetScheme() == "file");
         }
 
         unique_ptr<AssetHandle>
-        resolve(AssetDescriptor const & descriptor) {
-            if (resolvable(descriptor)) {
+        Resolve(AssetDescriptor const & descriptor) {
+            if (IsResolvable(descriptor)) {
                 return unique_ptr<FileAssetHandle>(
                         new FileAssetHandle(descriptor));
             }

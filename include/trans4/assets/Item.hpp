@@ -2,7 +2,8 @@
 #define RPGTOOLKIT_TRANS4_ASSETS_ITEM_INCLUDED
 
 #include <string>
-#include <trans4/assets/Asset.hpp>
+
+#include "assets/Asset.hpp"
 
 namespace rpgtoolkit {
 

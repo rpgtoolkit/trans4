@@ -7,8 +7,9 @@
 #define RPGTOOLKIT_TRANS4_ASSETS_ASSETHANDLERESOLVER_INCLUDED
 
 #include <memory>
-#include <trans4/assets/AssetHandle.hpp>
-#include <trans4/assets/AssetDescriptor.hpp>
+
+#include "assets/AssetHandle.hpp"
+#include "assets/AssetDescriptor.hpp"
 
 namespace rpgtoolkit {
 
@@ -23,7 +24,7 @@ namespace rpgtoolkit {
         /// an asset handle by this resolver.
 
         virtual bool
-        resolvable(AssetDescriptor const & descriptor) = 0;
+        IsResolvable(AssetDescriptor const & descriptor) = 0;
 
         /// Resolves an asset descriptor into an asset handle.
         ///
@@ -31,7 +32,7 @@ namespace rpgtoolkit {
         /// be resolved or the specified asset does not exist.
 
         virtual unique_ptr<AssetHandle>
-        resolve(AssetDescriptor const & descriptor) = 0;
+        Resolve(AssetDescriptor const & descriptor) = 0;
 
     };
 

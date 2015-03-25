@@ -12,9 +12,11 @@
 #include <unordered_map>
 #include <type_traits>
 
-#include <trans4/assets/AssetDescriptor.hpp>
-#include <trans4/assets/AssetHandleResolver.hpp>
-#include <trans4/assets/AssetSerializer.hpp>
+#include "common/Exception.h"
+
+#include "assets/AssetDescriptor.hpp"
+#include "assets/AssetHandleResolver.hpp"
+#include "assets/AssetSerializer.hpp"
 
 namespace rpgtoolkit {
 
@@ -29,24 +31,43 @@ namespace rpgtoolkit {
 
     struct AssetRepository {
 
-        /// Pushes an asset resolver into the repository;
+        /// Registers an asset resolver with the repository;
+        /// asset resolvers generate asset handles based on
+        /// asset descriptor URI schemes (e.g. files, network
+        /// streams, memory buffers, etc).
+
+        template <typename T> void
+        RegisterResolver() {
+            RegisterResolver(std::unique_ptr<T>(new T()));
+        }
+
+        /// Registers an asset resolver with the repository;
         /// asset resolvers generate asset handles based on
         /// asset descriptor URI schemes (e.g. files, network
         /// streams, memory buffers, etc).
 
         void
-        push_resolver(unique_ptr<AssetHandleResolver> resolver) {
+        RegisterResolver(unique_ptr<AssetHandleResolver> resolver) {
             if (resolver) {
                 resolvers_.push_back(std::move(resolver));
             }
         }
 
-        /// Pushes an asset serializer into the repository;
+        /// Registers an asset serializer with the repository;
+        /// asset serializers load asset data from an asset
+        /// handle (file, network stream, etc).
+
+        template <typename T> void
+        RegisterSerializer() {
+            RegisterSerializer(std::unique_ptr<T>(new T()));
+        }
+
+        /// Registers an asset serializer with the repository;
         /// asset serializers load asset data from an asset
         /// handle (file, network stream, etc).
 
         void
-        push_serializer(unique_ptr<AssetSerializer> serializer) {
+        RegisterSerializer(unique_ptr<AssetSerializer> serializer) {
             if (serializer) {
                 serializers_.push_back(std::move(serializer));
             }
@@ -57,7 +78,7 @@ namespace rpgtoolkit {
         /// referenced by the specified descriptor.
 
         void
-        unload(AssetDescriptor const & descriptor) {
+        Unload(AssetDescriptor const & descriptor) {
             assets_.erase(descriptor);
         }
 
@@ -69,10 +90,10 @@ namespace rpgtoolkit {
             typename std::enable_if<
                     std::is_base_of<Asset, T>::value>::type* = nullptr>
         inline T *
-        load(string const & uri, bool reload = false) {
-            auto handle = load(uri, reload);
+        Load(string const & uri, bool reload = false) {
+            auto handle = Load(uri, reload);
             return handle
-                    ? dynamic_cast<T *>(handle->asset())
+                    ? dynamic_cast<T *>(handle->GetAsset())
                     : nullptr;
         }
 
@@ -82,8 +103,8 @@ namespace rpgtoolkit {
         /// @param reload if true, bypasses cache
 
         AssetHandle *
-        load(string const & uri, bool reload = false) {
-            return load(AssetDescriptor(0x00, uri), reload);
+        Load(string const & uri, bool reload = false) {
+            return Load(AssetDescriptor(0x00, uri), reload);
         }
 
         /// Loads an asset into the repository.
@@ -92,7 +113,7 @@ namespace rpgtoolkit {
         /// @param reload if true, bypasses cache
 
         AssetHandle *
-        load(AssetDescriptor const & descriptor, bool reload = false) {
+        Load(AssetDescriptor const & descriptor, bool reload = false) {
 
             // Bypass cache if reload was requested; otherwise lookup the
             // asset descriptor in the asset cache and return the cached handle
@@ -106,22 +127,22 @@ namespace rpgtoolkit {
 
             // Retrieve a resolver and serializer for the supplied descriptor
 
-            auto resolver = this->resolver(descriptor);
-            auto serializer = this->serializer(descriptor);
+            auto resolver = FindResolver(descriptor);
+            auto serializer = FindSerializer(descriptor);
 
             // Resolve an asset handle given the asset descriptor, and then
             // load the referenced asset if it exists and add it to the
             // asset cache...
 
             if (resolver && serializer) {
-                auto handle = resolver->resolve(descriptor);
+                auto handle = resolver->Resolve(descriptor);
                 auto ptr = handle.get();
                 if (handle) {
-                    if (!handle->exists()) {
-                        throw rpgtoolkit::Exception(
+                    if (!handle->Exists()) {
+                        throw clio::Exception(
                                 "The specified asset does not exist or could not be loaded.");
                     }
-                    serializer->deserialize(*ptr);
+                    serializer->Deserialize(*ptr);
                     assets_[descriptor] = std::move(handle);
                     return ptr;
                 }
@@ -140,9 +161,9 @@ namespace rpgtoolkit {
         /// The first registered compatible resolver is returned.
 
         AssetHandleResolver *
-        resolver(AssetDescriptor const & descriptor) {
+        FindResolver(AssetDescriptor const & descriptor) {
             for (auto & resolver : resolvers_) {
-                if (resolver->resolvable(descriptor)) {
+                if (resolver->IsResolvable(descriptor)) {
                     return resolver.get();
                 }
             }
@@ -153,10 +174,10 @@ namespace rpgtoolkit {
         /// The first registered compatible serializer is returned.
 
         AssetSerializer *
-        serializer(AssetDescriptor const & descriptor) {
+        FindSerializer(AssetDescriptor const & descriptor) {
             for (auto & serializer : serializers_) {
-                if (serializer->serializable(descriptor)
-                        || serializer->deserializable(descriptor)) {
+                if (serializer->CanSerialize(descriptor)
+                        || serializer->CanDeserialize(descriptor)) {
                     return serializer.get();
                 }
             }
