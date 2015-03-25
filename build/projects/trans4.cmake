@@ -14,6 +14,14 @@ find_package(LUABRIDGE REQUIRED)
 # Files
 
 set(RPGTOOLKIT_TRANS4_HEADERS
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/Asset.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetDescriptor.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetHandle.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetHandleResolver.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetRepository.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetSerializer.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/Item.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyItemSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/common/Exception.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/common/Rectangle.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/io/BinaryReader.hpp

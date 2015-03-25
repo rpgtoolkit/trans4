@@ -83,6 +83,7 @@ namespace rpgtoolkit {
                     (buffer_[2] << 0x10) |
                     (buffer_[1] << 0x08) |
                     (buffer_[0] << 0x00);
+            return *this;
         }
 
     private:
