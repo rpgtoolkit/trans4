@@ -29,7 +29,7 @@ namespace rpgtoolkit {
 
         bool
         Exists() const override {
-            return ifstream(path_);
+            return ifstream(path_).good();
         }
 
         uintmax_t
