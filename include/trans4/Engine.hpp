@@ -12,6 +12,7 @@
 #include "game/Game.hpp"
 #include "assets/AssetRepository.hpp"
 #include "assets/serializers/LegacyGameManifestSerializer.hpp"
+#include "assets/serializers/LegacyTilesetSerializer.hpp"
 #include "assets/files/FileAssetHandleResolver.hpp"
 #include "scripts/ScriptEngine.hpp"
 #include "scripts/LuaScriptEngine.hpp"
@@ -154,6 +155,7 @@ namespace rpgtoolkit {
             // Initialize supported repository resolvers and serializers
 
             assets_.RegisterSerializer<LegacyGameManifestSerializer>();
+            assets_.RegisterSerializer<LegacyTilesetSerializer>();
             assets_.RegisterResolver<FileAssetHandleResolver>();
 
         }

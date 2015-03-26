@@ -67,13 +67,23 @@ namespace rpgtoolkit {
             return buffer[0];
         }
 
+        int16_t
+        ReadShort() {
+            return (ReadUnsignedShort() & 0xff);
+        }
+
+        int16_t
+        ReadShortSwapped() {
+            return (ReadUnsignedShortSwapped() & 0xff);
+        }
+
         uint16_t
         ReadUnsignedShort() {
             char buffer[2];
             stream_.read(buffer, 2);
             return static_cast<uint16_t>(
-                (static_cast<uint16_t>(buffer[0]) << 8) |
-                    (static_cast<uint16_t>(buffer[1]) << 0));
+                static_cast<uint16_t>(buffer[0] << 8) |
+                    static_cast<uint16_t>((unsigned) buffer[1]));
         }
 
         uint16_t
@@ -81,8 +91,18 @@ namespace rpgtoolkit {
             char buffer[2];
             stream_.read(buffer, 2);
             return static_cast<uint16_t>(
-                (static_cast<uint16_t>(buffer[1]) << 8) |
-                    (static_cast<uint16_t>(buffer[0]) << 0));
+                static_cast<uint16_t>(buffer[1] << 8) |
+                    static_cast<uint16_t>((unsigned) buffer[0]));
+        }
+
+        int32_t
+        ReadInteger() {
+            return (ReadUnsignedInteger() & 0xff);
+        }
+
+        int32_t
+        ReadIntegerSwapped() {
+            return (ReadUnsignedIntegerSwapped() * 0xff);
         }
 
         uint32_t
@@ -135,6 +155,16 @@ namespace rpgtoolkit {
                     (static_cast<uint64_t>(buffer[2]) << 16) |
                     (static_cast<uint64_t>(buffer[1]) << 8) |
                     (static_cast<uint64_t>(buffer[0]) << 0));
+        }
+
+        int64_t
+        ReadLong() {
+            return (ReadUnsignedLong() & 0xff);
+        }
+
+        int64_t
+        ReadLongSwapped() {
+            return (ReadUnsignedLongSwapped() & 0xff);
         }
 
         BinaryReader &

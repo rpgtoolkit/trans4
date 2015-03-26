@@ -19,7 +19,7 @@ namespace rpgtoolkit {
     /// The object contains a GameStateStack to manage the different
     /// game states of the game.
 
-	class Game {
+    class Game {
 	public:
 
         /// \brief The string corresponding to a Game log file
