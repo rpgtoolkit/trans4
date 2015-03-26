@@ -16,7 +16,6 @@ namespace clio {
 namespace rpgtoolkit {
 
 	class Game;
-
 	
 	/// The ScriptEngine interface defines how scripts can be run.
 	class ScriptEngine {

@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <type_traits>
 
-#include "common/Exception.h"
+#include "common/Exception.hpp"
 
 #include "assets/AssetDescriptor.hpp"
 #include "assets/AssetHandleResolver.hpp"
@@ -142,11 +142,7 @@ namespace rpgtoolkit {
             if (resolver && serializer) {
                 auto handle = resolver->Resolve(descriptor);
                 auto ptr = handle.get();
-                if (handle) {
-                    if (!handle->Exists()) {
-                        throw clio::Exception(
-                                "The specified asset does not exist or could not be loaded.");
-                    }
+                if (handle && handle->Exists()) {
                     serializer->Deserialize(*ptr);
                     assets_[descriptor] = std::move(handle);
                     return ptr;
