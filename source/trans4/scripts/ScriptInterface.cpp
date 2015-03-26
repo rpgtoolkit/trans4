@@ -37,7 +37,7 @@ namespace rpgtoolkit {
 	}
 
 	bool detail::IsKeyDown(std::string key) {
-		return sys->GetInput()->GetKeyboard()->isKeyDown(clio::StringToKey(key));
+		return sys->GetInput()->GetKeyboard()->IsKeyDown(clio::StringToKey(key));
 	}
 
 	void detail::ChangeState(std::string state) {
