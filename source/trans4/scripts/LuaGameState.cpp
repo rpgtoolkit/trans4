@@ -6,7 +6,7 @@
 #include "lua.hpp"
 #include "LuaBridge.h"
 
-#include "common/Exception.hpp"
+#include "clio/common/Exception.hpp"
 #include "scripts/LuaGameState.hpp"
 
 namespace rpgtoolkit {

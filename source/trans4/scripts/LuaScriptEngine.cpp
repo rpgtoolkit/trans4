@@ -6,7 +6,7 @@
 #include "lua.hpp"
 #include "LuaBridge.h"
 
-#include "graphics/Texture.hpp"
+#include "clio/graphics/Texture.hpp"
 #include "scripts/LuaScriptEngine.hpp"
 #include "scripts/ScriptInterface.hpp"
 

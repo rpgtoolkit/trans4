@@ -9,14 +9,14 @@
 #include "scripts/ScriptInterface.hpp"
 #include "scripts/LuaGameState.hpp"
 #include "game/Game.hpp"
-#include "game/GameState.hpp"
-#include "game/GameStateStack.hpp"
-#include "graphics/Renderer2D.hpp"
-#include "graphics/Texture.hpp"
-#include "system/System.hpp"
-#include "input/Input.hpp"
-#include "input/Keyboard.hpp"
-#include "input/Key.hpp"
+#include "clio/game/GameState.hpp"
+#include "clio/game/GameStateStack.hpp"
+#include "clio/graphics/Renderer2D.hpp"
+#include "clio/graphics/Texture.hpp"
+#include "clio/system/System.hpp"
+#include "clio/input/Input.hpp"
+#include "clio/input/Keyboard.hpp"
+#include "clio/input/Key.hpp"
 
 namespace rpgtoolkit {
 
