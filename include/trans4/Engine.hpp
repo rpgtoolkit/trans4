@@ -3,14 +3,16 @@
 
 #include <memory>
 
-#include "Version.hpp"
-#include "assets/AssetRepository.hpp"
-#include "assets/serializers/LegacyGameManifestSerializer.hpp"
-#include "assets/files/FileAssetHandleResolver.hpp"
 #include "system/System.hpp"
 #include "system/SystemSettings.hpp"
 #include "window/Window.hpp"
 #include "common/Logger.hpp"
+
+#include "Version.hpp"
+#include "game/Game.hpp"
+#include "assets/AssetRepository.hpp"
+#include "assets/serializers/LegacyGameManifestSerializer.hpp"
+#include "assets/files/FileAssetHandleResolver.hpp"
 #include "scripts/ScriptEngine.hpp"
 #include "scripts/LuaScriptEngine.hpp"
 
