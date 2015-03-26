@@ -69,7 +69,7 @@ target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET} optimized
   ${LUA_LIBRARY}
   ${SDL2_LIBRARY}
   ${SDL2_IMAGE_LIBRARY}
-  ${CLIO_LIBRARY}
+  ${CLIO_LIBRARIES}
 )
 
 target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET} debug
@@ -77,7 +77,7 @@ target_link_libraries(${RPGTOOLKIT_TRANS4_TARGET} debug
   ${SDL2_LIBRARY}
   ${SDL2MAIN_LIBRARY}
   ${SDL2_IMAGE_LIBRARY}
-  ${CLIO_LIBRARY}
+  ${CLIO_LIBRARIES}
 )
 
 if (WIN32)
