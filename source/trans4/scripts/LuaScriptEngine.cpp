@@ -54,7 +54,7 @@ namespace rpgtoolkit {
 			.beginNamespace("tk")
 				.beginClass<clio::Texture>("Texture")
 					.addData("width", &clio::Texture::width)
-					.addData("height", &clio::Texture::width)
+					.addData("height", &clio::Texture::height)
 				.endClass()
 				.beginClass<clio::TextureClip>("TextureClip")
 					.addConstructor <void(*) (clio::Texture*, int32_t, int32_t, int32_t, int32_t)>()
