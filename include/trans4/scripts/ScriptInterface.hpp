@@ -37,7 +37,11 @@ namespace rpgtoolkit {
 
 		void PopState();
 
+		void QuitGame();
+
 		clio::Texture* LoadTexture(std::string texture_file);
+
+		void FreeTexture(clio::Texture* texture);
 
 		void DrawTexture(clio::Texture* texture, int x, int y);
 

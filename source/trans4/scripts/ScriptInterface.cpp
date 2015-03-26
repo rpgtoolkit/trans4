@@ -52,8 +52,16 @@ namespace rpgtoolkit {
 		game->GetStateStack()->PopState();
 	}
 
+	void detail::QuitGame() {
+		game->GetStateStack()->ClearAllStates();
+	}
+
 	clio::Texture* detail::LoadTexture(std::string texture_file) {
 		return sys->GetRenderer()->LoadTexture(texture_file);
+	}
+
+	void detail::FreeTexture(clio::Texture* texture) {
+		return sys->GetRenderer()->FreeTexture(texture);
 	}
 
 	void detail::DrawTexture(clio::Texture* texture, int x, int y) {

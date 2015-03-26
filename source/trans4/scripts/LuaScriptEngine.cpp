@@ -45,7 +45,9 @@ namespace rpgtoolkit {
 				.addFunction("changeState", detail::ChangeState)
 				.addFunction("pushState", detail::PushState)
 				.addFunction("popState", detail::PopState)
+				.addFunction("quit", detail::QuitGame)
 				.addFunction("loadTexture", detail::LoadTexture)
+				.addFunction("freeTexture", detail::FreeTexture)
 				.addFunction("drawTexture", detail::DrawTexture)
 				.addFunction("drawClip", detail::DrawClip)
 			.endNamespace();
