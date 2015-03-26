@@ -6,7 +6,10 @@
 #include "assets/AssetHandle.hpp"
 
 namespace rpgtoolkit {
-    
+
+    AssetHandle::AssetHandle(AssetDescriptor const & descriptor)
+        : descriptor_(descriptor) { }
+
     AssetDescriptor const &
     AssetHandle::GetDescriptor() const {
         return descriptor_;
