@@ -20,7 +20,7 @@ namespace rpgtoolkit {
 	/// Lua scripts are expected to implement the functionality of the 
 	/// GameState via a table, indexed by strings labeled "initialize",
 	/// "pause", "resume", "update", and "render".
-	class LuaGameState : public clio::GameState {
+	struct LuaGameState : public clio::GameState {
 	public:
 		/// \brief Constructor
 		///
