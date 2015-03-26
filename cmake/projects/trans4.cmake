@@ -26,10 +26,12 @@ set(RPGTOOLKIT_TRANS4_HEADERS
   ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/Item.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/GameManifest.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/Tileset.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/files/FileAssetHandle.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/files/FileAssetHandleResolver.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyItemSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyGameManifestSerializer.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/assets/serializers/LegacyTilesetSerializer.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/io/BinaryReader.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/game/Game.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/scripts/LuaGameState.hpp

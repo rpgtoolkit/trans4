@@ -3,10 +3,10 @@
 
 #include <memory>
 
-#include "system/System.hpp"
-#include "system/SystemSettings.hpp"
-#include "window/Window.hpp"
-#include "common/Logger.hpp"
+#include "clio/system/System.hpp"
+#include "clio/system/SystemSettings.hpp"
+#include "clio/window/Window.hpp"
+#include "clio/common/Logger.hpp"
 
 #include "Version.hpp"
 #include "game/Game.hpp"

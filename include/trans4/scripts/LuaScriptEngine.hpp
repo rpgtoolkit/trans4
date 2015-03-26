@@ -6,12 +6,12 @@
 #ifndef RPGTOOLKIT_TRANS4_SCRIPTS_LUASCRIPTENGINE_INCLUDED
 #define RPGTOOLKIT_TRANS4_SCRIPTS_LUASCRIPTENGINE_INCLUDED
 
-
 #include <memory>
+
+#include "clio/system/System.hpp"
 
 #include "lua.hpp"
 #include "scripts/ScriptEngine.hpp"
-#include "system/System.hpp"
 
 struct lua_State;
 
