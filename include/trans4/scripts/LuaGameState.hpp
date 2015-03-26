@@ -44,6 +44,8 @@ namespace rpgtoolkit {
 		luabridge::LuaRef luaTable_;
 		
 		void Quit();
+
+		void CallTableFunction(const std::string& name);
 	};
 }
 

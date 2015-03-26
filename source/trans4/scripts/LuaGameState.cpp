@@ -24,26 +24,32 @@ namespace rpgtoolkit {
 
 	void LuaGameState::Initialize() {
 		input_context_->RegisterQuitCallback(std::bind(&LuaGameState::Quit, this));
-		luaTable_["initialize"]();
+		CallTableFunction("initialize");
 	}
 
 	void LuaGameState::Pause() {
-		luaTable_["pause"]();
+		CallTableFunction("pause");
 	}
 
 	void LuaGameState::Resume() {
-		luaTable_["resume"]();
+		CallTableFunction("resume");
 	}
 
 	void LuaGameState::Update() {
-		luaTable_["update"]();
+		CallTableFunction("update");
 	}
 
 	void LuaGameState::Render() {
-		luaTable_["render"]();
+		CallTableFunction("render");
 	}
 
 	void LuaGameState::Quit() {
-		luaTable_["quit"]();
+		CallTableFunction("quit");
+	}
+
+	void LuaGameState::CallTableFunction(const std::string& name) {
+		if (luaTable_[name].isFunction()) {
+			luaTable_[name]();
+		}
 	}
 }
