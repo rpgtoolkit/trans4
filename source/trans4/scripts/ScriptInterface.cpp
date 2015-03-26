@@ -12,6 +12,7 @@
 #include "game/GameState.hpp"
 #include "game/GameStateStack.hpp"
 #include "graphics/Renderer2D.hpp"
+#include "graphics/Texture.hpp"
 #include "system/System.hpp"
 #include "input/Input.hpp"
 #include "input/Keyboard.hpp"
@@ -21,7 +22,6 @@ namespace rpgtoolkit {
 
 	static lua_State* L;
 	static clio::System* sys;
-	static clio::Renderer2D* renderer;
 	static Game* game;
 
 	void detail::SetLuaInstance(lua_State * const lua) {
@@ -30,7 +30,6 @@ namespace rpgtoolkit {
 
 	void detail::SetSystemInstance(clio::System * const system) {
 		sys = system;
-		renderer = sys->GetRenderer();
 	}
 
 	void detail::SetGameInstance(Game * const g) {
@@ -53,14 +52,16 @@ namespace rpgtoolkit {
 		game->GetStateStack()->PopState();
 	}
 
-	unsigned int detail::LoadTexture(std::string texture_file) {
-		return 0;
+	clio::Texture* detail::LoadTexture(std::string texture_file) {
+		return sys->GetRenderer()->LoadTexture(texture_file);
 	}
 
-	void detail::DrawTexture(int textureId, int x, int y) {
+	void detail::DrawTexture(clio::Texture* texture, int x, int y) {
+		sys->GetRenderer()->DrawTexture(texture, x, y);
 	}
 
-	void detail::DrawClip(int textureId, int x, int y, int tx, int ty, int tw, int th) {
+	void detail::DrawClip(clio::TextureClip* clip, int x, int y) {
+		sys->GetRenderer()->DrawTextureClip(clip, x, y);
 	}
 
 }

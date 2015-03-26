@@ -6,6 +6,7 @@
 #include "lua.hpp"
 #include "LuaBridge.h"
 
+#include "graphics/Texture.hpp"
 #include "scripts/LuaScriptEngine.hpp"
 #include "scripts/ScriptInterface.hpp"
 
@@ -47,6 +48,22 @@ namespace rpgtoolkit {
 				.addFunction("loadTexture", detail::LoadTexture)
 				.addFunction("drawTexture", detail::DrawTexture)
 				.addFunction("drawClip", detail::DrawClip)
+			.endNamespace();
+
+		getGlobalNamespace(state_.get())
+			.beginNamespace("tk")
+				.beginClass<clio::Texture>("Texture")
+					.addData("width", &clio::Texture::width)
+					.addData("height", &clio::Texture::width)
+				.endClass()
+				.beginClass<clio::TextureClip>("TextureClip")
+					.addConstructor <void(*) (clio::Texture*, int32_t, int32_t, int32_t, int32_t)>()
+					.addData("texture", &clio::TextureClip::texture)
+					.addData("x", &clio::TextureClip::x)
+					.addData("y", &clio::TextureClip::y)
+					.addData("height", &clio::TextureClip::height)
+					.addData("width", &clio::TextureClip::width)
+				.endClass()
 			.endNamespace();
 	}
 

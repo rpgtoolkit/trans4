@@ -6,9 +6,9 @@
 
 namespace clio {
 
-    class GameStateStack;
-	class Logger;
-	class System;
+    struct GameStateStack;
+	struct Logger;
+	struct System;
 
 }
 
@@ -19,7 +19,7 @@ namespace rpgtoolkit {
     /// The object contains a GameStateStack to manage the different
     /// game states of the game.
 
-    class Game {
+	struct Game {
 	public:
 
         /// \brief The string corresponding to a Game log file

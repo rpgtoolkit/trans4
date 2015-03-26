@@ -42,6 +42,8 @@ namespace rpgtoolkit {
 
 	private:
 		luabridge::LuaRef luaTable_;
+		
+		void Quit();
 	};
 }
 

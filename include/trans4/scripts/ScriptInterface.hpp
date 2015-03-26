@@ -12,6 +12,11 @@
 
 struct lua_State;
 
+namespace clio {
+	struct Texture;
+	struct TextureClip;
+}
+
 namespace rpgtoolkit {
 
 	struct Game;
@@ -32,11 +37,11 @@ namespace rpgtoolkit {
 
 		void PopState();
 
-		unsigned int LoadTexture(std::string texture_file);
+		clio::Texture* LoadTexture(std::string texture_file);
 
-		void DrawTexture(int textureId, int x, int y);
+		void DrawTexture(clio::Texture* texture, int x, int y);
 
-		void DrawClip(int textureId, int x, int y, int tx, int ty, int tw, int th);
+		void DrawClip(clio::TextureClip* clip, int x, int y);
 	}
 }
 

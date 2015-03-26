@@ -7,6 +7,7 @@
 #include "common/Timer.hpp"
 #include "game/GameState.hpp"
 #include "game/GameStateStack.hpp"
+#include "graphics/Renderer2D.hpp"
 #include "input/Input.hpp"
 #include "system/System.hpp"
 
@@ -76,7 +77,9 @@ namespace rpgtoolkit {
 			Quit();
 		}
 		else {
+			system_->GetRenderer()->ClearScreen();
 			stack_->GetCurrentState().Render();
+			system_->GetRenderer()->RenderDraws();
 		}
 	}
 }
