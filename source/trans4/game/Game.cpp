@@ -3,13 +3,12 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include "common/Logger.hpp"
-#include "common/Timer.hpp"
-#include "game/GameState.hpp"
-#include "game/GameStateStack.hpp"
-#include "input/Input.hpp"
-#include "system/System.hpp"
-
+#include "clio/common/Logger.hpp"
+#include "clio/common/Timer.hpp"
+#include "clio/game/GameState.hpp"
+#include "clio/game/GameStateStack.hpp"
+#include "clio/input/Input.hpp"
+#include "clio/system/System.hpp"
 #include "game/Game.hpp"
 
 namespace rpgtoolkit {
