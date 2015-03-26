@@ -14,7 +14,7 @@ struct lua_State;
 
 namespace rpgtoolkit {
 
-	class Game;
+	struct Game;
 
 	namespace detail {
 

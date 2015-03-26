@@ -10,15 +10,15 @@
 #include <string>
 
 namespace clio {
-	class System;
+	struct System;
 }
 
 namespace rpgtoolkit {
 
-	class Game;
+	struct Game;
 	
 	/// The ScriptEngine interface defines how scripts can be run.
-	class ScriptEngine {
+	struct ScriptEngine {
 	public:
 		ScriptEngine();
 

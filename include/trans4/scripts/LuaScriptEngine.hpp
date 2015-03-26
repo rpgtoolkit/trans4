@@ -31,7 +31,7 @@ namespace rpgtoolkit {
 	/// by using the relevant lua calls. The class is also
 	/// responsible for exposing functions and classes to
 	/// Lua.
-	class LuaScriptEngine : public ScriptEngine {
+	struct LuaScriptEngine : public ScriptEngine {
 	public:
 		LuaScriptEngine();
 
