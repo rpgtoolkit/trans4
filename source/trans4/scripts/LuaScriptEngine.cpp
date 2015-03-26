@@ -41,19 +41,25 @@ namespace rpgtoolkit {
 
 		getGlobalNamespace(state_.get())
 			.beginNamespace("tk")
-				.addFunction("isKeyDown", detail::IsKeyDown)
-				.addFunction("changeState", detail::ChangeState)
-				.addFunction("pushState", detail::PushState)
-				.addFunction("popState", detail::PopState)
-				.addFunction("quit", detail::QuitGame)
-				.addFunction("loadTexture", detail::LoadTexture)
-				.addFunction("freeTexture", detail::FreeTexture)
-				.addFunction("drawTexture", detail::DrawTexture)
-				.addFunction("drawClip", detail::DrawClip)
+				.beginNamespace("input")
+					.addFunction("isKeyDown", detail::IsKeyDown)
+				.endNamespace()
+				.beginNamespace("game")
+					.addFunction("changeState", detail::ChangeState)
+					.addFunction("pushState", detail::PushState)
+					.addFunction("popState", detail::PopState)
+					.addFunction("quit", detail::QuitGame)
+				.endNamespace()
+				.beginNamespace("graphics")
+					.addFunction("loadTexture", detail::LoadTexture)
+					.addFunction("freeTexture", detail::FreeTexture)
+					.addFunction("drawTexture", detail::DrawTexture)
+					.addFunction("drawClip", detail::DrawClip)
+				.endNamespace()
 			.endNamespace();
 
 		getGlobalNamespace(state_.get())
-			.beginNamespace("tk")
+			.beginNamespace("tk").beginNamespace("graphics")
 				.beginClass<clio::Texture>("Texture")
 					.addData("width", &clio::Texture::width)
 					.addData("height", &clio::Texture::height)
@@ -66,7 +72,7 @@ namespace rpgtoolkit {
 					.addData("height", &clio::TextureClip::height)
 					.addData("width", &clio::TextureClip::width)
 				.endClass()
-			.endNamespace();
+			.endNamespace().endNamespace();
 	}
 
 }
