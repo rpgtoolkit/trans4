@@ -9,6 +9,7 @@
 #include "assets/files/FileAssetHandleResolver.hpp"
 #include "system/System.hpp"
 #include "system/SystemSettings.hpp"
+#include "window/Window.hpp"
 #include "common/Logger.hpp"
 #include "scripts/ScriptEngine.hpp"
 #include "scripts/LuaScriptEngine.hpp"
@@ -67,6 +68,9 @@ namespace rpgtoolkit {
             }
 
             system_->Initialize(settings);
+
+            system_->GetWindow()->SetTitle(
+                manifest ? manifest->GetTitle() : "RPG Toolkit 4.0");
 
         }
 

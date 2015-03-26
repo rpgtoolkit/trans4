@@ -16,6 +16,8 @@ find_package(CLIO REQUIRED)
 # Files
 
 set(RPGTOOLKIT_TRANS4_HEADERS
+  ${RPGTOOLKIT_HEADERS}/trans4/Version.hpp
+  ${RPGTOOLKIT_HEADERS}/trans4/Engine.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/Asset.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetDescriptor.hpp
   ${RPGTOOLKIT_HEADERS}/trans4/assets/AssetHandle.hpp
