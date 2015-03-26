@@ -6,7 +6,7 @@
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_SERIALIZERS_LEGACYITEMSERIALIZER_INCLUDED
 
-#include "common/Exception.hpp"
+#include "clio/common/Exception.hpp"
 
 #include "io/BinaryReader.hpp"
 #include "assets/AssetSerializer.hpp"

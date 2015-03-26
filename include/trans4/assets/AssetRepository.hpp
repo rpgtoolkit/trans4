@@ -12,7 +12,7 @@
 #include <unordered_map>
 #include <type_traits>
 
-#include "common/Exception.hpp"
+#include "clio/common/Exception.hpp"
 
 #include "assets/AssetDescriptor.hpp"
 #include "assets/AssetHandleResolver.hpp"
