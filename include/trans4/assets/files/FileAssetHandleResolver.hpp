@@ -14,18 +14,10 @@ namespace rpgtoolkit {
     struct FileAssetHandleResolver : public AssetHandleResolver {
 
         bool
-        IsResolvable(AssetDescriptor const & descriptor) {
-            return (descriptor.GetScheme() == "file");
-        }
+        IsResolvable(AssetDescriptor const & descriptor) override;
 
         unique_ptr<AssetHandle>
-        Resolve(AssetDescriptor const & descriptor) {
-            if (IsResolvable(descriptor)) {
-                return unique_ptr<FileAssetHandle>(
-                        new FileAssetHandle(descriptor));
-            }
-            return nullptr;
-        }
+        Resolve(AssetDescriptor const & descriptor) override;
 
     };
 

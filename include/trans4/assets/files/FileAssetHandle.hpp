@@ -23,32 +23,19 @@ namespace rpgtoolkit {
 
     struct FileAssetHandle : public AssetHandle {
 
-        FileAssetHandle(AssetDescriptor const & descriptor)
-                  : AssetHandle(descriptor), path_(descriptor.GetName()) {
-        }
+        FileAssetHandle(AssetDescriptor const & descriptor);
 
         bool
-        Exists() const override {
-            return ifstream(path_).good();
-        }
+        Exists() const override;
 
         uintmax_t
-        GetSize() const override {
-            std::ifstream file(path_, std::ifstream::ate | std::ifstream::binary);
-            return file.tellg();
-        }
+        GetSize() const override;
 
         unique_ptr<istream>
-        GetInputStream() override {
-            return unique_ptr<istream>(
-                    new std::ifstream(path_, std::ifstream::binary));
-        }
+        GetInputStream() override;
 
         unique_ptr<ostream>
-        GetOutputStream() override {
-            return unique_ptr<ostream>(
-                    new std::ofstream(path_, std::ifstream::binary));
-        }
+        GetOutputStream() override;
 
     private:
 

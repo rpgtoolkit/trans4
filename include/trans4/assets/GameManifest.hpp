@@ -47,119 +47,73 @@ namespace rpgtoolkit {
     struct GameManifest : public Asset {
 
         string const &
-        GetPath() const {
-            return path_;
-        }
+        GetPath() const;
 
         void
-        SetPath(string const & value) {
-            path_ = value;
-        }
+        SetPath(string const & value);
 
         string const &
-        GetTitle() const {
-            return title_;
-        }
+        GetTitle() const;
 
         void
-        SetTitle(string const & value) {
-            title_ = value;
-        }
+        SetTitle(string const & value);
 
         AssetDescriptor const &
-        GetInitialProgram() const {
-            return initialProgram_;
-        }
+        GetInitialProgram() const;
 
         void
-        SetInitialProgram(AssetDescriptor const & value) {
-            initialProgram_ = value;
-        }
+        SetInitialProgram(AssetDescriptor const & value);
 
         AssetDescriptor const &
-        GetInitialBoard() const {
-            return initialBoard_;
-        }
+        GetInitialBoard() const;
 
         void
-        SetInitialBoard(AssetDescriptor const & value) {
-            initialBoard_ = value;
-        }
+        SetInitialBoard(AssetDescriptor const & value);
 
         AssetDescriptor const &
-        GetInitialCharacter() const {
-            return initialCharacter_;
-        }
+        GetInitialCharacter() const;
 
         void
-        SetInitialCharacter(AssetDescriptor const & value) {
-            initialCharacter_ = value;
-        }
+        SetInitialCharacter(AssetDescriptor const & value);
 
         MovementType
-        GetMovementType() const {
-            return movementType_;
-        }
+        GetMovementType() const;
 
         void
-        SetMovementType(MovementType type) {
-            movementType_ = type;
-        }
+        SetMovementType(MovementType type);
 
         MovementControlFlags
-        GetMovementControlFlags() const {
-            return movementControlFlags_;
-        }
+        GetMovementControlFlags() const;
 
         void
-        SetMovementControlFlags(MovementControlFlags value) {
-            movementControlFlags_ = value;
-        }
+        SetMovementControlFlags(MovementControlFlags value);
 
         unsigned
-        GetResolutionWidth() const {
-            return resolutionWidth_;
-        }
+        GetResolutionWidth() const;
 
         void
-        SetResolutionWidth(unsigned value) {
-            resolutionWidth_ = value;
-        }
+        SetResolutionWidth(unsigned value);
 
         unsigned
-        GetResolutionHeight() const {
-            return resolutionHeight_;
-        }
+        GetResolutionHeight() const;
 
         void
-        SetResolutionHeight(unsigned value) {
-            resolutionHeight_ = value;
-        }
+        SetResolutionHeight(unsigned value);
 
         unsigned
-        GetGameSpeed() const {
-            return speed_;
-        }
+        GetGameSpeed() const;
 
         void
-        SetGameSpeed(unsigned value) {
-            speed_ = value;
-        }
+        SetGameSpeed(unsigned value);
 
         DisplayMode
-        GetDisplayMode() const {
-            return displayMode_;
-        }
+        GetDisplayMode() const;
 
         void
-        SetDisplayMode(DisplayMode value) {
-            displayMode_ = value;
-        }
+        SetDisplayMode(DisplayMode value);
 
         vector<string> &
-        GetPlugins() {
-            return plugins_;
-        }
+        GetPlugins();
 
     private:
 

@@ -26,24 +26,19 @@ namespace rpgtoolkit {
 
     struct AssetHandle {
 
-        AssetHandle(AssetDescriptor const & descriptor)
-                : descriptor_(descriptor) { }
+        AssetHandle(AssetDescriptor const & descriptor);
 
         /// Returns descriptor associated with the asset handle
 
         AssetDescriptor const &
-        GetDescriptor() const {
-            return descriptor_;
-        }
+        GetDescriptor() const;
 
         /// Returns asset content associated with the handle.
         ///
         /// This method may return null.
 
         Asset *
-        GetAsset() const {
-            return asset_.get();
-        }
+        GetAsset() const;
 
         /// Sets the asset content associated with the handle.
         ///
@@ -52,9 +47,7 @@ namespace rpgtoolkit {
         /// \param asset asset content
 
         void
-        SetAsset(unique_ptr<Asset> asset) {
-            asset_ = std::move(asset);
-        }
+        SetAsset(unique_ptr<Asset> asset);
 
         /// Determines if the asset content exists for the serialization
         /// method represented by the handle (e.g. file, network stream).

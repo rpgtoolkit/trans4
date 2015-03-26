@@ -1,7 +1,19 @@
+/// \copyright
+///
+/// See LICENSE.md in the distribution for the full license text including,
+/// but not limited to, a notice of warranty and distribution rights.
+
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_TILESET_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_TILESET_INCLUDED
 
+#include <cstdint>
+#include <memory>
+
+#include "assets/Asset.hpp"
+
 namespace rpgtoolkit {
+
+    using std::unique_ptr;
 
     enum class TilesetPerspective {
 
@@ -13,25 +25,16 @@ namespace rpgtoolkit {
     struct Tileset : public Asset {
 
 
-        Tileset (size_t dimension, size_t count)
-            : dimension_(dimension), count_(count),
-              buffer_(new uint32_t[dimension * dimension * count]) {
-        }
+        Tileset (size_t dimension, size_t count);
 
         size_t
-        GetCount() const {
-            return count_;
-        }
+        GetCount() const;
 
         size_t
-        GetTileDimensions() const {
-            return dimension_;
-        }
+        GetTileDimensions() const;
 
         uint32_t *
-        GetImageBuffer() {
-            return buffer_.get();
-        }
+        GetImageBuffer();
 
     private:
 

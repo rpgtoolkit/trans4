@@ -1,3 +1,8 @@
+/// \copyright
+///
+/// See LICENSE.md in the distribution for the full license text including,
+/// but not limited to, a notice of warranty and distribution rights.
+
 #ifndef RPGTOOLKIT_TRANS4_ASSETS_ITEM_INCLUDED
 #define RPGTOOLKIT_TRANS4_ASSETS_ITEM_INCLUDED
 
@@ -12,24 +17,16 @@ namespace rpgtoolkit {
     struct Item : public Asset {
 
         string const &
-        GetName() const {
-            return name_;
-        }
+        GetName() const;
 
         void
-        SetName(string const & value) {
-            name_ = value;
-        }
+        SetName(string const & value);
 
         string const &
-        GetDescription() const {
-            return description_;
-        }
+        GetDescription() const;
 
         void
-        SetDescription(string const & value) {
-            description_ = value;
-        }
+        SetDescription(string const & value);
 
     private:
 

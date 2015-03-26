@@ -42,7 +42,18 @@ set(RPGTOOLKIT_TRANS4_HEADERS
 
 set(RPGTOOLKIT_TRANS4_SOURCES
   ${RPGTOOLKIT_SOURCES}/trans4/trans4.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/AssetHandle.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/AssetRepository.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/GameManifest.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/Item.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/Tileset.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/files/FileAssetHandle.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/files/FileAssetHandleResolver.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/serializers/LegacyGameManifestSerializer.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/serializers/LegacyItemSerializer.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/assets/serializers/LegacyTilesetSerializer.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/game/Game.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/io/BinaryReader.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/scripts/LuaGameState.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/scripts/LuaScriptEngine.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/scripts/ScriptEngine.cpp
