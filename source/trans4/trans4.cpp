@@ -5,11 +5,9 @@
 
 #include "Engine.hpp"
 
-using rpgtoolkit::Engine;
-
 int main(int argc, char* argv[]) {
 
-	auto & engine = Engine::GetInstance();
+	auto & engine = rpgtoolkit::Engine::GetInstance();
 
 	engine.Configure();
 	engine.Run();
