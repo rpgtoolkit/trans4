@@ -53,6 +53,7 @@ namespace rpgtoolkit {
 
         auto asset = unique_ptr<Tileset>(new Tileset(dimension, count));
         auto length = dimension * dimension * depth;
+		auto image = asset->GetImageBuffer();
 
         auto buffer = unique_ptr<char[]>(new char[length]);
 
@@ -76,6 +77,11 @@ namespace rpgtoolkit {
                     }
 
                     // TODO: Copy pixel data to tileset image buffer
+
+					auto dst = ((x + i * dimension) * dimension + y);
+
+					image[dst] =
+						(alpha << 24) | (r << 16) | (g << 8) || b;
 
                 }
             }
