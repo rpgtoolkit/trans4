@@ -7,6 +7,8 @@
 #include "LuaBridge.h"
 
 #include "clio/graphics/Texture.hpp"
+
+#include "scripts/Canvas.hpp"
 #include "scripts/LuaScriptEngine.hpp"
 #include "scripts/ScriptInterface.hpp"
 
@@ -60,6 +62,7 @@ namespace rpgtoolkit {
 					.addFunction("drawLine", detail::DrawLine)
 					.addFunction("drawRect", detail::DrawRect)
 					.addFunction("fillRect", detail::FillRect)
+					.addFunction("createCanvas", detail::CreateCanvas)
 				.endNamespace()
 			.endNamespace();
 
@@ -68,6 +71,15 @@ namespace rpgtoolkit {
 				.beginClass<clio::Texture>("Texture")
 					.addFunction("width", &clio::Texture::GetWidth)
 					.addFunction("height", &clio::Texture::GetHeight)
+				.endClass()
+				.beginClass<rpgtoolkit::Canvas>("Canvas")
+					.addFunction("drawTexture", &rpgtoolkit::Canvas::DrawTexture)
+					.addFunction("drawClip", &rpgtoolkit::Canvas::DrawTextureClip)
+					.addFunction("drawPixel", &rpgtoolkit::Canvas::DrawPixel)
+					.addFunction("drawLine", &rpgtoolkit::Canvas::DrawLine)
+					.addFunction("drawRect", &rpgtoolkit::Canvas::DrawRect)
+					.addFunction("fillRect", &rpgtoolkit::Canvas::FillRect)
+					.addFunction("render", &rpgtoolkit::Canvas::Render)
 				.endClass()
 			.endNamespace().endNamespace();
 	}

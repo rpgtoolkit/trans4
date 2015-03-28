@@ -88,7 +88,6 @@ namespace rpgtoolkit {
         }
 
 		return sys->GetTextureLoader()->LoadTexture(texture_file);
-
     }
 
     void detail::FreeTexture(clio::Texture *texture) {
@@ -122,5 +121,9 @@ namespace rpgtoolkit {
 
 	void detail::FillRect(int x, int y, int width, int height) {
 		sys->GetRenderer()->FillRect(x, y, width, height);
+	}
+
+	rpgtoolkit::Canvas detail::CreateCanvas(size_t width, size_t height) {
+		return Canvas(sys->GetRenderer(), width, height);
 	}
 }

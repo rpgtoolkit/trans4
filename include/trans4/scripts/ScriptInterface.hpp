@@ -10,6 +10,8 @@
 
 #include "clio/system/System.hpp"
 
+#include "scripts/Canvas.hpp"
+
 struct lua_State;
 
 namespace clio {
@@ -39,6 +41,9 @@ namespace rpgtoolkit {
 
 		void QuitGame();
 
+		/// Loads a texture using the engine. We return a pointer to
+		/// Lua, indicating a C++ lifetime. That is, we control when
+		/// the texture is deleted.
 		clio::Texture* LoadTexture(std::string texture_file);
 
 		void FreeTexture(clio::Texture* texture);
@@ -56,6 +61,11 @@ namespace rpgtoolkit {
 		void DrawRect(int x, int y, int width, int height);
 
 		void FillRect(int x, int y, int width, int height);
+
+		/// Creates a canvas for Lua. We return the canvas by value,
+		/// so it has a Lua lifetime. Lua will garbage collect it and
+		/// run its destructor.
+		rpgtoolkit::Canvas CreateCanvas(size_t width, size_t height);
 	}
 }
 
