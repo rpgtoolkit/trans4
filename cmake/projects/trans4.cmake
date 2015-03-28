@@ -42,6 +42,8 @@ set(RPGTOOLKIT_TRANS4_HEADERS
 
 set(RPGTOOLKIT_TRANS4_SOURCES
   ${RPGTOOLKIT_SOURCES}/trans4/trans4.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/Engine.cpp
+  ${RPGTOOLKIT_SOURCES}/trans4/Version.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/assets/AssetHandle.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/assets/AssetRepository.cpp
   ${RPGTOOLKIT_SOURCES}/trans4/assets/GameManifest.cpp

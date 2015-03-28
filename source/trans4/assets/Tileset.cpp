@@ -11,7 +11,7 @@ namespace rpgtoolkit {
 
     Tileset::Tileset(size_t dimension, size_t count)
         : dimension_(dimension), count_(count),
-          buffer_(new uint32_t[dimension * dimension * count]) {
+          buffer_(new char[dimension * dimension * count * 4]) {
     }
 
     size_t
@@ -24,7 +24,7 @@ namespace rpgtoolkit {
         return dimension_;
     }
 
-    uint32_t *
+    char *
     Tileset::GetImageBuffer() {
         return buffer_.get();
     }

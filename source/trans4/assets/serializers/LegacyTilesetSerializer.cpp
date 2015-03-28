@@ -40,6 +40,8 @@ namespace rpgtoolkit {
         auto dimension = 32;
         auto depth = 3;
 
+        // TODO: Detect and decode isometric tilesets
+
         switch (detail) {
             case 1: // 32x32 @ 24 bpp
                 dimension = 32;
@@ -53,34 +55,40 @@ namespace rpgtoolkit {
 
         auto asset = unique_ptr<Tileset>(new Tileset(dimension, count));
         auto length = dimension * dimension * depth;
+		auto image = asset->GetImageBuffer();
+        auto pitch = dimension * count;
 
         auto buffer = unique_ptr<char[]>(new char[length]);
 
-        for (int i = 0; i < count; ++i) {
+        for (int i = 0; i < count; i++) {
 
-            stream->read(buffer.get(), length * sizeof(char));
+            stream->read(buffer.get(), length);
 
             for (int y = 0; y < dimension; ++y) {
                 for (int x = 0; x < dimension; ++x) {
 
-                    auto index = (x * dimension) + y;
-                    auto src = depth * index;
+                    auto src = (x * dimension + y) * depth;
+                    auto dst = (y * pitch + x + (dimension * i)) * 4;
 
-                    uint8_t r = buffer[src + 0];
-                    uint8_t g = buffer[src + 1];
-                    uint8_t b = buffer[src + 2];
-                    uint8_t alpha = 255;
+                    auto r = buffer[src + 0];
+                    auto g = buffer[src + 1];
+                    auto b = buffer[src + 2];
+                    auto a = 255;
 
                     if (r == 0 && g == 1 && b == 2) {
-                        alpha = 0;
+                        a = 0;
                     }
 
-                    // TODO: Copy pixel data to tileset image buffer
+                    image[dst + 3] = a;
+                    image[dst + 2] = r;
+                    image[dst + 1] = g;
+                    image[dst + 0] = b;
 
                 }
             }
 
         }
+
 
         handle.SetAsset(std::move(asset));
 

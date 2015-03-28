@@ -6,67 +6,97 @@
 #include <string>
 #include <memory>
 
-#include "scripts/ScriptInterface.hpp"
-#include "scripts/LuaGameState.hpp"
-#include "game/Game.hpp"
-#include "clio/game/GameState.hpp"
 #include "clio/game/GameStateStack.hpp"
 #include "clio/graphics/Renderer2D.hpp"
 #include "clio/graphics/Texture.hpp"
-#include "clio/system/System.hpp"
 #include "clio/input/Input.hpp"
 #include "clio/input/Keyboard.hpp"
 #include "clio/input/Key.hpp"
 
+#include "Engine.hpp"
+#include "scripts/ScriptInterface.hpp"
+#include "scripts/LuaGameState.hpp"
+
 namespace rpgtoolkit {
 
-	static lua_State* L;
-	static clio::System* sys;
-	static Game* game;
+    static lua_State *L;
 
-	void detail::SetLuaInstance(lua_State * const lua) {
-		L = lua;
-	}
+    static clio::System *sys;
 
-	void detail::SetSystemInstance(clio::System * const system) {
-		sys = system;
-	}
+    static Game *game;
 
-	void detail::SetGameInstance(Game * const g) {
-		game = g;
-	}
+    void detail::SetLuaInstance(lua_State *const lua) {
+        L = lua;
+    }
 
-	bool detail::IsKeyDown(std::string key) {
-		return sys->GetInput()->GetKeyboard()->IsKeyDown(clio::StringToKey(key));
-	}
+    void detail::SetSystemInstance(clio::System *const system) {
+        sys = system;
+    }
 
-	void detail::ChangeState(std::string state) {
-		game->GetStateStack()->ChangeState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
-	}
+    void detail::SetGameInstance(Game *const g) {
+        game = g;
+    }
 
-	void detail::PushState(std::string state) {
-		game->GetStateStack()->PushState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
-	}
+    bool detail::IsKeyDown(std::string key) {
+        return sys->GetInput()->GetKeyboard()->IsKeyDown(clio::StringToKey(key));
+    }
 
-	void detail::PopState() {
-		game->GetStateStack()->PopState();
-	}
+    void detail::ChangeState(std::string state) {
+        game->GetStateStack()->ChangeState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
+    }
 
-	void detail::QuitGame() {
-		game->GetStateStack()->ClearAllStates();
-	}
+    void detail::PushState(std::string state) {
+        game->GetStateStack()->PushState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
+    }
 
-	clio::Texture* detail::LoadTexture(std::string texture_file) {
-		return sys->GetRenderer()->LoadTexture(texture_file);
-	}
+    void detail::PopState() {
+        game->GetStateStack()->PopState();
+    }
 
-	void detail::FreeTexture(clio::Texture* texture) {
-		return sys->GetRenderer()->FreeTexture(texture);
-	}
+    void detail::QuitGame() {
+        game->GetStateStack()->ClearAllStates();
+    }
 
-	void detail::DrawTexture(clio::Texture* texture, int x, int y) {
-		sys->GetRenderer()->DrawTexture(texture, x, y);
-	}
+    clio::Texture *detail::LoadTexture(std::string texture_file) {
+
+        AssetDescriptor descriptor(0x00, "file://" + texture_file);
+
+        /// If the asset is a legacy tileset then intervene and load
+        /// a tileset asset, create a texture, and upload the tileset
+        /// image data to the texture...
+
+        if (descriptor.GetExtension() == "tst") {
+
+            auto & assets = Engine::GetInstance().GetAssets();
+            auto tileset = assets.Load<Tileset>(descriptor.GetURI());
+
+            // TODO: Determine optimal POT texture size and fill the
+            // texture with tiles.
+
+            if (tileset) {
+                auto texture =
+                    sys->GetRenderer()->CreateTexture(descriptor.GetURI(),
+                        tileset->GetTileDimensions() * tileset->GetCount(),
+                        tileset->GetTileDimensions());
+                if (texture) {
+                    texture->Update(tileset->GetImageBuffer());
+                }
+                return texture;
+            }
+
+        }
+
+        return sys->GetRenderer()->LoadTexture(texture_file);
+
+    }
+
+    void detail::FreeTexture(clio::Texture *texture) {
+        return sys->GetRenderer()->FreeTexture(texture);
+    }
+
+    void detail::DrawTexture(clio::Texture *texture, int x, int y) {
+        sys->GetRenderer()->DrawTexture(texture, x, y);
+    }
 
 	void detail::DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height) {
 		clio::TextureClip clip(tex, source_x, source_y, width, height);
