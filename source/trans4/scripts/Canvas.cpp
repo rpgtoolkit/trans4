@@ -16,9 +16,10 @@ namespace rpgtoolkit {
 		texture_(renderer_->CreateTarget(obj.texture_->GetWidth(), obj.texture_->GetHeight())) {
 	}
 
-	Canvas & Canvas::operator=(Canvas const& rhs) {
-		Canvas temp(rhs);
-		std::swap(*this, temp);
+	Canvas & Canvas::operator=(Canvas & rhs) {
+		using std::swap;
+		swap(this->renderer_, rhs.renderer_);
+		swap(this->texture_, rhs.texture_);
 
 		return *this;
 	}

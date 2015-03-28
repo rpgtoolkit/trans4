@@ -38,7 +38,7 @@ namespace rpgtoolkit {
 
 		Canvas(Canvas const&);
 
-		Canvas & operator=(Canvas const&);
+		Canvas & operator=(Canvas &);
 	private:		
 		clio::Renderer2D* renderer_;
 
