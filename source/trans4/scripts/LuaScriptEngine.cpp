@@ -55,6 +55,11 @@ namespace rpgtoolkit {
 					.addFunction("freeTexture", detail::FreeTexture)
 					.addFunction("drawTexture", detail::DrawTexture)
 					.addFunction("drawClip", detail::DrawClip)
+					.addFunction("setColor", detail::SetColor)
+					.addFunction("drawPixel", detail::DrawPixel)
+					.addFunction("drawLine", detail::DrawLine)
+					.addFunction("drawRect", detail::DrawRect)
+					.addFunction("fillRect", detail::FillRect)
 				.endNamespace()
 			.endNamespace();
 
@@ -63,14 +68,6 @@ namespace rpgtoolkit {
 				.beginClass<clio::Texture>("Texture")
 					.addFunction("width", &clio::Texture::GetWidth)
 					.addFunction("height", &clio::Texture::GetHeight)
-				.endClass()
-				.beginClass<clio::TextureClip>("TextureClip")
-					.addConstructor <void(*) (clio::Texture*, int32_t, int32_t, int32_t, int32_t)>()
-					.addData("texture", &clio::TextureClip::texture)
-					.addData("x", &clio::TextureClip::x)
-					.addData("y", &clio::TextureClip::y)
-					.addData("height", &clio::TextureClip::height)
-					.addData("width", &clio::TextureClip::width)
 				.endClass()
 			.endNamespace().endNamespace();
 	}

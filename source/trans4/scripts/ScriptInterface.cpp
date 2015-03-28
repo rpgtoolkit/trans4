@@ -103,4 +103,24 @@ namespace rpgtoolkit {
 		clio::TextureClip clip(tex, source_x, source_y, width, height);
 		sys->GetRenderer()->DrawTextureClip(&clip, x, y);
 	}
+
+	void detail::SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
+		sys->GetRenderer()->SetColor(red, green, blue, alpha);
+	}
+
+	void detail::DrawPixel(int x, int y) {
+		sys->GetRenderer()->DrawPixel(x, y);
+	}
+
+	void detail::DrawLine(int x1, int y1, int x2, int y2) {
+		sys->GetRenderer()->DrawLine(x1, y1, x2, y2);
+	}
+
+	void detail::DrawRect(int x, int y, int width, int height) {
+		sys->GetRenderer()->DrawRect(x, y, width, height);
+	}
+
+	void detail::FillRect(int x, int y, int width, int height) {
+		sys->GetRenderer()->FillRect(x, y, width, height);
+	}
 }
