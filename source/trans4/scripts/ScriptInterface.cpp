@@ -68,7 +68,8 @@ namespace rpgtoolkit {
 		sys->GetRenderer()->DrawTexture(texture, x, y);
 	}
 
-	void detail::DrawClip(clio::TextureClip* clip, int x, int y) {
-		sys->GetRenderer()->DrawTextureClip(clip, x, y);
+	void detail::DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height) {
+		clio::TextureClip clip(tex, source_x, source_y, width, height);
+		sys->GetRenderer()->DrawTextureClip(&clip, x, y);
 	}
 }
