@@ -7,13 +7,15 @@
 #define RPGTOOLKIT_TRANS4_SCRIPTS_LUAGAMESTATE_INCLUDED
 
 #include <string>
+#include <vector>
 
-#include <lua.hpp>
-#include <LuaBridge.h>
+#include "lua.hpp"
+#include "LuaBridge.h"
 
 #include "clio/game/GameState.hpp"
 
 namespace rpgtoolkit {
+	struct LuaCommand;
 
 	/// \brief A GameState implementation that calls on Lua scripts.
 	///
@@ -42,6 +44,8 @@ namespace rpgtoolkit {
 
 	private:
 		luabridge::LuaRef luaTable_;
+
+		std::vector<LuaCommand*> commands_;
 		
 		void Quit();
 

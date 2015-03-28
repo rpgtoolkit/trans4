@@ -11,6 +11,7 @@ namespace rpgtoolkit {
 
 		~LuaCommand();
 
+		/// \brief Execute the lua function
 		void Execute();
 	private:
 		std::string function_;
