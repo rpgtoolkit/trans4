@@ -9,6 +9,7 @@
 #include "clio/game/GameStateStack.hpp"
 #include "clio/graphics/Renderer2D.hpp"
 #include "clio/graphics/Texture.hpp"
+#include "clio/graphics/TextureLoader.hpp"
 #include "clio/input/Input.hpp"
 #include "clio/input/Keyboard.hpp"
 #include "clio/input/Key.hpp"
@@ -75,7 +76,7 @@ namespace rpgtoolkit {
 
             if (tileset) {
                 auto texture =
-                    sys->GetRenderer()->CreateTexture(descriptor.GetURI(),
+                    sys->GetTextureLoader()->CreateTexture(descriptor.GetURI(),
                         tileset->GetTileDimensions() * tileset->GetCount(),
                         tileset->GetTileDimensions());
                 if (texture) {
@@ -86,12 +87,12 @@ namespace rpgtoolkit {
 
         }
 
-        return sys->GetRenderer()->LoadTexture(texture_file);
+		return sys->GetTextureLoader()->LoadTexture(texture_file);
 
     }
 
     void detail::FreeTexture(clio::Texture *texture) {
-        return sys->GetRenderer()->FreeTexture(texture);
+		return sys->GetTextureLoader()->FreeTexture(texture);
     }
 
     void detail::DrawTexture(clio::Texture *texture, int x, int y) {
