@@ -23,8 +23,8 @@ namespace rpgtoolkit {
 		return *this;
 	}
 
-	void Canvas::Render() {
-		renderer_->DrawTexture(texture_.get(), 0, 0);
+	void Canvas::Render(int x, int y) {
+		renderer_->DrawTexture(texture_.get(), x, y);
 	}
 
 	void Canvas::DrawTexture(clio::Texture *texture, int x, int y, int w, int h) {
@@ -33,9 +33,10 @@ namespace rpgtoolkit {
 		renderer_->SetTarget(nullptr);
 	}
 
-	void Canvas::DrawTextureClip(clio::TextureClip *clip, int x, int y, int w, int h) { 
+	void Canvas::DrawTextureClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height) {
 		renderer_->SetTarget(texture_.get());
-		renderer_->DrawTextureClip(clip, x, y, w, h);
+		clio::TextureClip clip(tex, source_x, source_y, width, height);
+		renderer_->DrawTextureClip(&clip, x, y, width, height);
 		renderer_->SetTarget(nullptr);
 	}
 

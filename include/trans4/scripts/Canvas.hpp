@@ -22,11 +22,11 @@ namespace rpgtoolkit {
 
 		~Canvas();
 
-		void Render();
+		void Render(int x, int y);
 
 		void DrawTexture(clio::Texture *texture, int x, int y, int w = 0, int h = 0);
 
-		void DrawTextureClip(clio::TextureClip *texture, int x, int y, int w = 0, int h = 0);
+		void DrawTextureClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height);
 
 		void DrawPixel(int x, int y);
 
