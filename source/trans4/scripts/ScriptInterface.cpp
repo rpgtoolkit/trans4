@@ -94,8 +94,8 @@ namespace rpgtoolkit {
 		return sys->GetTextureLoader()->FreeTexture(texture);
     }
 
-    void detail::DrawTexture(clio::Texture *texture, int x, int y) {
-        sys->GetRenderer()->DrawTexture(texture, x, y);
+	void detail::DrawTexture(clio::Texture *texture, int x, int y, int w, int h) {
+        sys->GetRenderer()->DrawTexture(texture, x, y, w, h);
     }
 
 	void detail::DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height) {

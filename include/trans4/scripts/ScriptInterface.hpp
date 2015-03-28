@@ -48,7 +48,7 @@ namespace rpgtoolkit {
 
 		void FreeTexture(clio::Texture* texture);
 
-		void DrawTexture(clio::Texture* texture, int x, int y);
+		void DrawTexture(clio::Texture* texture, int x, int y, int w, int h);
 
 		void DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height);
 
