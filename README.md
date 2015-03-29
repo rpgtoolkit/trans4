@@ -2,6 +2,8 @@
 
 Unofficial development of the RPG Toolkit Development System 4.x (rpgtoolkit.net).
 
+[![Build status](https://ci.appveyor.com/api/projects/status/hkvmpmrpcily4hws?svg=true)](https://ci.appveyor.com/project/chutchinson/rpgtk4)
+
 # License
 
 Mozilla Public License 2.0
