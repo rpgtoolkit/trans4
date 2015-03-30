@@ -7,6 +7,8 @@
 #include "LuaBridge.h"
 
 #include "clio/graphics/Texture.hpp"
+
+#include "scripts/Canvas.hpp"
 #include "scripts/LuaScriptEngine.hpp"
 #include "scripts/ScriptInterface.hpp"
 
@@ -55,22 +57,29 @@ namespace rpgtoolkit {
 					.addFunction("freeTexture", detail::FreeTexture)
 					.addFunction("drawTexture", detail::DrawTexture)
 					.addFunction("drawClip", detail::DrawClip)
+					.addFunction("setColor", detail::SetColor)
+					.addFunction("drawPixel", detail::DrawPixel)
+					.addFunction("drawLine", detail::DrawLine)
+					.addFunction("drawRect", detail::DrawRect)
+					.addFunction("fillRect", detail::FillRect)
+					.addFunction("createCanvas", detail::CreateCanvas)
 				.endNamespace()
 			.endNamespace();
 
 		getGlobalNamespace(state_.get())
 			.beginNamespace("tk").beginNamespace("graphics")
 				.beginClass<clio::Texture>("Texture")
-					.addData("width", &clio::Texture::width)
-					.addData("height", &clio::Texture::height)
+					.addFunction("width", &clio::Texture::GetWidth)
+					.addFunction("height", &clio::Texture::GetHeight)
 				.endClass()
-				.beginClass<clio::TextureClip>("TextureClip")
-					.addConstructor <void(*) (clio::Texture*, int32_t, int32_t, int32_t, int32_t)>()
-					.addData("texture", &clio::TextureClip::texture)
-					.addData("x", &clio::TextureClip::x)
-					.addData("y", &clio::TextureClip::y)
-					.addData("height", &clio::TextureClip::height)
-					.addData("width", &clio::TextureClip::width)
+				.beginClass<rpgtoolkit::Canvas>("Canvas")
+					.addFunction("drawTexture", &rpgtoolkit::Canvas::DrawTexture)
+					.addFunction("drawClip", &rpgtoolkit::Canvas::DrawTextureClip)
+					.addFunction("drawPixel", &rpgtoolkit::Canvas::DrawPixel)
+					.addFunction("drawLine", &rpgtoolkit::Canvas::DrawLine)
+					.addFunction("drawRect", &rpgtoolkit::Canvas::DrawRect)
+					.addFunction("fillRect", &rpgtoolkit::Canvas::FillRect)
+					.addFunction("render", &rpgtoolkit::Canvas::Render)
 				.endClass()
 			.endNamespace().endNamespace();
 	}

@@ -1,21 +1,25 @@
+/// \copyright
+///
+/// See LICENSE.md in the distribution for the full license text including,
+/// but not limited to, a notice of warranty and distribution rights.
+
 #ifndef RPGTOOLKIT_TRANS4_VERSION_INCLUDED
 #define RPGTOOLKIT_TRANS4_VERSION_INCLUDED
 
 #include <string>
 #include <ostream>
-#include <sstream>
 
 namespace rpgtoolkit {
 
-    const int RPGTOOLKIT_VERSION_MAJOR = 4;
+    static const int RPGTOOLKIT_VERSION_MAJOR = 4;
 
-    const int RPGTOOLKIT_VERSION_MINOR = 0;
+    static const int RPGTOOLKIT_VERSION_MINOR = 0;
 
-    const int RPGTOOLKIT_VERSION_PATCH = 0;
+    static const int RPGTOOLKIT_VERSION_PATCH = 0;
 
-    const char * RPGTOOLKIT_VERSION_RELEASE = "alpha";
+    static const char RPGTOOLKIT_VERSION_RELEASE[] = "alpha";
 
-    const char * RPGTOOLKIT_VERSION_METADATA = "";
+    static const char RPGTOOLKIT_VERSION_METADATA[] = "";
 
     using std::string;
     using std::stringstream;
@@ -25,55 +29,27 @@ namespace rpgtoolkit {
     struct Version {
 
         Version(short major, short minor, short patch,
-            string const & release, string const & metadata)
-            : major_(major), minor_(minor), patch_(patch),
-              release_(release), metadata_(metadata) {
-        }
+            string const & release, string const & metadata);
 
-        Version(short major, short minor, short patch)
-            : major_(major), minor_(minor), patch_(patch) {
-        }
+        Version(short major, short minor, short patch);
 
         short
-        GetMajor() const {
-            return major_;
-        }
+        GetMajor() const;
 
         short
-        GetMinor() const {
-            return minor_;
-        }
+        GetMinor() const;
 
         short
-        GetPatch() const {
-            return patch_;
-        }
+        GetPatch() const;
 
         string const &
-        GetRelease() const {
-            return release_;
-        }
+        GetRelease() const;
 
         string const &
-        GetBuildMetadata() const {
-            return metadata_;
-        }
+        GetBuildMetadata() const;
 
         string const
-        ToString() const {
-            stringstream buffer;
-            buffer << major_ << ".";
-            buffer << minor_ << ".";
-            buffer << patch_;
-            if (!release_.empty()) {
-                buffer << "-" << release_;
-            }
-            if (!metadata_.empty()) {
-                buffer << "+" << metadata_;
-            }
-            return buffer.str();
-        }
-
+        ToString() const;
 
     private:
 

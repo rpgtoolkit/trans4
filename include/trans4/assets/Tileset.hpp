@@ -24,7 +24,6 @@ namespace rpgtoolkit {
 
     struct Tileset : public Asset {
 
-
         Tileset (size_t dimension, size_t count);
 
         size_t
@@ -33,7 +32,7 @@ namespace rpgtoolkit {
         size_t
         GetTileDimensions() const;
 
-        uint32_t *
+        char *
         GetImageBuffer();
 
     private:
@@ -41,7 +40,7 @@ namespace rpgtoolkit {
         size_t dimension_;
         size_t count_;
 
-        unique_ptr<uint32_t[]> buffer_;
+        unique_ptr<char[]> buffer_;
 
     };
 

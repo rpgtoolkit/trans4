@@ -1,3 +1,8 @@
+/// \copyright
+///
+/// See LICENSE.md in the distribution for the full license text including,
+/// but not limited to, a notice of warranty and distribution rights.
+
 #ifndef RPGTOOLKIT_TRANS4_ENGINE_INCLUDED
 #define RPGTOOLKIT_TRANS4_ENGINE_INCLUDED
 
@@ -7,6 +12,8 @@
 #include "clio/system/SystemSettings.hpp"
 #include "clio/window/Window.hpp"
 #include "clio/common/Logger.hpp"
+#include "clio/graphics/Texture.hpp"
+#include "clio/graphics/Renderer2D.hpp"
 
 #include "Version.hpp"
 #include "game/Game.hpp"
@@ -24,110 +31,28 @@ namespace rpgtoolkit {
 
     struct Engine {
 
-        const char * DEFAULT_LOG_FILENAME = "trans4.log";
-        const char * DEFAULT_SCRIPT_FILENAME = "main.lua";
-
-        static Engine & GetInstance() {
-
-            static Engine instance;
-            return instance;
-
-        }
+        static Engine & GetInstance();
 
         void
-        Configure() {
-
-            clio::SystemSettings settings;
-
-            // Configure default system settings
-
-            settings.window.x = settings.window.POSITION_CENTERED;
-            settings.window.y = settings.window.POSITION_CENTERED;
-            settings.window.width = 640;
-            settings.window.height = 480;
-            settings.window.init_flags = 0;
-
-            // Look for a game manifest in the current working directory
-            // and load settings from this file.
-
-            auto manifest = assets_.Load<GameManifest>("file://main.gam");
-
-            if (manifest) {
-
-                settings.window.width = manifest->GetResolutionWidth();
-                settings.window.height = manifest->GetResolutionHeight();
-
-                switch (manifest->GetDisplayMode()) {
-                    case DisplayMode::FULLSCREEN:
-                        settings.window.init_flags |= settings.window.FULLSCREEN;
-                        break;
-                    case DisplayMode::BORDERLESS:
-                        settings.window.init_flags |= settings.window.BORDERLESS;
-                        break;
-                    default:
-                        break;
-                }
-
-            }
-
-            system_->Initialize(settings);
-
-            system_->GetWindow()->SetTitle(
-                manifest ? manifest->GetTitle() : "RPG Toolkit 4.0");
-
-        }
+        Configure();
 
         void
-        Run() {
-
-            LOG(&log_, "RPG Toolkit %s", GetVersion().ToString().c_str());
-
-            scripting_.Run(DEFAULT_SCRIPT_FILENAME);
-            game_.Run();
-
-        }
+        Run();
 
         ScriptEngine &
-        GetScriptEngine() {
-
-            return scripting_;
-
-        }
+        GetScriptEngine();
 
         AssetRepository &
-        GetAssets() {
-
-            return assets_;
-
-        }
+        GetAssets();
 
         clio::Logger
-        GetLog() {
-
-            return log_;
-
-        }
+        GetLog();
 
         Game &
-        GetGame() {
-
-            return game_;
-
-        }
+        GetGame();
 
         Version const &
-        GetVersion() const {
-
-            static Version v(
-                RPGTOOLKIT_VERSION_MAJOR,
-                RPGTOOLKIT_VERSION_MINOR,
-                RPGTOOLKIT_VERSION_PATCH,
-                RPGTOOLKIT_VERSION_RELEASE,
-                RPGTOOLKIT_VERSION_METADATA);
-
-            return v;
-
-        }
+        GetVersion() const;
 
     private:
 
@@ -143,22 +68,7 @@ namespace rpgtoolkit {
 
         Engine(Engine const & rhs) = delete;
 
-        Engine()
-            : system_(new clio::System()),
-              log_(DEFAULT_LOG_FILENAME),
-              game_(system_.get()) {
-
-            // Initialize the scripting runtime
-
-            scripting_.Initialize(&game_, system_.get());
-
-            // Initialize supported repository resolvers and serializers
-
-            assets_.RegisterSerializer<LegacyGameManifestSerializer>();
-            assets_.RegisterSerializer<LegacyTilesetSerializer>();
-            assets_.RegisterResolver<FileAssetHandleResolver>();
-
-        }
+        Engine();
 
     };
 
