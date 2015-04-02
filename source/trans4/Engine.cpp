@@ -4,11 +4,12 @@
 /// but not limited to, a notice of warranty and distribution rights.
 
 #include "Engine.hpp"
+#include "EngineVersion.hpp"
 
 namespace rpgtoolkit {
 
-    const char * DEFAULT_LOG_FILENAME = "trans4.log";
-    const char * DEFAULT_SCRIPT_FILENAME = "main.lua";
+    const char *DEFAULT_LOG_FILENAME = "trans4.log";
+    const char *DEFAULT_SCRIPT_FILENAME = "main.lua";
 
     Engine &
     Engine::GetInstance() {
@@ -17,9 +18,9 @@ namespace rpgtoolkit {
     }
 
     Engine::Engine()
-        : system_(new clio::System()),
-          log_(DEFAULT_LOG_FILENAME),
-          game_(system_.get()) {
+            : system_(new clio::System()),
+              log_(DEFAULT_LOG_FILENAME),
+              game_(system_.get()) {
 
         // Initialize the scripting runtime
 
@@ -72,7 +73,7 @@ namespace rpgtoolkit {
         system_->Initialize(settings);
 
         system_->GetWindow()->SetTitle(
-            manifest ? manifest->GetTitle() : "RPG Toolkit 4.0");
+                manifest ? manifest->GetTitle() : "RPG Toolkit 4.0");
 
     }
 
@@ -118,11 +119,8 @@ namespace rpgtoolkit {
     Engine::GetVersion() const {
 
         static Version v(
-            RPGTOOLKIT_VERSION_MAJOR,
-            RPGTOOLKIT_VERSION_MINOR,
-            RPGTOOLKIT_VERSION_PATCH,
-            RPGTOOLKIT_VERSION_RELEASE,
-            RPGTOOLKIT_VERSION_METADATA);
+                VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH,
+                VERSION_RELEASE, VERSION_METADATA);
 
         return v;
 

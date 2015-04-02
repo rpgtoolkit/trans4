@@ -11,16 +11,6 @@
 
 namespace rpgtoolkit {
 
-    static const int RPGTOOLKIT_VERSION_MAJOR = 4;
-
-    static const int RPGTOOLKIT_VERSION_MINOR = 0;
-
-    static const int RPGTOOLKIT_VERSION_PATCH = 0;
-
-    static const char RPGTOOLKIT_VERSION_RELEASE[] = "alpha";
-
-    static const char RPGTOOLKIT_VERSION_METADATA[] = "";
-
     using std::string;
     using std::stringstream;
 
