@@ -8,64 +8,27 @@
 
 #include <string>
 
-#include "clio/system/System.hpp"
-
-#include "scripts/Canvas.hpp"
-
-struct lua_State;
-
-namespace clio {
-	struct Texture;
-	struct TextureClip;
-}
-
 namespace rpgtoolkit {
-
-	struct Game;
+	struct Colour;
+	struct Settings;
 
 	namespace detail {
 
-		void SetLuaInstance(lua_State * const lua);
+		bool IsKeyDown(std::string const & key);
 
-		void SetSystemInstance(clio::System * const system);
+		void RenderDraws();
 
-		void SetGameInstance(Game * const game);
+		void ClearScreen();
 
-		bool IsKeyDown(std::string key);
+		void SetColour(Colour const & colour);
 
-		void ChangeState(std::string state);
+		void DrawPixel(int const & x, int const & y);
 
-		void PushState(std::string state);
+		void DrawLine(int const & x1, int const & y1, int const & x2, int const & y2);
 
-		void PopState();
+		void DrawRect(int const & x, int const & y, int const & width, int const & height);
 
-		void QuitGame();
-
-		/// Loads a texture using the engine. We return a pointer to
-		/// Lua, indicating a C++ lifetime. That is, we control when
-		/// the texture is deleted.
-		clio::Texture* LoadTexture(std::string texture_file);
-
-		void FreeTexture(clio::Texture* texture);
-
-		void DrawTexture(clio::Texture* texture, int x, int y, int w, int h);
-
-		void DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height);
-
-		void SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha);
-
-		void DrawPixel(int x, int y);
-
-		void DrawLine(int x1, int y1, int x2, int y2);
-
-		void DrawRect(int x, int y, int width, int height);
-
-		void FillRect(int x, int y, int width, int height);
-
-		/// Creates a canvas for Lua. We return the canvas by value,
-		/// so it has a Lua lifetime. Lua will garbage collect it and
-		/// run its destructor.
-		rpgtoolkit::Canvas CreateCanvas(size_t width, size_t height);
+		void FillRect(int const & x, int const & y, int const & width, int const & height);
 	}
 }
 

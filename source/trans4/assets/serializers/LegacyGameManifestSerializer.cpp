@@ -36,11 +36,11 @@ namespace rpgtoolkit {
         auto minor = reader.ReadUnsignedShortSwapped();
 
         if (header != "RPGTLKIT MAIN") {
-            throw clio::Exception("Unrecognized file format!");
+            throw Exception("Unrecognized file format!");
         }
 
         if (!(major = 2 && minor == 9)) {
-            throw clio::Exception("Unrecognized file version!");
+            throw Exception("Unrecognized file version!");
         }
 
         reader.ReadUnsignedIntegerSwapped();    // unused
@@ -91,7 +91,7 @@ namespace rpgtoolkit {
                 asset->SetResolutionHeight(768);
                 break;
             default:
-                throw clio::Exception(
+                throw Exception(
                     "Unreognized preset screen resolution discovered");
         }
 

@@ -5,6 +5,7 @@
 
 #include "Engine.hpp"
 #include "EngineVersion.hpp"
+#include "common/Exception.hpp"
 
 namespace rpgtoolkit {
 
@@ -17,17 +18,9 @@ namespace rpgtoolkit {
         return instance;
     }
 
-    Engine::Engine()
-            : system_(new clio::System()),
-              log_(DEFAULT_LOG_FILENAME),
-              game_(system_.get()) {
-
-        // Initialize the scripting runtime
-
-        scripting_.Initialize(&game_, system_.get());
+    Engine::Engine() : log_(DEFAULT_LOG_FILENAME) {
 
         // Initialize supported repository resolvers and serializers
-
         assets_.RegisterSerializer<LegacyGameManifestSerializer>();
         assets_.RegisterSerializer<LegacyTilesetSerializer>();
         assets_.RegisterResolver<FileAssetHandleResolver>();
@@ -35,57 +28,73 @@ namespace rpgtoolkit {
     }
 
     void
-    Engine::Configure() {
-
-        clio::SystemSettings settings;
-
+    Engine::Configure(Settings const & settings) {
         // Configure default system settings
-
-        settings.window.x = settings.window.POSITION_CENTERED;
-        settings.window.y = settings.window.POSITION_CENTERED;
-        settings.window.width = 640;
-        settings.window.height = 480;
-        settings.window.init_flags = 0;
+		int x = SDL_WINDOWPOS_CENTERED;
+		int y = SDL_WINDOWPOS_CENTERED;
+		int w, h;
+		Uint32 flags = 0;
+		std::string title;
 
         // Look for a game manifest in the current working directory
         // and load settings from this file.
-
         auto manifest = assets_.Load<GameManifest>("file://main.gam");
-
         if (manifest) {
-
-            settings.window.width = manifest->GetResolutionWidth();
-            settings.window.height = manifest->GetResolutionHeight();
+            w = manifest->GetResolutionWidth();
+            h = manifest->GetResolutionHeight();
+			title = manifest->GetTitle();
 
             switch (manifest->GetDisplayMode()) {
                 case DisplayMode::FULLSCREEN:
-                    settings.window.init_flags |= settings.window.FULLSCREEN;
+					flags |= SDL_WINDOW_FULLSCREEN;
                     break;
                 case DisplayMode::BORDERLESS:
-                    settings.window.init_flags |= settings.window.BORDERLESS;
+					flags |= SDL_WINDOW_BORDERLESS;
                     break;
                 default:
                     break;
-            }
+            }			
+		} else{
+			w = settings.window.width;
+			h = settings.window.height;
+			title = settings.window.title;
 
-        }
+			if (settings.window.fullscreen) {
+				//flags |= SDL_WINDOW_FULLSCREEN;
+			}
+		}
+		
+		SDL_Window* window = SDL_CreateWindow(title.c_str(), x, y, w, h, flags);
+		if (window == nullptr) {
+			throw Exception(SDL_GetError());
+		}
+		window_.reset(window);
 
-        system_->Initialize(settings);
-
-        system_->GetWindow()->SetTitle(
-                manifest ? manifest->GetTitle() : "RPG Toolkit 4.0");
+		SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		if (renderer == nullptr) {
+			throw Exception(SDL_GetError());
+		}
+		renderer_.reset(renderer);
+		SDL_RenderSetLogicalSize(renderer, settings.game.width, settings.game.height);
 
     }
 
     void
-    Engine::Run() {
-
+	Engine::Run(std::string const & startup_file) {
         LOG(&log_, "RPG Toolkit %s", GetVersion().ToString().c_str());
 
-        scripting_.Run(DEFAULT_SCRIPT_FILENAME);
-        game_.Run();
-
+		scripting_.Run(startup_file);
     }
+
+	SDL_Window & 
+	Engine::GetWindow() {
+		return *window_.get();
+	}
+
+	SDL_Renderer &
+	Engine::GetRenderer() {
+		return *renderer_.get();
+	}
 
     ScriptEngine &
     Engine::GetScriptEngine() {
@@ -101,7 +110,7 @@ namespace rpgtoolkit {
 
     }
 
-    clio::Logger
+    Logger &
     Engine::GetLog() {
 
         return log_;

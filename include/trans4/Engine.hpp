@@ -6,63 +6,77 @@
 #ifndef RPGTOOLKIT_TRANS4_ENGINE_INCLUDED
 #define RPGTOOLKIT_TRANS4_ENGINE_INCLUDED
 
+#include <SDL.h>
 #include <memory>
 
-#include "clio/system/System.hpp"
-#include "clio/system/SystemSettings.hpp"
-#include "clio/window/Window.hpp"
-#include "clio/common/Logger.hpp"
-#include "clio/graphics/Texture.hpp"
-#include "clio/graphics/Renderer2D.hpp"
-
 #include "Version.hpp"
+#include "Settings.hpp"
+#include "common/Logger.hpp"
 #include "game/Game.hpp"
 #include "assets/AssetRepository.hpp"
 #include "assets/serializers/LegacyGameManifestSerializer.hpp"
 #include "assets/serializers/LegacyTilesetSerializer.hpp"
 #include "assets/files/FileAssetHandleResolver.hpp"
 #include "scripts/ScriptEngine.hpp"
-#include "scripts/LuaScriptEngine.hpp"
 
 namespace rpgtoolkit {
-
     using std::unique_ptr;
     using std::string;
 
     struct Engine {
-
-        static Engine & GetInstance();
-
-        void
-        Configure();
+        static Engine & 
+		GetInstance();
 
         void
-        Run();
+        Configure(Settings const & settings);
+
+        void
+        Run(std::string const & startup_file);
+
+		AssetRepository &
+		GetAssets();
+
+		Game &
+		GetGame();
+
+		Logger &
+		GetLog();
+
+		SDL_Renderer &
+		GetRenderer();
 
         ScriptEngine &
         GetScriptEngine();
 
-        AssetRepository &
-        GetAssets();
+		Version const &
+		GetVersion() const;
 
-        clio::Logger
-        GetLog();
-
-        Game &
-        GetGame();
-
-        Version const &
-        GetVersion() const;
-
+		SDL_Window &
+		GetWindow();
     private:
+		struct WindowDeleter {
+			void operator()(SDL_Window *window) {
+				if (window != nullptr) {
+					SDL_DestroyWindow(window);
+				}
+			}
+		};
+		unique_ptr<SDL_Window, WindowDeleter> window_;
 
-        unique_ptr<clio::System> system_;
+		struct RendererDeleter {
+			void operator()(SDL_Renderer *renderer) {
+				if (renderer != nullptr) {
+					SDL_DestroyRenderer(renderer);
+				}
+			}
+		};
+		unique_ptr<SDL_Renderer, RendererDeleter> renderer_;
 
-        clio::Logger log_;
+        Logger log_;
 
         AssetRepository assets_;
 
-        LuaScriptEngine scripting_;
+        ScriptEngine scripting_;
 
         Game game_;
 

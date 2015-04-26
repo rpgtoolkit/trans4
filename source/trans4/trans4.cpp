@@ -3,8 +3,7 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include "clio/common/Exception.hpp"
-#include "clio/system/Dialog.hpp"
+#include <SDL.h>
 
 //Have to include this after clio Exception
 //This is a hack anyway, should rethrow luabridge exceptions as tk ones
@@ -12,19 +11,23 @@
 #include "LuaBridge.h"
 
 #include "Engine.hpp"
+#include "Settings.hpp"
+#include "common/Exception.hpp"
 
 int main(int argc, char* argv[]) {
-
-	auto & engine = rpgtoolkit::Engine::GetInstance();
-
 	try {
-		engine.Configure();
-		engine.Run();
-	} catch(clio::Exception e) {
-		clio::Dialog::ShowError("Clio Error", e.what());
+		rpgtoolkit::Settings settings;
+		settings.LoadFromLua("settings.lua");
+
+		auto & engine = rpgtoolkit::Engine::GetInstance();
+		engine.Configure(settings);
+		engine.Run(settings.game.startup_file);
+	}
+	catch (rpgtoolkit::Exception e) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "TK4 Error", e.what(), nullptr);
 	}
 	catch (luabridge::LuaException e) {
-		clio::Dialog::ShowError("Lua Error", e.what());
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Lua Error", e.what(), nullptr);
 	}
 
 	return 0;

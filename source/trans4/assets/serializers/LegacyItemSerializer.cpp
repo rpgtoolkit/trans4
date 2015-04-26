@@ -3,7 +3,7 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include "clio/common/Exception.hpp"
+#include "common/Exception.hpp"
 
 #include "assets/serializers/LegacyItemSerializer.hpp"
 #include "assets/Item.hpp"
@@ -39,11 +39,11 @@ namespace rpgtoolkit {
         auto minor = reader.ReadUnsignedShortSwapped();
 
         if (header != "RPGTLKIT ITEM") {
-            throw clio::Exception("Unrecognized file format!");
+            throw Exception("Unrecognized file format!");
         }
 
         if (!major == VERSION_MAJOR && minor == VERSION_MINOR) {
-            throw clio::Exception("Unrecognized file version!");
+            throw Exception("Unrecognized file version!");
         }
 
         auto name = reader.ReadString();

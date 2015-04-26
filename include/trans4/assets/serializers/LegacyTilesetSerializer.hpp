@@ -9,7 +9,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "clio/common/Exception.hpp"
+#include "common/Exception.hpp"
 
 #include "io/BinaryReader.hpp"
 #include "assets/AssetSerializer.hpp"

@@ -4,14 +4,6 @@
 #include <memory>
 #include <string>
 
-namespace clio {
-
-    struct GameStateStack;
-	struct Logger;
-	struct System;
-
-}
-
 namespace rpgtoolkit {
 
     /// \brief The game class is responsible for the game loop.
@@ -26,9 +18,7 @@ namespace rpgtoolkit {
         const static std::string LOG;
 
         /// \brief Constructor
-        ///
-        /// \param system The system with which to interact.
-        Game(clio::System *system);
+        Game();
 
         /// \brief Destructor
         ~Game();
@@ -39,9 +29,6 @@ namespace rpgtoolkit {
         /// \brief Quit the game.
         void Quit();
 
-        /// \brief Get the game stack.
-        clio::GameStateStack *const GetStateStack();
-
         /// \brief No copying allowed.
         Game(Game const &) = delete;
 
@@ -50,25 +37,13 @@ namespace rpgtoolkit {
 
     private:
         /// \brief Logger for this class.
-        std::unique_ptr<clio::Logger> log_;
+        std::unique_ptr<Logger> log_;
 
         /// \brief Whether the game loop continues or not.
         bool quit_;
 
-        /// \brief Manages the game states.
-        std::unique_ptr<clio::GameStateStack> stack_;
-
-        /// \brief The underlying system.
-        clio::System *system_;
-
         /// \brief Helper function to poll input.
         void Poll();
-
-        /// \brief Helper function to update state(s).
-        void Update();
-
-        /// \brief Helper function to render to the screen.
-        void Render();
     };
 }
 

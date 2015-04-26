@@ -32,7 +32,7 @@ namespace rpgtoolkit {
         auto version = reader.ReadShortSwapped();
 
         if (version != 20) {
-            throw clio::Exception("Invalid tileset version.");
+            throw Exception("Invalid tileset version.");
         }
 
         auto count = reader.ReadShortSwapped();

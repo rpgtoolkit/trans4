@@ -1,4 +1,4 @@
-#include "clio/common/Exception.hpp"
+#include "common/Exception.hpp"
 
 #include "scripts/LuaCommand.hpp"
 
@@ -7,7 +7,7 @@ namespace rpgtoolkit {
 		: luaTable_(luabridge::getGlobal(L, table.c_str())), function_(function) {
 
 		if (luaTable_.isTable() == false) {
-			throw clio::Exception("Tried to create a LuaCommand without a Lua table.");
+			throw Exception("Tried to create a LuaCommand without a Lua table.");
 		}
 	}
 

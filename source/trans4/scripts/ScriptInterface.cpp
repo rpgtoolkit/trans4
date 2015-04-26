@@ -3,127 +3,62 @@
 /// See LICENSE.md in the distribution for the full license text including,
 /// but not limited to, a notice of warranty and distribution rights.
 
-#include <string>
-#include <memory>
+#include <SDL.h>
 
-#include "clio/game/GameStateStack.hpp"
-#include "clio/graphics/Renderer2D.hpp"
-#include "clio/graphics/Texture.hpp"
-#include "clio/graphics/TextureLoader.hpp"
-#include "clio/input/Input.hpp"
-#include "clio/input/Keyboard.hpp"
-#include "clio/input/Key.hpp"
+#include <memory>
+#include <string>
 
 #include "Engine.hpp"
+#include "Settings.hpp"
+#include "graphics/Colour.hpp"
 #include "scripts/ScriptInterface.hpp"
-#include "scripts/LuaGameState.hpp"
 
 namespace rpgtoolkit {
 
-    static lua_State *L;
+    bool detail::IsKeyDown(std::string const & key) {
+		SDL_PumpEvents();
+		const Uint8 *state = SDL_GetKeyboardState(nullptr);
 
-    static clio::System *sys;
-
-    static Game *game;
-
-    void detail::SetLuaInstance(lua_State *const lua) {
-        L = lua;
+		return state[SDL_GetScancodeFromName(key.c_str())] == 1;
     }
 
-    void detail::SetSystemInstance(clio::System *const system) {
-        sys = system;
-    }
-
-    void detail::SetGameInstance(Game *const g) {
-        game = g;
-    }
-
-    bool detail::IsKeyDown(std::string key) {
-        return sys->GetInput()->GetKeyboard()->IsKeyDown(clio::StringToKey(key));
-    }
-
-    void detail::ChangeState(std::string state) {
-        game->GetStateStack()->ChangeState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
-    }
-
-    void detail::PushState(std::string state) {
-        game->GetStateStack()->PushState(std::unique_ptr<clio::GameState>(new LuaGameState(L, state)));
-    }
-
-    void detail::PopState() {
-        game->GetStateStack()->PopState();
-    }
-
-    void detail::QuitGame() {
-        game->GetStateStack()->ClearAllStates();
-    }
-
-    clio::Texture *detail::LoadTexture(std::string texture_file) {
-
-        AssetDescriptor descriptor(0x00, "file://" + texture_file);
-
-        /// If the asset is a legacy tileset then intervene and load
-        /// a tileset asset, create a texture, and upload the tileset
-        /// image data to the texture...
-
-        if (descriptor.GetExtension() == "tst") {
-
-            auto & assets = Engine::GetInstance().GetAssets();
-            auto tileset = assets.Load<Tileset>(descriptor.GetURI());
-
-            // TODO: Determine optimal POT texture size and fill the
-            // texture with tiles.
-
-            if (tileset) {
-                auto texture =
-                    sys->GetTextureLoader()->CreateTexture(descriptor.GetURI(),
-                        tileset->GetTileDimensions() * tileset->GetCount(),
-                        tileset->GetTileDimensions());
-                if (texture) {
-                    texture->Update(tileset->GetImageBuffer());
-                }
-                return texture;
-            }
-
-        }
-
-		return sys->GetTextureLoader()->LoadTexture(texture_file);
-    }
-
-    void detail::FreeTexture(clio::Texture *texture) {
-		return sys->GetTextureLoader()->FreeTexture(texture);
-    }
-
-	void detail::DrawTexture(clio::Texture *texture, int x, int y, int w, int h) {
-        sys->GetRenderer()->DrawTexture(texture, x, y, w, h);
-    }
-
-	void detail::DrawClip(clio::Texture* tex, int x, int y, int source_x, int source_y, int width, int height) {
-		clio::TextureClip clip(tex, source_x, source_y, width, height);
-		sys->GetRenderer()->DrawTextureClip(&clip, x, y);
+	void detail::RenderDraws() {
+		SDL_RenderPresent(&Engine::GetInstance().GetRenderer());
 	}
 
-	void detail::SetColor(uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha) {
-		sys->GetRenderer()->SetColor(red, green, blue, alpha);
+	void detail::ClearScreen() {
+		SDL_RenderClear(&Engine::GetInstance().GetRenderer());
 	}
 
-	void detail::DrawPixel(int x, int y) {
-		sys->GetRenderer()->DrawPixel(x, y);
+	void detail::SetColour(Colour const & colour) {
+		SDL_SetRenderDrawColor(&Engine::GetInstance().GetRenderer(), colour.red, colour.green, colour.blue, colour.alpha);
 	}
 
-	void detail::DrawLine(int x1, int y1, int x2, int y2) {
-		sys->GetRenderer()->DrawLine(x1, y1, x2, y2);
+	void detail::DrawPixel(int const & x, int const & y) {
+		SDL_RenderDrawPoint(&Engine::GetInstance().GetRenderer(), x, y);
 	}
 
-	void detail::DrawRect(int x, int y, int width, int height) {
-		sys->GetRenderer()->DrawRect(x, y, width, height);
+	void detail::DrawLine(int const & x1, int const & y1, int const & x2, int const & y2) {
+		SDL_RenderDrawLine(&Engine::GetInstance().GetRenderer(), x1, y1, x2, y2);
 	}
 
-	void detail::FillRect(int x, int y, int width, int height) {
-		sys->GetRenderer()->FillRect(x, y, width, height);
+	void detail::DrawRect(int const & x, int const & y, int const & width, int const & height) {
+		SDL_Rect rect;
+		rect.x = x;
+		rect.y = y;
+		rect.w = width;
+		rect.h = height;
+
+		SDL_RenderDrawRect(&Engine::GetInstance().GetRenderer(), &rect);
 	}
 
-	rpgtoolkit::Canvas detail::CreateCanvas(size_t width, size_t height) {
-		return Canvas(sys->GetRenderer(), width, height);
+	void detail::FillRect(int const & x, int const & y, int const & width, int const & height) {
+		SDL_Rect rect;
+		rect.x = x;
+		rect.y = y;
+		rect.w = width;
+		rect.h = height;
+
+		SDL_RenderFillRect(&Engine::GetInstance().GetRenderer(), &rect);
 	}
 }

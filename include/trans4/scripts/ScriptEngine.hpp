@@ -9,12 +9,9 @@
 #include <memory>
 #include <string>
 
-namespace clio {
-	struct System;
-}
+#include "lua.hpp"
 
 namespace rpgtoolkit {
-
 	struct Game;
 	
 	/// The ScriptEngine interface defines how scripts can be run.
@@ -23,15 +20,6 @@ namespace rpgtoolkit {
 		ScriptEngine();
 
 		virtual ~ScriptEngine();
-
-
-		/// \brief Initialize the ScriptEngine. 
-		/// Provide references to the System and Game implementations, 
-		/// to be used with scripts in the future.
-		///
-		/// \param game
-		/// \param system
-		virtual void Initialize(Game * const game, clio::System * const system);
 
 		/// \brief Run a script.
 		///
@@ -43,10 +31,19 @@ namespace rpgtoolkit {
 
 		/// \brief No copying allowed.
 		ScriptEngine & operator=(ScriptEngine const&) = delete;
-	protected:
-		/// \brief The ScriptEngine implementation.
-		std::unique_ptr<ScriptEngine> scriptEngine_;
+	private:
+		/// \brief Smart pointer deleter for lua_State pointers
+		struct LuaStateDeleter {
+			void operator()(lua_State* L) {
+				if (L != nullptr) {
+					lua_close(L);
+				}
+			}
+		};
+		std::unique_ptr<lua_State, LuaStateDeleter> state_;
 
+		/// \brief Helper function to expose TK functions to lua
+		void RegisterFunctions();
 	};
 }
 
